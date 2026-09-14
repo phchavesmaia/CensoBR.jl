@@ -1,9 +1,13 @@
 name = "CensoBR"
 uuid = "2807fffc-06d5-4d06-bb7d-6dc727979162"
-authors = ["Pedro Chaves Maia"]
 version = "1.0.0-DEV"
+authors = ["Pedro Chaves Maia"]
+
+[deps]
+ZipFile = "a5390f91-8eb1-5f08-bee0-b1d1ffed6cea"
 
 [compat]
+ZipFile = "0.10.1"
 julia = "1.10.10"
 
 [extras]
