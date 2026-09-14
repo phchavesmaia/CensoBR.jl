@@ -1,3 +1,6 @@
 [deps]
 CensoBR = "2807fffc-06d5-4d06-bb7d-6dc727979162"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+
+[compat]
+Documenter = "1.19.0"
