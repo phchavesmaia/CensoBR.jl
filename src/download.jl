@@ -2,12 +2,12 @@ using Downloads
 using ZipFile
 using ProgressMeter: Progress, update!, finish!
 
-const ibge_urls = Dict(
+const IBGE_URLS = Dict(
 	2000 => "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2000/Microdados",
 	2010 => "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2010/Resultados_Gerais_da_Amostra/Microdados",
 )
 
-const valid_ufs = Set([
+const VALID_UFS = Set([
 	"AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO",
 	"MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR",
 	"RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO",
@@ -27,20 +27,20 @@ _census_url(2010, :RJ)
 """
 function _census_url(year::Integer, uf)
 	# checking if the year is supported
-	year in keys(ibge_urls) || throw(ArgumentError("Unsupported census year: $year"))
+	year in keys(IBGE_URLS) || throw(ArgumentError("Unsupported census year: $year"))
 	
 	# converting the UF code to an uppercase string
 	uf = uppercase(String(uf))
 
 	# checking if the UF code is valid
-	uf in valid_ufs || throw(ArgumentError("Invalid UF code: $uf"))
+	uf in VALID_UFS || throw(ArgumentError("Invalid UF code: $uf"))
 
 	# 2010 São Paulo is a special case in the IBGE distribution.
 	if year == 2010 && uf == "SP"
 		throw(ArgumentError("Census 2010 SP is split into multiple archives; support for SP should be handled separately."))
 	end
 
-	"$(ibge_urls[year])/$uf.zip"
+	"$(IBGE_URLS[year])/$uf.zip"
 end
 
 """
@@ -68,7 +68,7 @@ function _default_cache_dir()
 end
 
 """
-_download_census(year, uf; cache_dir=default_cache_dir(), force=false)
+_download_census(year, uf; cache_dir=_default_cache_dir(), force=false, show_progress=true)
 
 Download an official IBGE Census microdata archive.
 
@@ -111,6 +111,7 @@ function _download_census(year::Integer, uf; cache_dir::AbstractString = _defaul
 	try
 		if show_progress 
 			Downloads.download(url, temporary; progress = progress_callback)
+            !isnothing(progress[]) && finish!(progress[])
 		else
 			Downloads.download(url, temporary)
 		end
@@ -129,11 +130,12 @@ Extract a Census ZIP archive.
 
 Returns the extraction directory.
 """
-function _extract_census(zip_path::AbstractString; destination::AbstractString = splitext(zip_path)[1], force::Bool = false)
+function _extract_census(zip_path::AbstractString; force::Bool = false)
 	# verifying that the ZIP file exists
 	isfile(zip_path) || throw(ArgumentError("ZIP file does not exist: $zip_path"))
 
 	# ensuring the destination directory is set
+    destination = splitext(zip_path)[1]
 	if isdir(destination)
 		if !force
 			return destination
@@ -145,8 +147,9 @@ function _extract_census(zip_path::AbstractString; destination::AbstractString =
 	# extracting the contents of the ZIP archive
 	ZipFile.Reader(zip_path) do archive
 		for entry in archive.files
+            # determining the output path for the current entry
 			outpath = joinpath(destination, entry.name)
-			# determining the output path for the current entry
+			# creating the output directory 
 			if endswith(entry.name, "/")
 				mkpath(outpath)
 				continue
@@ -169,12 +172,10 @@ Download and extract an IBGE Census archive.
 
 Returns the directory containing the extracted raw files.
 """
-function _prepare_census(year::Integer, uf; cache_dir::AbstractString = _default_cache_dir(), force::Bool = false)
-	
-    zip_path = _download_census(year, uf; cache_dir = cache_dir, force = force)
-	
-    extracted_dir = joinpath(cache_dir, "raw", string(year), uppercase(String(uf)))
-
-	_extract_census(zip_path; destination = extracted_dir, force = force)
+function _prepare_census(year::Integer, uf; cache_dir::AbstractString = _default_cache_dir(), force::Bool = false, show_progress::Bool = true)
+	# downloading the ZIP file for the specified year and UF
+    zip_path = _download_census(year, uf; cache_dir = cache_dir, force = force, show_progress = show_progress)
+    # extracting the downloaded ZIP file
+	_extract_census(zip_path; force = force)
 end
 
