@@ -30,22 +30,25 @@ end
 
 @testitem "Extract Census archive" begin
 	using CensoBR
-	using ZipFile
+	using p7zip_jll
 
 	mktempdir() do tmpdir
 		# write test ZIP archive
 		zip_path = joinpath(tmpdir, "RJ.zip")
-		archive = ZipFile.Writer(zip_path)
-		try
-			file1 = ZipFile.addfile(archive, "DOM33.TXT")
-			write(file1, "domicile data")
-
-			file2 = ZipFile.addfile(archive, "nested/PES33.TXT")
-			write(file2, "person data")
-		finally
-			close(archive)
+		source_dir = joinpath(tmpdir, "source")
+		mkpath(joinpath(source_dir, "nested"))
+		write(joinpath(source_dir, "DOM33.TXT"), "domicile data")
+		write(joinpath(source_dir, "nested", "PES33.TXT"), "person data")
+		cd(source_dir) do
+			run(
+				pipeline(
+					`$(p7zip_jll.p7zip()) a -tzip $zip_path DOM33.TXT nested/PES33.TXT`,
+					stdout = devnull,
+					stderr = devnull,
+				),
+			)
 		end
-		
+
 		# extract the contents of the ZIP archive
 		destination = CensoBR._extract_census(zip_path)
 

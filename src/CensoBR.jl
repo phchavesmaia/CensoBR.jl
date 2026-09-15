@@ -1,11 +1,7 @@
 module CensoBR
 
-using Downloads
-using ZipFile
-
+# Core module for handling Brazilian Census data
 include("download.jl")
-
-export download_census
-export prepare_census
+include("layouts.jl")
 
 end
