@@ -1,3 +1,5 @@
+using TOML
+
 abstract type LayoutSource end
 
 struct SASLayout <: LayoutSource end
@@ -8,7 +10,7 @@ struct LayoutField
 	start::Int
 	width::Int
 	decimals::Int
-	is_character::Bool
+	ischaracter::Bool
 	label::Union{Nothing, String}
 	values::Dict{String, String}
 	notes::Vector{String}
@@ -80,4 +82,13 @@ function _loadlayout(year::Integer, record::Symbol)
     end
 
     CensusLayout(record, data["lrecl"], fields)
+end
+
+function _validatelayout(layout::CensusLayout)
+    isempty(layout.fields) && error("Layout contains no fields")
+
+    maximum(field.start + field.width - 1 for field in layout.fields) <= layout.lrecl ||
+        error("Layout fields extend beyond LRECL")
+
+    true
 end
