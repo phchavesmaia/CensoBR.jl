@@ -6,11 +6,6 @@ const IBGE_URLS = Dict(
 	2010 => "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2010/Resultados_Gerais_da_Amostra/Microdados",
 )
 
-const DOCUMENTATION_FILES = Dict(
-    2000 => "1_Documentacao_20170908.zip",
-    2010 => "Documentacao.zip",
-)
-
 const VALID_UFS = Set([
 	"AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO",
 	"MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR",
@@ -133,13 +128,13 @@ function _downloadfile(url::AbstractString, destination::AbstractString; force::
 end
 
 """
-	_downloadcensus(year, uf; cache_dir=_defaultcachedir(), force=false, showprogress=true)
+	_downloadcensus(year, uf; cachedir=_defaultcachedir(), force=false, showprogress=true)
 
 Download an official IBGE Census microdata archive.
 
 Returns the path to the cached ZIP file.
 """
-function _downloadcensus(year::Integer, uf; cache_dir::AbstractString = _defaultcachedir(), force::Bool = false, showprogress::Bool = true)
+function _downloadcensus(year::Integer, uf; cachedir::AbstractString = _defaultcachedir(), force::Bool = false, showprogress::Bool = true)
 	# determining the URL for the Census archive
 	url = _censusurl(year, uf)
 
@@ -147,7 +142,7 @@ function _downloadcensus(year::Integer, uf; cache_dir::AbstractString = _default
 	uf = uppercase(String(uf))
 
 	# ensuring the cache directory exists
-	raw_dir = joinpath(cache_dir, "raw", string(year))
+	raw_dir = joinpath(cachedir, "raw", string(year))
 	mkpath(raw_dir)
 
 	# determining the destination path for the downloaded ZIP file
@@ -155,27 +150,6 @@ function _downloadcensus(year::Integer, uf; cache_dir::AbstractString = _default
 	
 	# downloading the file using the helper function
 	_downloadfile(url, destination; force = force, showprogress = showprogress, description = "Downloading $uf $year")
-end
-
-"""
-    _downloaddocumentation(year; cache_dir=_defaultcachedir(),
-                            force=false, showprogress=true)
-
-Download the official IBGE documentation archive for a Census year.
-
-Returns the path to the cached ZIP file.
-"""
-function _downloaddocumentation(year::Integer; cache_dir::AbstractString = _defaultcachedir(), 
-	force::Bool = false,showprogress::Bool = true)
-
-    haskey(DOCUMENTATION_FILES, year) || throw(ArgumentError("Unsupported census year: $year"))
-
-    filename = DOCUMENTATION_FILES[year]
-    url = "$(IBGE_URLS[year])/$filename"
-
-    destination = joinpath(cache_dir, "raw", string(year), filename,)
-
-    _downloadfile(url, destination; force = force, showprogress = showprogress, description = "Downloading documentation $year")
 end
 
 """
@@ -206,20 +180,16 @@ function _extractarchive(zip_path::AbstractString; force::Bool = false)
 end
 
 """
-	_preparecensus(year, uf; cache_dir=_defaultcachedir(), force=false)
+	_preparecensus(year, uf; cachedir=_defaultcachedir(), force=false)
 
 Download and extract an IBGE Census archive.
 
 Returns the directory containing the extracted raw files.
 """
-function _preparecensus(year::Integer, uf; cache_dir::AbstractString = _defaultcachedir(), force::Bool = false, showprogress::Bool = true)
+function _preparecensus(year::Integer, uf; cachedir::AbstractString = _defaultcachedir(), force::Bool = false, showprogress::Bool = true)
 	# downloading the ZIP file for the specified year and UF
-	zip_path = _downloadcensus(year, uf; cache_dir = cache_dir, force = force, showprogress = showprogress)
-	documentation_zip = _downloaddocumentation(year; cache_dir = cache_dir, force = force, showprogress = showprogress)
+	zip_path = _downloadcensus(year, uf; cachedir = cachedir, force = force, showprogress = showprogress)
 
 	# extracting the downloaded ZIP file
-	census_dir = _extractarchive(zip_path; force = force)
-	documentation_dir = _extractarchive(documentation_zip; force = force)
-
-	(census = census_dir, documentation = documentation_dir)
+	_extractarchive(zip_path; force = force)
 end

@@ -21,11 +21,11 @@ end
 @testitem "Default cache directory" begin
 	using CensoBR
 
-	cache_dir = CensoBR._defaultcachedir()
+	cachedir = CensoBR._defaultcachedir()
 
-	@test cache_dir isa AbstractString
-	@test basename(cache_dir) == "CensoBR"
-	@test !isempty(cache_dir)
+	@test cachedir isa AbstractString
+	@test basename(cachedir) == "CensoBR"
+	@test !isempty(cachedir)
 end
 
 @testitem "Extract Census archive" begin
@@ -78,7 +78,7 @@ end
 	end
 end
 
-@testitem "Download Census documentation" begin
+@testitem "Download Census function" begin
 	using CensoBR
 
 	# download aux file for year 2000
@@ -137,9 +137,9 @@ end
         @test read(destination, String) != "corrupted"
 	end
 
-	# documentation download rejects unsupported year
+	# download rejects unsupported year
 	mktempdir() do tmpdir
-		@test_throws ArgumentError CensoBR._downloaddocumentation(1990; cache_dir = tmpdir, showprogress = false)
+		@test_throws ArgumentError CensoBR._downloadcensus(1990, :rj; cachedir = tmpdir, showprogress = false)
 	end
 
 end
