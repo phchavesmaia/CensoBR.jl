@@ -34,6 +34,13 @@ Censuses.
 -   Handles blank fields as `missing` and implied decimal places
     according to the official layouts.
 
+## to-do list
+
+- [ ] Handle the SP-2010 special case (2 files for one UF)
+- [ ] Export processed table to a `.parquet` for faster pickups in future calls, while removing the previous files in `.cache/` 
+- [ ] Add a `:brazil` option to read the whole census?
+- [ ] *(in the far future)* Standardize the data 
+
 ## Installation
 
 CensoBR is currently under development. Install it from its repository:
@@ -80,7 +87,7 @@ only when requested.
 | 2010   | Mortality   | `opencensus(2010, :rj, :mortality)`     |
 
 State availability follows the corresponding IBGE releases. Support for
-special archive structures may vary while the package is under
+special archive structures (such as SP 2010) may vary while the package is under
 development.
 
 ## Lazy tables
@@ -139,10 +146,6 @@ valuecodes(table, :V0102)["33"]
 # "Rio de Janeiro"
 ```
 
-CensoBR keeps the original Census code in the data rather than
-automatically replacing codes with labels. This preserves the raw IBGE
-representation while keeping definitions available as metadata.
-
 ## Parsing
 
 IBGE Census microdata are distributed as fixed-width text files. CensoBR
@@ -156,63 +159,3 @@ Parsing follows these conventions:
 -   integer numeric fields become `Int`;
 -   numeric fields with implied decimal places become `Float64`;
 -   character identifiers retain leading zeroes.
-
-For example, `00345` in a numeric field with two implied decimal places
-becomes `3.45`.
-
-## Census layouts
-
-Runtime parsing does not depend on the original SAS or ODS documentation
-files. CensoBR includes normalized TOML layouts:
-
-``` text
-data/
-└── layouts/
-    ├── 2000/
-    │   ├── household.toml
-    │   ├── family.toml
-    │   └── person.toml
-    └── 2010/
-        ├── household.toml
-        ├── person.toml
-        ├── emigration.toml
-        └── mortality.toml
-```
-
-These layouts are generated from official IBGE documentation and
-committed to the repository. Developer scripts used to regenerate them
-are kept under `dev/`.
-
-## Development
-
-The project separates runtime code from developer tooling:
-
-``` text
-CensoBR/
-├── src/
-│   ├── CensoBR.jl
-│   ├── download.jl
-│   ├── layouts.jl
-│   └── maketable.jl
-├── data/
-│   └── layouts/
-├── dev/
-│   ├── Project.toml
-│   ├── download.jl
-│   ├── generatelayouts2000.jl
-│   └── generatelayouts2010.jl
-└── test/
-```
-
-Run the package tests with:
-
-``` julia
-pkg> test
-```
-
-Developer scripts use their separate environment:
-
-``` sh
-julia --project=dev dev/generatelayouts2000.jl
-julia --project=dev dev/generatelayouts2010.jl
-```
