@@ -6,29 +6,30 @@ struct SASLayout <: LayoutSource end
 struct OdsLayout <: LayoutSource end
 
 struct LayoutField
-	name::String
-	start::Int
-	width::Int
-	decimals::Int
-	ischaracter::Bool
-	label::Union{Nothing, String}
-	values::Dict{String, String}
-	notes::Vector{String}
+    name::String
+    start::Int
+    width::Int
+    decimals::Int
+    ischaracter::Bool
+    label::Union{Nothing,String}
+    values::Dict{String,String}
+    notes::Vector{String}
 end
 
 struct CensusLayout
-	record::Symbol
-	lrecl::Int
-	fields::Vector{LayoutField}
+    record::Symbol
+    lrecl::Int
+    fields::Vector{LayoutField}
 end
 
 const LAYOUT_FILES = Dict(
-	(2000, :household) => "household.toml",
-	(2000, :family)    => "family.toml",
-	(2000, :person)    => "person.toml", (2010, :household)  => "household.toml",
-	(2010, :person)     => "person.toml",
-	(2010, :emigration) => "emigration.toml",
-	(2010, :mortality)  => "mortality.toml",
+    (2000, :household) => "household.toml",
+    (2000, :family) => "family.toml",
+    (2000, :person) => "person.toml",
+    (2010, :household) => "household.toml",
+    (2010, :person) => "person.toml",
+    (2010, :emigration) => "emigration.toml",
+    (2010, :mortality) => "mortality.toml",
 )
 
 """
@@ -39,12 +40,13 @@ Load a bundled Census layout into CensoBR's internal representation.
 function _loadlayout(year::Integer, record::Symbol)
 
     # retrieve the filename for the given year and record from the LAYOUT_FILES dictionary.
-	haskey(LAYOUT_FILES, (year, record)) || throw(ArgumentError("Unsupported Census layout: year=$year, record=$record"))
+    haskey(LAYOUT_FILES, (year, record)) ||
+        throw(ArgumentError("Unsupported Census layout: year=$year, record=$record"))
     filename = LAYOUT_FILES[(year, record)]
 
-	# construct the full path to the layout file within the package's data directory.
-	path = joinpath(pkgdir(CensoBR), "data", "layouts", string(year), filename)
-	isfile(path) || error("Bundled Census layout not found: $path")
+    # construct the full path to the layout file within the package's data directory.
+    path = joinpath(pkgdir(CensoBR), "data", "layouts", string(year), filename)
+    isfile(path) || error("Bundled Census layout not found: $path")
 
     data = TOML.parsefile(path)
 
@@ -52,8 +54,7 @@ function _loadlayout(year::Integer, record::Symbol)
 
     for field in data["fields"]
         values = Dict{String,String}(
-            string(k) => string(v)
-            for (k, v) in get(field, "values", Dict())
+            string(k) => string(v) for (k, v) in get(field, "values", Dict())
         )
 
         notes = String.(get(field, "notes", String[]))

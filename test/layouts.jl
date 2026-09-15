@@ -39,10 +39,8 @@ end
         @test all(field -> field.start > 0, layout.fields)
         @test all(field -> field.width > 0, layout.fields)
 
-        @test maximum(
-            field.start + field.width - 1
-            for field in layout.fields
-        ) <= layout.lrecl
+        @test maximum(field.start + field.width - 1 for field in layout.fields) <=
+              layout.lrecl
     end
 end
 
@@ -88,59 +86,59 @@ end
 end
 
 @testitem "Validate Census layout" begin
-	using CensoBR
+    using CensoBR
 
-	valid = CensoBR.CensusLayout(
-		:household,
-		10,
-		[
-			CensoBR.LayoutField(
-				"A",
-				1,
-				5,
-				0,
-				true,
-				nothing,
-				Dict{String, String}(),
-				String[],
-			),
-			CensoBR.LayoutField(
-				"B",
-				6,
-				5,
-				0,
-				false,
-				nothing,
-				Dict{String, String}(),
-				String[],
-			),
-		],
-	)
+    valid = CensoBR.CensusLayout(
+        :household,
+        10,
+        [
+            CensoBR.LayoutField(
+                "A",
+                1,
+                5,
+                0,
+                true,
+                nothing,
+                Dict{String,String}(),
+                String[],
+            ),
+            CensoBR.LayoutField(
+                "B",
+                6,
+                5,
+                0,
+                false,
+                nothing,
+                Dict{String,String}(),
+                String[],
+            ),
+        ],
+    )
 
-	@test CensoBR._validatelayout(valid)
+    @test CensoBR._validatelayout(valid)
 
-	empty = CensoBR.CensusLayout(:household, 10, CensoBR.LayoutField[])
+    empty = CensoBR.CensusLayout(:household, 10, CensoBR.LayoutField[])
 
-	@test_throws ErrorException CensoBR._validatelayout(empty)
+    @test_throws ErrorException CensoBR._validatelayout(empty)
 
-	overflow = CensoBR.CensusLayout(
-		:household,
-		10,
-		[
-			CensoBR.LayoutField(
-				"A",
-				8,
-				5,
-				0,
-				false,
-				nothing,
-				Dict{String, String}(),
-				String[],
-			),
-		],
-	)
+    overflow = CensoBR.CensusLayout(
+        :household,
+        10,
+        [
+            CensoBR.LayoutField(
+                "A",
+                8,
+                5,
+                0,
+                false,
+                nothing,
+                Dict{String,String}(),
+                String[],
+            ),
+        ],
+    )
 
-	@test_throws ErrorException CensoBR._validatelayout(overflow)
+    @test_throws ErrorException CensoBR._validatelayout(overflow)
 end
 
 @testitem "Layout fields are ordered" begin
