@@ -145,8 +145,8 @@ Tables.rows(table::CensusTable) = table
 Base.IteratorSize(::Type{CensusTable}) = Base.SizeUnknown()
 Base.IteratorEltype(::Type{CensusTable}) = Base.EltypeUnknown()
 
-function Base.iterate(rows::CensusTable)
-  io = open(rows.path, "r")
+function Base.iterate(table::CensusTable)
+  io = open(table.path, "r")
 
   eof(io) && begin
     close(io)
@@ -155,10 +155,10 @@ function Base.iterate(rows::CensusTable)
 
   line = readline(io)
 
-  (_parseline(rows.layout, codeunits(line)), CensusRowState(io, 1))
+  (_parseline(table.layout, codeunits(line)), CensusRowState(io, 1))
 end
 
-function Base.iterate(rows::CensusTable, state::CensusRowState)
+function Base.iterate(table::CensusTable, state::CensusRowState)
   io = state.io
 
   if eof(io)
@@ -169,7 +169,7 @@ function Base.iterate(rows::CensusTable, state::CensusRowState)
   line = readline(io)
   linenumber = state.line + 1
 
-  (_parseline(rows.layout, codeunits(line)), CensusRowState(io, linenumber))
+  (_parseline(table.layout, codeunits(line)), CensusRowState(io, linenumber))
 end
 
 function Tables.schema(table::CensusTable)

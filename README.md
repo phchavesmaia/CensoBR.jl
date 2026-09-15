@@ -183,35 +183,6 @@ These layouts are generated from official IBGE documentation and
 committed to the repository. Developer scripts used to regenerate them
 are kept under `dev/`.
 
-## Cache
-
-By default, downloaded and extracted Census files are stored in
-CensoBR's platform-appropriate cache directory.
-
-A different cache can be supplied with `cachedir`:
-
-``` julia
-table = opencensus(
-    2000,
-    :rj,
-    :household;
-    cachedir="/path/to/cache",
-)
-```
-
-Preparation can be forced again with `force=true`, and download progress
-can be disabled with `showprogress=false`.
-
-## Data provenance
-
-CensoBR does not redistribute Census microdata. Source files are
-downloaded from official IBGE Census repositories.
-
-The bundled layouts are derived from documentation distributed by IBGE
-with the corresponding Census releases. Users should consult IBGE
-documentation for authoritative variable definitions, methodology,
-sampling procedures, and conditions of use.
-
 ## Development
 
 The project separates runtime code from developer tooling:
@@ -245,22 +216,3 @@ Developer scripts use their separate environment:
 julia --project=dev dev/generatelayouts2000.jl
 julia --project=dev dev/generatelayouts2010.jl
 ```
-
-## Roadmap
-
-Planned work includes efficient Parquet materialization and caching,
-DuckDB integration for querying Census microdata, broader geographic and
-Census coverage, and higher-level tools for coded variables and Census
-metadata.
-
-## Acknowledgements
-
-Census microdata and documentation are produced and distributed by the
-**Instituto Brasileiro de Geografia e Estatística (IBGE)**.
-
-CensoBR is an independent Julia package and is not affiliated with or
-endorsed by IBGE.
-
-## License
-
-See the repository's `LICENSE` file for licensing information.

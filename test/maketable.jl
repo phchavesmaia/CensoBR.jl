@@ -252,228 +252,119 @@ end
 end
 
 @testitem "Census table metadata" begin
-    using CensoBR
+  using CensoBR
 
-    fields = [
-        CensoBR.LayoutField(
-            "UF",
-            1,
-            2,
-            0,
-            true,
-            "UNIDADE DA FEDERAÇÃO",
-            Dict(
-                "33" => "Rio de Janeiro",
-                "35" => "São Paulo",
-            ),
-            String[],
-        ),
-        CensoBR.LayoutField(
-            "MESO",
-            3,
-            4,
-            0,
-            true,
-            "CODIGO DA MESORREGIÃO",
-            Dict{String,String}(),
-            [
-                "A RELAÇÃO ENCONTRA-SE NO ARQUIVO Divisão Territorial Brasileira.xls",
-            ],
-        ),
-    ]
-
-    layout = CensoBR.CensusLayout(
-        2000,
-        :household,
-        6,
-        fields,
+  fields = [
+    CensoBR.LayoutField(
+      "UF",
+      1,
+      2,
+      0,
+      true,
+      "UNIDADE DA FEDERAÇÃO",
+      Dict("33" => "Rio de Janeiro", "35" => "São Paulo"),
+      String[]
+    ),
+    CensoBR.LayoutField(
+      "MESO",
+      3,
+      4,
+      0,
+      true,
+      "CODIGO DA MESORREGIÃO",
+      Dict{String,String}(),
+      ["A RELAÇÃO ENCONTRA-SE NO ARQUIVO Divisão Territorial Brasileira.xls"]
     )
+  ]
 
-    table = CensoBR.CensusTable(
-        "dummy.txt",
-        layout,
-    )
+  layout = CensoBR.CensusLayout(2000, :household, 6, fields)
 
-    metadata = CensoBR.fieldmetadata(table, :UF)
+  table = CensoBR.CensusTable("dummy.txt", layout)
 
-    @test metadata.label == "UNIDADE DA FEDERAÇÃO"
-    @test metadata.values["33"] == "Rio de Janeiro"
-    @test metadata.values["35"] == "São Paulo"
-    @test isempty(metadata.notes)
+  metadata = CensoBR.fieldmetadata(table, :UF)
+
+  @test metadata.label == "UNIDADE DA FEDERAÇÃO"
+  @test metadata.values["33"] == "Rio de Janeiro"
+  @test metadata.values["35"] == "São Paulo"
+  @test isempty(metadata.notes)
 end
 
 @testitem "Census table metadata errors" begin
-    using CensoBR
+  using CensoBR
 
-    field = CensoBR.LayoutField(
-        "UF",
-        1,
-        2,
-        0,
-        true,
-        "UNIDADE DA FEDERAÇÃO",
-        Dict("33" => "Rio de Janeiro"),
-        String[],
-    )
+  field = CensoBR.LayoutField("UF", 1, 2, 0, true, "UNIDADE DA FEDERAÇÃO", Dict("33" => "Rio de Janeiro"), String[])
 
-    layout = CensoBR.CensusLayout(
-        2000,
-        :household,
-        2,
-        [field],
-    )
+  layout = CensoBR.CensusLayout(2000, :household, 2, [field])
 
-    table = CensoBR.CensusTable(
-        "dummy.txt",
-        layout,
-    )
+  table = CensoBR.CensusTable("dummy.txt", layout)
 
-    @test_throws ArgumentError CensoBR.fieldmetadata(
-        table,
-        :DOES_NOT_EXIST,
-    )
+  @test_throws ArgumentError CensoBR.fieldmetadata(table, :DOES_NOT_EXIST)
 end
 
 @testitem "Census table labels" begin
-    using CensoBR
+  using CensoBR
 
-    fields = [
-        CensoBR.LayoutField(
-            "UF",
-            1,
-            2,
-            0,
-            true,
-            "UNIDADE DA FEDERAÇÃO",
-            Dict{String,String}(),
-            String[],
-        ),
-        CensoBR.LayoutField(
-            "CONTROL",
-            3,
-            4,
-            0,
-            false,
-            "CONTROLE",
-            Dict{String,String}(),
-            String[],
-        ),
-    ]
+  fields = [
+    CensoBR.LayoutField("UF", 1, 2, 0, true, "UNIDADE DA FEDERAÇÃO", Dict{String,String}(), String[]),
+    CensoBR.LayoutField("CONTROL", 3, 4, 0, false, "CONTROLE", Dict{String,String}(), String[])
+  ]
 
-    layout = CensoBR.CensusLayout(
-        2000,
-        :household,
-        6,
-        fields,
-    )
+  layout = CensoBR.CensusLayout(2000, :household, 6, fields)
 
-    table = CensoBR.CensusTable(
-        "dummy.txt",
-        layout,
-    )
+  table = CensoBR.CensusTable("dummy.txt", layout)
 
-    labels = CensoBR.label(table)
+  labels = CensoBR.label(table)
 
-    @test labels[:UF] == "UNIDADE DA FEDERAÇÃO"
-    @test labels[:CONTROL] == "CONTROLE"
+  @test labels[:UF] == "UNIDADE DA FEDERAÇÃO"
+  @test labels[:CONTROL] == "CONTROLE"
 end
 
 @testitem "Census table value codes" begin
-    using CensoBR
+  using CensoBR
 
-    field = CensoBR.LayoutField(
-        "SEX",
-        1,
-        1,
-        0,
-        true,
-        "SEXO",
-        Dict(
-            "1" => "Masculino",
-            "2" => "Feminino",
-        ),
-        String[],
-    )
+  field = CensoBR.LayoutField("SEX", 1, 1, 0, true, "SEXO", Dict("1" => "Masculino", "2" => "Feminino"), String[])
 
-    layout = CensoBR.CensusLayout(
-        2000,
-        :person,
-        1,
-        [field],
-    )
+  layout = CensoBR.CensusLayout(2000, :person, 1, [field])
 
-    table = CensoBR.CensusTable(
-        "dummy.txt",
-        layout,
-    )
+  table = CensoBR.CensusTable("dummy.txt", layout)
 
-    codes = CensoBR.valuecodes(
-        table,
-        :SEX,
-    )
+  codes = CensoBR.valuecodes(table, :SEX)
 
-    @test codes == Dict(
-        "1" => "Masculino",
-        "2" => "Feminino",
-    )
+  @test codes == Dict("1" => "Masculino", "2" => "Feminino")
 end
 
 @testitem "Census table notes" begin
-    using CensoBR
+  using CensoBR
 
-    field = CensoBR.LayoutField(
-        "MESO",
-        1,
-        4,
-        0,
-        true,
-        "CODIGO DA MESORREGIÃO",
-        Dict{String,String}(),
-        [
-            "A RELAÇÃO ENCONTRA-SE NO ARQUIVO Divisão Territorial Brasileira.xls",
-        ],
-    )
+  field = CensoBR.LayoutField(
+    "MESO",
+    1,
+    4,
+    0,
+    true,
+    "CODIGO DA MESORREGIÃO",
+    Dict{String,String}(),
+    ["A RELAÇÃO ENCONTRA-SE NO ARQUIVO Divisão Territorial Brasileira.xls"]
+  )
 
-    layout = CensoBR.CensusLayout(
-        2000,
-        :household,
-        4,
-        [field],
-    )
+  layout = CensoBR.CensusLayout(2000, :household, 4, [field])
 
-    table = CensoBR.CensusTable(
-        "dummy.txt",
-        layout,
-    )
+  table = CensoBR.CensusTable("dummy.txt", layout)
 
-    @test CensoBR.notes(
-        table,
-        :MESO,
-    ) == [
-        "A RELAÇÃO ENCONTRA-SE NO ARQUIVO Divisão Territorial Brasileira.xls",
-    ]
+  @test CensoBR.notes(table, :MESO) == ["A RELAÇÃO ENCONTRA-SE NO ARQUIVO Divisão Territorial Brasileira.xls"]
 end
 
 @testitem "Bundled Census metadata" begin
-    using CensoBR
+  using CensoBR
 
-    layout = CensoBR._loadlayout(
-        2000,
-        :household,
-    )
+  layout = CensoBR._loadlayout(2000, :household)
 
-    table = CensoBR.CensusTable(
-        "dummy.txt",
-        layout,
-    )
+  table = CensoBR.CensusTable("dummy.txt", layout)
 
-    metadata = CensoBR.fieldmetadata(
-        table,
-        :V0102,
-    )
+  metadata = CensoBR.fieldmetadata(table, :V0102)
 
-    @test metadata.label == "UNIDADE DA FEDERAÇÃO"
-    @test metadata.values["33"] == "Rio de Janeiro"
-    @test metadata.values["35"] == "São Paulo"
-    @test isempty(metadata.notes)
+  @test metadata.label == "UNIDADE DA FEDERAÇÃO"
+  @test metadata.values["33"] == "Rio de Janeiro"
+  @test metadata.values["35"] == "São Paulo"
+  @test isempty(metadata.notes)
 end
