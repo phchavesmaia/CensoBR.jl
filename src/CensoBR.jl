@@ -15,17 +15,21 @@ The corresponding Census archive is downloaded and extracted if necessary.
 CensoBR then loads the bundled layout for `year` and `record`, locates the
 matching fixed-width microdata file, and parses records on demand.
 """
-function opencensus(year::Integer, uf::Union{String, Symbol}, record::Symbol;
-	cachedir::AbstractString = _defaultcachedir(), force::Bool = false,
-	showprogress::Bool = true)
+function opencensus(
+  year::Integer,
+  uf::Union{String,Symbol},
+  record::Symbol;
+  cachedir::AbstractString=_defaultcachedir(),
+  force::Bool=false,
+  showprogress::Bool=true
+)
+  censusdir = _preparecensus(year, uf; cachedir=cachedir, force=force, showprogress=showprogress)
 
-	censusdir = _preparecensus(year, uf; cachedir = cachedir, force = force, showprogress = showprogress)
+  layout = _loadlayout(year, record)
 
-	layout = _loadlayout(year, record)
+  path = _findrawfile(censusdir, layout)
 
-	path = _findrawfile(censusdir, layout)
-
-	_parsefile(path, layout)
+  _parsefile(path, layout)
 end
 
 export opencensus
