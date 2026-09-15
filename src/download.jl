@@ -145,7 +145,8 @@ function _extract_census(zip_path::AbstractString; force::Bool = false)
 	mkpath(destination)
 
 	# extracting the contents of the ZIP archive
-	ZipFile.Reader(zip_path) do archive
+	archive = ZipFile.Reader(zip_path)
+    try
 		for entry in archive.files
             # determining the output path for the current entry
 			outpath = joinpath(destination, entry.name)
@@ -160,8 +161,10 @@ function _extract_census(zip_path::AbstractString; force::Bool = false)
 				write(io, read(entry))
 			end
 		end
-	end
-
+    finally
+        close(archive)
+    end
+    
 	destination
 end
 
