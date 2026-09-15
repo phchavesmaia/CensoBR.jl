@@ -185,3 +185,51 @@ function Tables.schema(table::CensusTable)
 
   Tables.Schema(names, types)
 end
+
+"""
+	fieldmetadata(table, variable)
+
+Return variable metadata for all fields in a Census table.
+"""
+function fieldmetadata(table::CensusTable, variable::Symbol)
+  for field in table.layout.fields
+    if Symbol(field.name) == variable
+      return (label=field.label, values=field.values, notes=field.notes)
+    end
+  end
+
+  throw(ArgumentError("Variable `$variable` not found in Census table"))
+end
+
+label(table::CensusTable) = Dict(Symbol(field.name) => field.label for field in table.layout.fields)
+
+valuecodes(table::CensusTable, variable::Symbol) = fieldmetadata(table, variable).values
+
+notes(table::CensusTable, variable::Symbol) = fieldmetadata(table, variable).notes
+
+"""
+	opencensus(year, uf, record; cachedir=_defaultcachedir(),
+			   force=false, showprogress=true)
+
+Return a lazy Tables.jl-compatible view of IBGE Census microdata.
+
+The corresponding Census archive is downloaded and extracted if necessary.
+CensoBR then loads the bundled layout for `year` and `record`, locates the
+matching fixed-width microdata file, and parses records on demand.
+"""
+function opencensus(
+  year::Integer,
+  uf::Union{String,Symbol},
+  record::Symbol;
+  cachedir::AbstractString=_defaultcachedir(),
+  force::Bool=false,
+  showprogress::Bool=true
+)
+  censusdir = _preparecensus(year, uf; cachedir=cachedir, force=force, showprogress=showprogress)
+
+  layout = _loadlayout(year, record)
+
+  path = _findrawfile(censusdir, layout)
+
+  _parsefile(path, layout)
+end
