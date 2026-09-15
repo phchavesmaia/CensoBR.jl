@@ -1,6 +1,8 @@
 using TOML
 using OdsIO
 
+include(joinpath(@__DIR__, "download.jl"))
+
 const ODSLAYOUTFILE = "Layout_microdados_Amostra.ods"
 
 const ODS_SHEETS = Dict(
@@ -271,17 +273,15 @@ function _generatelayouts2010(
 end
 
 function main(args)
-	length(args) == 2 || error(
-		"Usage:\n" *
-		"  julia generatelayouts2010.jl <documentationdir> <outputdir>\n\n" *
-		"Example:\n" *
-		"  julia generatelayouts2010.jl " *
-		"~/.cache/CensoBR/raw/2010/Documentacao " *
-		"data/layouts/2010",
-	)
+	length(args) <= 1 ||
+		error(
+			"Usage:\n" *
+			"  julia --project=dev dev/generatelayouts2010.jl [outputdir]",
+		)
 
-	documentationdir = expanduser(args[1])
-	outputdir = expanduser(args[2])
+	documentationdir = preparedocumentation(2010)
+
+	outputdir = isempty(args) ? joinpath(dirname(@__DIR__), "data", "layouts", "2010") : expanduser(only(args))
 
 	_generatelayouts2010(documentationdir, outputdir)
 end
