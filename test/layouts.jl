@@ -89,6 +89,7 @@ end
     using CensoBR
 
     valid = CensoBR.CensusLayout(
+        2000,
         :household,
         10,
         [
@@ -117,11 +118,12 @@ end
 
     @test CensoBR._validatelayout(valid)
 
-    empty = CensoBR.CensusLayout(:household, 10, CensoBR.LayoutField[])
+    empty = CensoBR.CensusLayout(2000, :household, 10, CensoBR.LayoutField[])
 
     @test_throws ErrorException CensoBR._validatelayout(empty)
 
     overflow = CensoBR.CensusLayout(
+        2000,
         :household,
         10,
         [

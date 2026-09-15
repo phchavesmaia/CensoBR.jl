@@ -87,7 +87,7 @@ function _defaultcachedir()
 end
 
 """
-    _downloadfile(url, destination; force=false, showprogress=true, description="Downloading")
+	_downloadfile(url, destination; force=false, showprogress=true, description="Downloading")
 
 Download a file to `destination`, optionally displaying a progress bar.
 
@@ -118,14 +118,14 @@ function _downloadfile(
     progress = Ref{Union{Nothing,Progress}}(nothing)
     finished = Ref(false)
     function progress_callback(total, now)
-        total <= 0 && return
+        total ≤ 0 && return
         finished[] && return
         if isnothing(progress[])
             progress[] = Progress(total; desc = description, dt = 0.1, showspeed = false)
         end
         current = min(now, total)
         update!(progress[], current)
-        if current >= total
+        if current ≥ total
             finished[] = true
         end
     end
