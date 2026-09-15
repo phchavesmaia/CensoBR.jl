@@ -1,5 +1,4 @@
-using Downloads
-using p7zip_jll
+using Downloads, p7zip_jll
 using ProgressMeter: Progress, update!, finish!
 
 const IBGE_URLS = Dict(
@@ -19,7 +18,7 @@ const VALID_UFS = Set([
 ])
 
 """
-	_census_url(year, uf)
+	_censusurl(year, uf)
 
 Return the official IBGE URL for a Census microdata archive.
 
@@ -30,7 +29,7 @@ _census_url(2000, "RJ")
 _census_url(2010, :RJ)
 ```
 """
-function _census_url(year::Integer, uf::Union{String, Symbol})
+function _censusurl(year::Integer, uf::Union{String, Symbol})
 	# checking if the year is supported
 	year in keys(IBGE_URLS) || throw(ArgumentError("Unsupported census year: $year"))
 
@@ -49,11 +48,11 @@ function _census_url(year::Integer, uf::Union{String, Symbol})
 end
 
 """
-_default_cache_dir()
+	_defaultcachedir()
 
 Default location for downloaded CensoBR files.
 """
-function _default_cache_dir()
+function _defaultcachedir()
 	if Sys.iswindows()
 		base = get(
 			ENV,
@@ -73,7 +72,7 @@ function _default_cache_dir()
 end
 
 """
-    _download_file(url, destination; force=false, show_progress=true, description="Downloading")
+    _downloadfile(url, destination; force=false, show_progress=true, description="Downloading")
 
 Download a file to `destination`, optionally displaying a progress bar.
 
@@ -83,7 +82,7 @@ and `force=false`, the existing file is returned.
 
 Returns the path to the downloaded file.
 """
-function _download_file(url::AbstractString, destination::AbstractString; force::Bool = false,
+function _downloadfile(url::AbstractString, destination::AbstractString; force::Bool = false,
     show_progress::Bool = true, description::AbstractString = "Downloading")
 
 	# determining the destination path for the downloaded ZIP file
@@ -134,15 +133,15 @@ function _download_file(url::AbstractString, destination::AbstractString; force:
 end
 
 """
-_download_census(year, uf; cache_dir=_default_cache_dir(), force=false, show_progress=true)
+	_downloadcensus(year, uf; cache_dir=_defaultcachedir(), force=false, show_progress=true)
 
 Download an official IBGE Census microdata archive.
 
 Returns the path to the cached ZIP file.
 """
-function _download_census(year::Integer, uf; cache_dir::AbstractString = _default_cache_dir(), force::Bool = false, show_progress::Bool = true)
+function _downloadcensus(year::Integer, uf; cache_dir::AbstractString = _defaultcachedir(), force::Bool = false, show_progress::Bool = true)
 	# determining the URL for the Census archive
-	url = _census_url(year, uf)
+	url = _censusurl(year, uf)
 
 	# converting the UF code to an uppercase string
 	uf = uppercase(String(uf))
@@ -155,18 +154,18 @@ function _download_census(year::Integer, uf; cache_dir::AbstractString = _defaul
 	destination = joinpath(raw_dir, "$uf.zip")
 	
 	# downloading the file using the helper function
-	_download_file(url, destination; force = force, show_progress = show_progress, description = "Downloading $uf $year")
+	_downloadfile(url, destination; force = force, show_progress = show_progress, description = "Downloading $uf $year")
 end
 
 """
-    _download_documentation(year; cache_dir=_default_cache_dir(),
+    _downloaddocumentation(year; cache_dir=_defaultcachedir(),
                             force=false, show_progress=true)
 
 Download the official IBGE documentation archive for a Census year.
 
 Returns the path to the cached ZIP file.
 """
-function _download_documentation(year::Integer; cache_dir::AbstractString = _default_cache_dir(), 
+function _downloaddocumentation(year::Integer; cache_dir::AbstractString = _defaultcachedir(), 
 	force::Bool = false,show_progress::Bool = true)
 
     haskey(DOCUMENTATION_FILES, year) || throw(ArgumentError("Unsupported census year: $year"))
@@ -176,17 +175,17 @@ function _download_documentation(year::Integer; cache_dir::AbstractString = _def
 
     destination = joinpath(cache_dir, "raw", string(year), filename,)
 
-    _download_file(url, destination; force = force, show_progress = show_progress, description = "Downloading documentation $year")
+    _downloadfile(url, destination; force = force, show_progress = show_progress, description = "Downloading documentation $year")
 end
 
 """
-extract_census(zip_path; destination=nothing, force=false)
+	_extractcensus(zip_path; destination=nothing, force=false)
 
 Extract a Census ZIP archive with 7-Zip.
 
 Returns the extraction directory.
 """
-function _extract_census(zip_path::AbstractString; force::Bool = false)
+function _extractcensus(zip_path::AbstractString; force::Bool = false)
 	# verifying that the ZIP file exists
 	isfile(zip_path) || throw(ArgumentError("ZIP file does not exist: $zip_path"))
 
@@ -207,20 +206,20 @@ function _extract_census(zip_path::AbstractString; force::Bool = false)
 end
 
 """
-_prepare_census(year, uf; cache_dir=_default_cache_dir(), force=false)
+	_preparecensus(year, uf; cache_dir=_defaultcachedir(), force=false)
 
 Download and extract an IBGE Census archive.
 
 Returns the directory containing the extracted raw files.
 """
-function _prepare_census(year::Integer, uf; cache_dir::AbstractString = _default_cache_dir(), force::Bool = false, show_progress::Bool = true)
+function _preparecensus(year::Integer, uf; cache_dir::AbstractString = _defaultcachedir(), force::Bool = false, show_progress::Bool = true)
 	# downloading the ZIP file for the specified year and UF
-	zip_path = _download_census(year, uf; cache_dir = cache_dir, force = force, show_progress = show_progress)
-	documentation_zip = _download_documentation(year; cache_dir = cache_dir, force = force, show_progress = show_progress)
+	zip_path = _downloadcensus(year, uf; cache_dir = cache_dir, force = force, show_progress = show_progress)
+	documentation_zip = _downloaddocumentation(year; cache_dir = cache_dir, force = force, show_progress = show_progress)
 
 	# extracting the downloaded ZIP file
-	census_dir = _extract_census(zip_path; force = force)
-	documentation_dir = _extract_census(documentation_zip; force = force)
+	census_dir = _extractcensus(zip_path; force = force)
+	documentation_dir = _extractcensus(documentation_zip; force = force)
 
 	(census = census_dir, documentation = documentation_dir)
 end

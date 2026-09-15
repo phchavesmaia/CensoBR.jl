@@ -1,6 +1,7 @@
 *.jl.*.cov
 *.jl.cov
 *.jl.mem
-/Manifest*.toml
+**/Manifest*.toml
+**/.CondaPkg/
 /docs/Manifest*.toml
 /docs/build/

@@ -1,0 +1,864 @@
+lrecl = 172
+record = "household"
+source_file = "layout.ods"
+source_sheet = "DOMI"
+
+[[fields]]
+character = true
+decimals = 0
+label = "UNIDADE DA FEDERAÇÃO"
+name = "V0001"
+start = 1
+width = 2
+
+    [fields.values]
+    11 = "Rondônia"
+    12 = "Acre"
+    13 = "Amazonas"
+    14 = "Roraima"
+    15 = "Pará"
+    16 = "Amapá"
+    17 = "Tocantins"
+    21 = "Maranhão"
+    22 = "Piauí"
+    23 = "Ceará"
+    24 = "Rio Grande do Norte"
+    25 = "Paraíba"
+    26 = "Pernambuco"
+    27 = "Alagoas"
+    28 = "Sergipe"
+    29 = "Bahia"
+    31 = "Minas Gerais"
+    32 = "Espírito Santo"
+    33 = "Rio de Janeiro"
+    35 = "São Paulo"
+    41 = "Paraná"
+    42 = "Santa Catarina"
+    43 = "Rio Grande do Sul"
+    50 = "Mato Grosso do Sul"
+    51 = "Mato Grosso"
+    52 = "Goiás"
+    53 = "Distrito Federal"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DO MUNICÍPIO"
+name = "V0002"
+start = 3
+width = 5
+[[fields]]
+character = true
+decimals = 0
+label = "ÁREA DE PONDERAÇÃO"
+name = "V0011"
+start = 8
+width = 13
+[[fields]]
+character = false
+decimals = 0
+label = "CONTROLE"
+name = "V0300"
+start = 21
+width = 8
+[[fields]]
+character = false
+decimals = 13
+label = "PESO AMOSTRAL"
+name = "V0010"
+start = 29
+width = 16
+[[fields]]
+character = true
+decimals = 0
+label = "REGIÃO GEOGRÁFICA"
+name = "V1001"
+start = 45
+width = 1
+
+    [fields.values]
+    1 = "Região norte (uf=11 a 17)"
+    2 = "Região nordeste (uf=21 a 29)"
+    3 = "Região sudeste (uf=31 a 33 e 35)"
+    4 = "Região sul (uf=41 a 43)"
+    5 = "Região centro-oeste (uf=50 a 53)"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DA MESORREGIÃO"
+name = "V1002"
+notes = ["A relação de códigos encontra-se no arquivo:"]
+start = 46
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DA MICRORREGIÃO"
+name = "V1003"
+notes = ["A relação de códigos encontra-se no arquivo:"]
+start = 48
+width = 3
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DA REGIÃO METROPOLITANA"
+name = "V1004"
+notes = ["A relação de códigos encontra-se no arquivo:"]
+start = 51
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "SITUAÇÃO DO DOMICÍLIO"
+name = "V1006"
+start = 53
+width = 1
+
+    [fields.values]
+    1 = "Urbana"
+    2 = "Rural"
+[[fields]]
+character = true
+decimals = 0
+label = "ESPÉCIE DE UNIDADE VISITADA"
+name = "V4001"
+start = 54
+width = 2
+
+    [fields.values]
+    01 = "Domicílio particular permanente ocupado"
+    02 = "Domicílio particular permanente ocupado sem entrevista realizada"
+    05 = "Domicílio particular improvisado ocupado"
+    06 = "Domicílio coletivo com morador"
+[[fields]]
+character = true
+decimals = 0
+label = "TIPO DE ESPÉCIE"
+name = "V4002"
+start = 56
+width = 2
+
+    [fields.values]
+    11 = "Casa"
+    12 = "Casa de vila ou em condomínio"
+    13 = "Apartamento"
+    14 = "Habitação em: casa de cômodos, cortiço ou cabeça de porco"
+    15 = "Oca ou maloca"
+    51 = "Tenda ou barraca"
+    52 = "Dentro de estabelecimento"
+    53 = "Outro (vagão, trailer, gruta, etc)"
+    61 = "Asilo, orfanato e similares  com morador"
+    62 = "Hotel, pensão e similares com morador"
+    63 = "Alojamento de trabalhadores com morador"
+    64 = "Penitenciária, presídio ou casa de detenção com morador"
+    65 = "Outro com morador"
+[[fields]]
+character = true
+decimals = 0
+label = "DOMICÍLIO, CONDIÇÃO DE OCUPAÇÃO"
+name = "V0201"
+start = 58
+width = 1
+
+    [fields.values]
+    1 = "Próprio de algum morador - já pago"
+    2 = "Próprio de algum morador - ainda pagando"
+    3 = "Alugado"
+    4 = "Cedido por empregador"
+    5 = "Cedido de outra forma"
+    6 = "Outra condição Branco"
+[[fields]]
+character = false
+decimals = 0
+label = "VALOR DO ALUGUEL (EM REAIS)"
+name = "V2011"
+start = 59
+width = 6
+[[fields]]
+character = false
+decimals = 5
+label = "ALUGUEL EM Nº DE SALÁRIOS MÍNIMOS"
+name = "V2012"
+start = 65
+width = 9
+[[fields]]
+character = true
+decimals = 0
+label = "MATERIAL PREDOMINANTE, PAREDES EXTERNAS"
+name = "V0202"
+start = 74
+width = 1
+
+    [fields.values]
+    1 = "Alvenaria com revestimento"
+    2 = "Alvenaria sem revestimento"
+    3 = "Madeira apropriada para construção (aparelhada)"
+    4 = "Taipa revestida"
+    5 = "Taipa não revestida"
+    6 = "Madeira aproveitada"
+    7 = "Palha"
+    8 = "Outro material"
+    9 = "Sem parede Branco"
+[[fields]]
+character = false
+decimals = 0
+label = "CÔMODOS, NÚMERO"
+name = "V0203"
+notes = ["- Branco", "- 1 a 30"]
+start = 75
+width = 2
+[[fields]]
+character = false
+decimals = 1
+label = "DENSIDADE DE MORADOR/CÔMODO"
+name = "V6203"
+start = 77
+width = 3
+[[fields]]
+character = false
+decimals = 0
+label = "CÔMODOS COMO DORMITÓRIO, NÚMERO"
+name = "V0204"
+notes = ["- Branco", "- 1 a 15"]
+start = 80
+width = 2
+[[fields]]
+character = false
+decimals = 1
+label = "DENSIDADE DE MORADOR / DORMITÓRIO"
+name = "V6204"
+start = 82
+width = 3
+[[fields]]
+character = true
+decimals = 0
+label = "BANHEIROS DE USO EXCLUSIVO, NÚMERO"
+name = "V0205"
+start = 85
+width = 1
+
+    [fields.values]
+    0 = "Zero banheiros"
+    1 = "Um banheiro"
+    2 = "Dois banheiros"
+    3 = "Três banheiros"
+    4 = "Quatro banheiros"
+    5 = "Cinco banheiros"
+    6 = "Seis banheiros"
+    7 = "Sete banheiros"
+    8 = "Oito banheiros"
+    9 = "Nove ou mais banheiros Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "SANITÁRIO OU BURACO PARA DEJEÇÕES, EXISTÊNCIA"
+name = "V0206"
+start = 86
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "ESGOTAMENTO SANITÁRIO, TIPO"
+name = "V0207"
+start = 87
+width = 1
+
+    [fields.values]
+    1 = "Rede geral de esgoto ou pluvial"
+    2 = "Fossa séptica"
+    3 = "Fossa rudimentar"
+    4 = "Vala"
+    5 = "Rio, lago ou mar"
+    6 = "Outro Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "ABASTECIMENTO DE ÁGUA, FORMA"
+name = "V0208"
+start = 88
+width = 2
+
+    [fields.values]
+    01 = "Rede geral de distribuição"
+    02 = "Poço ou nascente na propriedade"
+    03 = "Poço ou nascente fora da propriedade"
+    04 = "Carro-pipa"
+    05 = "Água da chuva armazenada em cisterna"
+    06 = "Água da chuva armazenada de outra forma"
+    07 = "Rios, açudes, lagos e igarapés"
+    08 = "Outra"
+    09 = "Poço ou nascente na aldeia"
+    10 = "Poço ou nascente fora da aldeia Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "ABASTECIMENTO DE ÁGUA, CANALIZAÇÃO"
+name = "V0209"
+start = 90
+width = 1
+
+    [fields.values]
+    1 = "Sim, em pelo menos um cômodo"
+    2 = "Sim, só na propriedade ou terreno"
+    3 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "LIXO, DESTINO"
+name = "V0210"
+start = 91
+width = 1
+
+    [fields.values]
+    1 = "Coletado diretamente por serviço de limpeza"
+    2 = "Colocado em caçamba de serviço de limpeza"
+    3 = "Queimado (na propriedade)"
+    4 = "Enterrado (na propriedade)"
+    5 = "Jogado em terreno baldio ou logradouro"
+    6 = "Jogado em rio, lago ou mar"
+    7 = "Tem outro destino Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "ENERGIA ELÉTRICA, EXISTÊNCIA"
+name = "V0211"
+start = 92
+width = 1
+
+    [fields.values]
+    1 = "Sim, de companhia distribuidora"
+    2 = "Sim, de outras fontes"
+    3 = "Não existe energia elétrica Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "EXISTÊNCIA DE MEDIDOR OU RELÓGIO, ENERGIA ELÉTRICA, COMPANHIA DISTRIBUIDORA"
+name = "V0212"
+start = 93
+width = 1
+
+    [fields.values]
+    1 = "Sim, de uso exclusivo"
+    2 = "Sim, de uso comum"
+    3 = "Não tem medidor ou relógio Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "RÁDIO, EXISTÊNCIA"
+name = "V0213"
+start = 94
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "TELEVISÃO, EXISTÊNCIA"
+name = "V0214"
+start = 95
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "MÁQUINA DE LAVAR ROUPA, EXISTÊNCIA"
+name = "V0215"
+start = 96
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "GELADEIRA, EXISTÊNCIA"
+name = "V0216"
+start = 97
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "TELEFONE CELULAR, EXISTÊNCIA"
+name = "V0217"
+start = 98
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "TELEFONE FIXO, EXISTÊNCIA"
+name = "V0218"
+start = 99
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "MICROCOMPUTADOR, EXISTÊNCIA"
+name = "V0219"
+start = 100
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "MICROCOMPUTADOR COM ACESSO À INTERNET, EXISTÊNCIA"
+name = "V0220"
+start = 101
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "MOTOCICLETA PARA USO PARTICULAR, EXISTÊNCIA"
+name = "V0221"
+start = 102
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "AUTOMÓVEL PARA USO PARTICULAR, EXISTÊNCIA"
+name = "V0222"
+start = 103
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "ALGUMA PESSOA QUE MORAVA COM VOCÊ(S) ESTAVA MORANDO EM OUTRO PAÍS EM 31 DE JULHO DE 2010"
+name = "V0301"
+start = 104
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = false
+decimals = 0
+label = "QUANTAS PESSOAS MORAVAM NESTE DOMICÍLIO EM 31 DE JULHO DE 2010"
+name = "V0401"
+start = 105
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "A RESPONSABILIDADE PELO DOMICÍLIO É DE"
+name = "V0402"
+start = 107
+width = 1
+
+    [fields.values]
+    1 = "Apenas um morador"
+    2 = "Mais de um morador"
+    9 = "Ignorado Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "DE AGOSTO DE 2009 A JULHO DE 2010, FALECEU ALGUMA PESSOA QUE MORAVA COM VOCÊ(S) (INCLUSIVE CRIANÇAS RECÉM-NASCIDAS E IDOSOS)"
+name = "V0701"
+start = 108
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = false
+decimals = 0
+label = "RENDIMENTO MENSAL DOMICILIAR EM JULHO DE 2010"
+name = "V6529"
+start = 109
+width = 7
+[[fields]]
+character = false
+decimals = 5
+label = "RENDIMENTO DOMICILIAR, SALÁRIOS MÍNIMOS, EM JULHO DE 2010"
+name = "V6530"
+start = 116
+width = 10
+[[fields]]
+character = false
+decimals = 2
+label = "RENDIMENTO DOMICILIAR PER CAPITA EM JULHO DE 2010"
+name = "V6531"
+start = 126
+width = 8
+[[fields]]
+character = false
+decimals = 5
+label = "RENDIMENTO DOMICILIAR PER CAPITA, EM Nº DE SALÁRIOS MÍNIMOS, EM JULHO DE 2010"
+name = "V6532"
+start = 134
+width = 9
+[[fields]]
+character = true
+decimals = 0
+label = "Espécie da Unidade Doméstica"
+name = "V6600"
+start = 143
+width = 1
+
+    [fields.values]
+    1 = "Unipessoal"
+    2 = "Nuclear"
+    3 = "Estendida"
+    4 = "Composta Branco (Domicílio Coletivo)"
+[[fields]]
+character = true
+decimals = 0
+label = "ADEQUAÇÃO DA MORADIA"
+name = "V6210"
+start = 144
+width = 1
+
+    [fields.values]
+    1 = "Adequada"
+    2 = "Semi-adequada"
+    3 = "Inadequada Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0201"
+name = "M0201"
+start = 145
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V2011"
+name = "M2011"
+start = 146
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0202"
+name = "M0202"
+start = 147
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0203"
+name = "M0203"
+start = 148
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0204"
+name = "M0204"
+start = 149
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0205"
+name = "M0205"
+start = 150
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0206"
+name = "M0206"
+start = 151
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0207"
+name = "M0207"
+start = 152
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0208"
+name = "M0208"
+start = 153
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0209"
+name = "M0209"
+start = 154
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0210"
+name = "M0210"
+start = 155
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0211"
+name = "M0211"
+start = 156
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0212"
+name = "M0212"
+start = 157
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0213"
+name = "M0213"
+start = 158
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0214"
+name = "M0214"
+start = 159
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0215"
+name = "M0215"
+start = 160
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0216"
+name = "M0216"
+start = 161
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0217"
+name = "M0217"
+start = 162
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0218"
+name = "M0218"
+start = 163
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0219"
+name = "M0219"
+start = 164
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0220"
+name = "M0220"
+start = 165
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0221"
+name = "M0221"
+start = 166
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0222"
+name = "M0222"
+start = 167
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0301"
+name = "M0301"
+start = 168
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0401"
+name = "M0401"
+start = 169
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0402"
+name = "M0402"
+start = 170
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0701"
+name = "M0701"
+start = 171
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "Situação do setor"
+name = "V1005"
+start = 172
+width = 1
+
+    [fields.values]
+    1 = "Masculino"
+    2 = "Feminino"
+    3 = "Área urbanizada isolada"
+    4 = "Área rural de extensão urbana"
+    5 = "Aglomerado rural (povoado)"
+    6 = "Aglomerado rural (núcleo)"
+    7 = "Aglomerado rural (outros)"
+    8 = "Área rural exclusive aglomerado rural"

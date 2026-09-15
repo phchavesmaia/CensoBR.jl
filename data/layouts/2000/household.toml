@@ -1,0 +1,1163 @@
+lrecl = 170
+record = "household"
+source_file = "LE DOMIC.sas"
+
+[[fields]]
+character = true
+decimals = 0
+label = "UNIDADE DA FEDERAÇÃO"
+name = "V0102"
+start = 1
+width = 2
+
+    [fields.values]
+    11 = "Rondônia"
+    12 = "Acre"
+    13 = "Amazonas"
+    14 = "Roraima"
+    15 = "Pará"
+    16 = "Amapá"
+    17 = "Tocantins"
+    21 = "Maranhão"
+    22 = "Piauí"
+    23 = "Ceará"
+    24 = "Rio Grande do Norte"
+    25 = "Paraíba"
+    26 = "Pernambuco"
+    27 = "Alagoas"
+    28 = "Sergipe"
+    29 = "Bahia"
+    31 = "Minas Gerais"
+    32 = "Espírito Santo"
+    33 = "Rio de Janeiro"
+    35 = "São Paulo"
+    41 = "Paraná"
+    42 = "Santa Catarina"
+    43 = "Rio Grande do Sul"
+    50 = "Mato Grosso do Sul"
+    51 = "Mato Grosso"
+    52 = "Goiás"
+    53 = "Distrito Federal"
+[[fields]]
+character = true
+decimals = 0
+label = "CODIGO DA MESORREGIÃO"
+name = "V1002"
+notes = ["A RELAÇÃO ENCONTRA-SE NO ARQUIVO “Divisão Territorial Brasileira.xls”"]
+start = 3
+width = 4
+[[fields]]
+character = true
+decimals = 0
+label = "CODIGO DA MICRORREGIÃO"
+name = "V1003"
+notes = ["A RELAÇÃO ENCONTRA-SE NO ARQUIVO Divisão Territorial Brasileira.xls”"]
+start = 7
+width = 5
+[[fields]]
+character = true
+decimals = 0
+label = "CODIGO DO MUNICÍPIO"
+name = "V0103"
+notes = ["A RELAÇÃO ENCONTRA-SE NO ARQUIVO “Divisão Territorial Brasileira.xls”"]
+start = 12
+width = 7
+[[fields]]
+character = true
+decimals = 0
+label = "CODIGO DO DISTRITO"
+name = "V0104"
+notes = ["A RELAÇÃO ENCONTRA-SE NO ARQUIVO “Divisão Territorial Brasileira.xls”"]
+start = 19
+width = 9
+[[fields]]
+character = true
+decimals = 0
+label = "CODIGO DO SUBDISTRITO"
+name = "V0105"
+notes = ["A RELAÇÃO ENCONTRA-SE NO ARQUIVO “Divisão Territorial Brasileira.xls”"]
+start = 28
+width = 11
+[[fields]]
+character = false
+decimals = 0
+label = "CONTROLE"
+name = "V0300"
+start = 39
+width = 8
+[[fields]]
+character = false
+decimals = 0
+label = "'= 00 (DOMICÍLIO)"
+name = "V0400"
+start = 47
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "REGIÃO GEOGRÁFICA"
+name = "V1001"
+start = 49
+width = 1
+
+    [fields.values]
+    1 = "Região Norte"
+    2 = "Região Nordeste"
+    3 = "Região Sudeste"
+    4 = "Região Sul"
+    5 = "Região Centro-Oeste"
+[[fields]]
+character = true
+decimals = 0
+label = "REGIÃO METROPOLITANA"
+name = "V1004"
+notes = ["VER ARQUIVO AUXILIARES"]
+start = 50
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "ÁREA DE PONDERAÇÃO"
+name = "AREAP"
+notes = ["CATEGORIAS NO ARQUIVO “Municípios Com Mais de Uma Área de Ponderação.xls”"]
+start = 52
+width = 13
+[[fields]]
+character = true
+decimals = 0
+label = "SITUAÇÃO DO SETOR"
+name = "V1005"
+start = 65
+width = 1
+
+    [fields.values]
+    1 = "Área urbanizada de vila ou cidade"
+    2 = "Área não urbanizada de vila ou cidade"
+    3 = "Área urbanizada isolada"
+    4 = "Rural - extensão urbana"
+    5 = "Rural - povoado"
+    6 = "Rural - núcleo"
+    7 = "Rural - outros aglomerados"
+    8 = "Rural - exclusive os aglomerados rurais"
+[[fields]]
+character = true
+decimals = 0
+label = "SITUAÇÃO DO DOMICÍLIO"
+name = "V1006"
+start = 66
+width = 1
+
+    [fields.values]
+    1 = "Urbano"
+    2 = "Rural"
+[[fields]]
+character = true
+decimals = 0
+label = "TIPO DO SETOR"
+name = "V1007"
+start = 67
+width = 1
+
+    [fields.values]
+    0 = "Setor comum ou não especial"
+    1 = "Setor especial de aglomerado subnormal"
+    2 = "Setor especial de quartéis, bases militares, etc."
+    3 = "Setor especial de alojamento, acampamentos, etc."
+    4 = "Setor especial de embarcações, barcos, navios, etc."
+    5 = "Setor especial de aldeia indígena"
+    6 = "Setor especial de penitenciárias, colônias penais, presídios, cadeias, etc."
+    7 = "Setor especial de asilos, orfanatos, conventos, hospitais, etc."
+[[fields]]
+character = false
+decimals = 0
+label = "TOTAL DE HOMENS"
+name = "V0110"
+start = 68
+width = 2
+[[fields]]
+character = false
+decimals = 0
+label = "TOTAL DE MULHERES"
+name = "V0111"
+start = 70
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "ESPÉCIE DE DOMICILIO"
+name = "V0201"
+start = 72
+width = 1
+
+    [fields.values]
+    1 = "Particular permanente"
+    2 = "Particular improvisado"
+    3 = "Coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0201"
+name = "M0201"
+start = 73
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "TIPO DO DOMICÍLIO"
+name = "V0202"
+start = 74
+width = 1
+
+    [fields.values]
+    1 = "Casa"
+    2 = "Apartamento"
+    3 = "Cômodo"
+    Branco = "Não aplicável"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0202"
+name = "M0202"
+start = 75
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "TOTAL DE CÔMODOS"
+name = "V0203"
+start = 76
+width = 2
+
+    [fields.values]
+    Branco = "para particular improvisado e domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0203"
+name = "M0203"
+start = 78
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "TOTAL DE CÔMODOS SERVINDO DE DORMITÓRIO"
+name = "V0204"
+start = 79
+width = 1
+
+    [fields.values]
+    Branco = "para particular improvisado e domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0204"
+name = "M0204"
+start = 80
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "CONDIÇÃO DO DOMICÍLIO"
+name = "V0205"
+start = 81
+width = 1
+
+    [fields.values]
+    1 = "Próprio, já pago"
+    2 = "Próprio, ainda pagando"
+    3 = "Alugado"
+    4 = "Cedido por empregador"
+    5 = "Cedido de outra forma"
+    6 = "Outra Condição"
+    Branco = "para domicílio particular improvisado e domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0205"
+name = "M0205"
+start = 82
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "CONDIÇÃO DO TERRENO"
+name = "V0206"
+start = 83
+width = 1
+
+    [fields.values]
+    1 = "Próprio"
+    2 = "Cedido"
+    3 = "Outra condição"
+    Branco = "para domicílio particular improvisado, domicílio coletivo e domicílio particular permanente que não é próprio (V0205 = 3 a 6)"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0206"
+name = "M0206"
+start = 84
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "FORMA DE ABASTECIMENTO DE ÁGUA"
+name = "V0207"
+start = 85
+width = 1
+
+    [fields.values]
+    1 = "Rede geral"
+    2 = "Poço ou nascente (na propriedade)"
+    3 = "Outra"
+    Branco = "para domicílio particular improvisado e domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0207"
+name = "M0207"
+start = 86
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "TIPO DE CANALIZAÇÃO"
+name = "V0208"
+start = 87
+width = 1
+
+    [fields.values]
+    1 = "Canalizada em pelo menos um cômodo"
+    2 = "Canalizada só na propriedade ou terreno"
+    3 = "Não canalizada"
+    Branco = "para domicílio particular improvisado e domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0208"
+name = "M0208"
+start = 88
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "TOTAL DE BANHEIROS"
+name = "V0209"
+start = 89
+width = 1
+
+    [fields.values]
+    0 = "Não tem"
+    1 = "1 banheiro"
+    2 = "2 banheiros"
+    3 = "3 banheiros"
+    4 = "4 banheiros"
+    5 = "5 banheiros"
+    6 = "6 banheiros"
+    7 = "7 banheiros"
+    8 = "8 banheiros"
+    9 = "9 ou mais banheiros Branco– para domicílio particular improvisado e domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0209"
+name = "M0209"
+start = 90
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "EXISTÊNCIA DE SANITÁRIO"
+name = "V0210"
+start = 91
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    Branco = "para domicílio particular improvisado, domicílio coletivo e domicílio particular permanente que tinha banheiro(s)"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0210"
+name = "M0210"
+start = 92
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "TIPO DE ESCOADOURO"
+name = "V0211"
+start = 93
+width = 1
+
+    [fields.values]
+    1 = "Rede geral de esgoto ou pluvial"
+    2 = "Fossa séptica"
+    3 = "Fossa rudimentar"
+    4 = "Vala"
+    5 = "Rio, lago ou mar"
+    6 = "Outro escoadouro"
+    Branco = "para domicílio particular improvisado, domicílio coletivo e domicílio particular permanente que tinha banheiro(s) ou sanitário"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0211"
+name = "M0211"
+start = 94
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "COLETA DE LIXO"
+name = "V0212"
+start = 95
+width = 1
+
+    [fields.values]
+    1 = "Coletado por serviço de limpeza"
+    2 = "Colocado em caçamba de serviço de limpeza"
+    3 = "Queimado (na propriedade)"
+    4 = "Enterrado (na propriedade)"
+    5 = "Jogado em terreno baldio ou logradouro"
+    6 = "Jogado em rio, lago ou mar"
+    7 = "Tem outro destino"
+    Branco = "para domicílio particular improvisado e domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0212"
+name = "M0212"
+start = 96
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "ILUMINAÇÃO ELÉTRICA"
+name = "V0213"
+start = 97
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    Branco = "para domicílio particular improvisado e domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0213"
+name = "M0213"
+start = 98
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "EXISTÊNCIA DE RÁDIO"
+name = "V0214"
+start = 99
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    Branco = "para domicílio particular improvisado e domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0214"
+name = "M0214"
+start = 100
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "EXISTÊNCIA DE GELADEIRA OU FREEZER"
+name = "V0215"
+start = 101
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    Branco = "para domicílio particular improvisado e domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0215"
+name = "M0215"
+start = 102
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "EXISTÊNCIA DE VIDEOCASSETE"
+name = "V0216"
+start = 103
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    Branco = "para domicílio particular improvisado e domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0216"
+name = "M0216"
+start = 104
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "EXISTÊNCIA DE MÁQUINA DE LAVAR ROUPA"
+name = "V0217"
+start = 105
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    Branco = "para domicílio particular improvisado e domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0217"
+name = "M0217"
+start = 106
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "EXISTÊNCIA DE FORNO DE MICROONDAS"
+name = "V0218"
+start = 107
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    Branco = "para domicílio particular improvisado e domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0218"
+name = "M0218"
+start = 108
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "EXISTÊNCIA DE LINHA TELEFÔNICA INSTALADA"
+name = "V0219"
+start = 109
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    Branco = "para domicílio particular improvisado e domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0219"
+name = "M0219"
+start = 110
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "EXISTÊNCIA DE MICROCOMPUTADOR"
+name = "V0220"
+start = 111
+width = 1
+
+    [fields.values]
+    1 = "Sim 2– Não"
+    Branco = "para domicílio particular improvisado e domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0220"
+name = "M0220"
+start = 112
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "QUANTIDADE EXISTENTE DE TELEVISORES"
+name = "V0221"
+start = 113
+width = 1
+
+    [fields.values]
+    0 = "Não tem"
+    1 = "1 televisor"
+    2 = "2 televisores"
+    3 = "3 televisores"
+    4 = "4 televisores"
+    5 = "5 televisores"
+    6 = "6 televisores"
+    7 = "7 televisores"
+    8 = "8 televisores"
+    9 = "9 ou mais televisores"
+    Branco = "para domicílio particular improvisado e domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0221"
+name = "M0221"
+start = 114
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "QUANTIDADE EXISTENTE DE AUTOMÓVEIS PARA USO PARTICULAR"
+name = "V0222"
+start = 115
+width = 1
+
+    [fields.values]
+    0 = "Não tem"
+    1 = "1 automóvel"
+    2 = "2 automóveis"
+    3 = "3 automóveis"
+    4 = "4 automóveis"
+    5 = "5 automóveis"
+    6 = "6 automóveis"
+    7 = "7 automóveis"
+    8 = "8 automóveis"
+    9 = "9 ou mais automóveis"
+    Branco = "para domicílio particular improvisado e domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0222"
+name = "M0222"
+start = 116
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "QUANTIDADE EXISTENTE DE APARELHOS DE AR CONDICIONADO"
+name = "V0223"
+start = 117
+width = 1
+
+    [fields.values]
+    0 = "Não tem"
+    1 = "1 aparelho"
+    2 = "2 aparelhos"
+    3 = "3 aparelhos"
+    4 = "4 aparelhos"
+    5 = "5 aparelhos"
+    6 = "6 aparelhos"
+    7 = "7 aparelhos"
+    8 = "8 aparelhos"
+    9 = "9 ou mais aparelhos"
+    Branco = "para domicílio particular improvisado e domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0223"
+name = "M0223"
+start = 118
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "TOTAL DE MORADORES NO DOMICÍLIO"
+name = "V7100"
+start = 119
+width = 2
+[[fields]]
+character = false
+decimals = 1
+label = "DENSIDADE DE MORADORES POR CÔMODO"
+name = "V7203"
+start = 121
+width = 3
+
+    [fields.values]
+    Branco = "para domicílio particular improvisado e domicílio coletivo"
+[[fields]]
+character = false
+decimals = 1
+label = "DENSIDADE DE MORADORES POR DORMITÓRIO"
+name = "V7204"
+start = 124
+width = 3
+
+    [fields.values]
+    Branco = "para domicílio particular improvisado e domicílio coletivo"
+[[fields]]
+character = false
+decimals = 0
+label = "NÚMERO DE COMPONENTES DA FAMÍLIA 01"
+name = "V7401"
+start = 127
+width = 2
+
+    [fields.values]
+    Branco = "para domicílio coletivo"
+[[fields]]
+character = false
+decimals = 0
+label = "NÚMERO DE COMPONENTES DA FAMÍLIA 02"
+name = "V7402"
+start = 129
+width = 2
+
+    [fields.values]
+    Branco = "para domicílio coletivo"
+[[fields]]
+character = false
+decimals = 0
+label = "NÚMERO DE COMPONENTES DA FAMÍLIA 03"
+name = "V7403"
+start = 131
+width = 2
+
+    [fields.values]
+    Branco = "para domicílio coletivo"
+[[fields]]
+character = false
+decimals = 0
+label = "NÚMERO DE COMPONENTES DA FAMÍLIA 04"
+name = "V7404"
+start = 133
+width = 2
+
+    [fields.values]
+    Branco = "para domicílio coletivo"
+[[fields]]
+character = false
+decimals = 0
+label = "NÚMERO DE COMPONENTES DA FAMÍLIA 05"
+name = "V7405"
+start = 135
+width = 2
+
+    [fields.values]
+    Branco = "para domicílio coletivo"
+[[fields]]
+character = false
+decimals = 0
+label = "NÚMERO DE COMPONENTES DA FAMÍLIA 06"
+name = "V7406"
+start = 137
+width = 2
+
+    [fields.values]
+    Branco = "para domicílio coletivo"
+[[fields]]
+character = false
+decimals = 0
+label = "NÚMERO DE COMPONENTES DA FAMÍLIA 07"
+name = "V7407"
+start = 139
+width = 2
+
+    [fields.values]
+    Branco = "para domicílio coletivo"
+[[fields]]
+character = false
+decimals = 0
+label = "NÚMERO DE COMPONENTES DA FAMÍLIA 08"
+name = "V7408"
+start = 141
+width = 2
+
+    [fields.values]
+    Branco = "para domicílio coletivo"
+[[fields]]
+character = false
+decimals = 0
+label = "NÚMERO DE COMPONENTES DA FAMÍLIA 09"
+name = "V7409"
+start = 143
+width = 2
+
+    [fields.values]
+    Branco = "para domicílio coletivo"
+[[fields]]
+character = false
+decimals = 0
+label = "TOTAL DE RENDIMENTOS DO DOMICÍLIO PARTICULAR"
+name = "V7616"
+start = 145
+width = 6
+[[fields]]
+character = false
+decimals = 2
+label = "TOTAL DE RENDIMENTOS DO DOMICÍLIO PARTICULAR, EM SALÁRIOS MÍNIMOS"
+name = "V7617"
+start = 151
+width = 6
+[[fields]]
+character = false
+decimals = 8
+label = "PESO (Peso atribuído ao domicílio)"
+name = "P001"
+start = 157
+width = 11
+[[fields]]
+character = true
+decimals = 0
+label = "EXISTÊNCIA DE IDENTIFICAÇÃO"
+name = "V1111"
+start = 168
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    9 = "Ignorado"
+    Branco = "para domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "EXISTÊNCIA DE ILUMINAÇÃO PÚBLICA"
+name = "V1112"
+start = 169
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    9 = "Ignorado"
+    Branco = "para domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "EXISTÊNCIA DE CALÇAMENTO/PAVIMENTAÇÃO"
+name = "V1113"
+start = 170
+width = 1
+
+    [fields.values]
+    1 = "Total"
+    2 = "Parcial"
+    3 = "Não Existe"
+    9 = "Ignorado"
+    Branco = "para domicílio coletivo"

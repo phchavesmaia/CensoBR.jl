@@ -1,0 +1,2603 @@
+lrecl = 540
+record = "person"
+source_file = "layout.ods"
+source_sheet = "PESS"
+
+[[fields]]
+character = true
+decimals = 0
+label = "UNIDADE DA FEDERAÇÃO"
+name = "V0001"
+start = 1
+width = 2
+
+    [fields.values]
+    11 = "Rondônia"
+    12 = "Acre"
+    13 = "Amazonas"
+    14 = "Roraima"
+    15 = "Pará"
+    16 = "Amapá"
+    17 = "Tocantins"
+    21 = "Maranhão"
+    22 = "Piauí"
+    23 = "Ceará"
+    24 = "Rio Grande do Norte"
+    25 = "Paraíba"
+    26 = "Pernambuco"
+    27 = "Alagoas"
+    28 = "Sergipe"
+    29 = "Bahia"
+    31 = "Minas Gerais"
+    32 = "Espírito Santo"
+    33 = "Rio de Janeiro"
+    35 = "São Paulo"
+    41 = "Paraná"
+    42 = "Santa Catarina"
+    43 = "Rio Grande do Sul"
+    50 = "Mato Grosso do Sul"
+    51 = "Mato Grosso"
+    52 = "Goiás"
+    53 = "Distrito Federal"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DO MUNICÍPIO"
+name = "V0002"
+start = 3
+width = 5
+[[fields]]
+character = true
+decimals = 0
+label = "ÁREA DE PONDERAÇÃO"
+name = "V0011"
+start = 8
+width = 13
+[[fields]]
+character = false
+decimals = 0
+label = "CONTROLE"
+name = "V0300"
+start = 21
+width = 8
+[[fields]]
+character = false
+decimals = 13
+label = "PESO AMOSTRAL"
+name = "V0010"
+start = 29
+width = 16
+[[fields]]
+character = true
+decimals = 0
+label = "REGIÃO GEOGRÁFICA"
+name = "V1001"
+start = 45
+width = 1
+
+    [fields.values]
+    1 = "Região norte (uf=11 a 17)"
+    2 = "Região nordeste (uf=21 a 29)"
+    3 = "Região sudeste (uf=31 a 33 e 35)"
+    4 = "Região sul (uf=41 a 43)"
+    5 = "Região centro-oeste (uf=50 a 53)"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DA MESORREGIÃO"
+name = "V1002"
+notes = ["A relação de códigos encontra-se no arquivo:"]
+start = 46
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DA MICRORREGIÃO"
+name = "V1003"
+notes = ["A relação de códigos encontra-se no arquivo:"]
+start = 48
+width = 3
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DA REGIÃO METROPOLITANA"
+name = "V1004"
+notes = ["A relação de códigos encontra-se no arquivo:"]
+start = 51
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "SITUAÇÃO DO DOMICÍLIO"
+name = "V1006"
+start = 53
+width = 1
+
+    [fields.values]
+    1 = "Urbana"
+    2 = "Rural"
+[[fields]]
+character = true
+decimals = 0
+label = "RELAÇÃO DE PARENTESCO OU DE CONVIVÊNCIA COM A PESSOA RESPONSÁVEL PELO DOMICÍLIO"
+name = "V0502"
+start = 54
+width = 2
+
+    [fields.values]
+    01 = "Pessoa responsável pelo domicílio"
+    02 = "Cônjuge ou companheiro(a) de sexo diferente"
+    03 = "Cônjuge ou companheiro(a) do mesmo sexo"
+    04 = "Filho(a) do responsável e do cônjuge"
+    05 = "Filho(a) somente do responsável"
+    06 = "Enteado(a)"
+    07 = "Genro ou nora"
+    08 = "Pai, mãe, padrasto ou madrasta"
+    09 = "Sogro(a)"
+    10 = "Neto(a)"
+    11 = "Bisneto(a)"
+    12 = "Irmão ou irmã"
+    13 = "Avô ou avó"
+    14 = "Outro parente"
+    15 = "Agregado(a)"
+    16 = "Convivente"
+    17 = "Pensionista"
+    18 = "Empregado(a) doméstico(a)"
+    19 = "Parente do(a) empregado(a)  doméstico(a)"
+    20 = "Individual em domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "ORDEM LÓGICA"
+name = "V0504"
+start = 56
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "SEXO"
+name = "V0601"
+start = 58
+width = 1
+
+    [fields.values]
+    1 = "Masculino"
+    2 = "Feminino"
+[[fields]]
+character = false
+decimals = 0
+label = "VARIÁVEL AUXILIAR DA IDADE CALCULADA (ANOS E MESES)"
+name = "V6033"
+notes = ["- 1 a 140", "-  900 a 911"]
+start = 59
+width = 3
+[[fields]]
+character = false
+decimals = 0
+label = "VARIÁVEL AUXILIAR DA IDADE CALCULADA EM ANOS"
+name = "V6036"
+notes = ["- 0 a 140"]
+start = 62
+width = 3
+[[fields]]
+character = false
+decimals = 0
+label = "VARIÁVEL AUXILIAR DA IDADE CALCULADA EM MESES (PARA AS PESSOAS MENORES DE 1 ANO)"
+name = "V6037"
+notes = ["- 0 a 11"]
+start = 65
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "FORMA DE DECLARAÇÃO DA IDADE"
+name = "V6040"
+start = 67
+width = 1
+
+    [fields.values]
+    1 = "Data de nascimento"
+    2 = "Idade declarada"
+[[fields]]
+character = true
+decimals = 0
+label = "COR OU RAÇA"
+name = "V0606"
+start = 68
+width = 1
+
+    [fields.values]
+    1 = "Branca"
+    2 = "Preta"
+    3 = "Amarela"
+    4 = "Parda"
+    5 = "Indígena"
+    9 = "Ignorado"
+[[fields]]
+character = true
+decimals = 0
+label = "REGISTRO DE NASCIMENTO"
+name = "V0613"
+start = 69
+width = 1
+
+    [fields.values]
+    1 = "Do cartório"
+    2 = "Declaração de nascido vivo (DNV) do hospital ou da maternidade"
+    3 = "Registro administrativo de nascimento indígena (RANI)"
+    4 = "Não tem"
+    5 = "Não sabe"
+    9 = "Ignorado Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "DIFICULDADE PERMANENTE DE ENXERGAR"
+name = "V0614"
+start = 70
+width = 1
+
+    [fields.values]
+    1 = "Sim, não consegue de modo algum"
+    2 = "Sim, grande dificuldade"
+    3 = "Sim, alguma dificuldade"
+    4 = "Não, nenhuma dificuldade"
+    9 = "Ignorado"
+[[fields]]
+character = true
+decimals = 0
+label = "DIFICULDADE PERMANENTE DE OUVIR"
+name = "V0615"
+start = 71
+width = 1
+
+    [fields.values]
+    1 = "Sim, não consegue de modo algum"
+    2 = "Sim, grande dificuldade"
+    3 = "Sim, alguma dificuldade"
+    4 = "Não, nenhuma dificuldade"
+    9 = "Ignorado"
+[[fields]]
+character = true
+decimals = 0
+label = "DIFICULDADE PERMANENTE DE CAMINHAR OU SUBIR DEGRAUS"
+name = "V0616"
+start = 72
+width = 1
+
+    [fields.values]
+    1 = "Sim, não consegue de modo algum"
+    2 = "Sim, grande dificuldade"
+    3 = "Sim, alguma dificuldade"
+    4 = "Não, nenhuma dificuldade"
+    9 = "Ignorado"
+[[fields]]
+character = true
+decimals = 0
+label = "DEFICIÊNCIA MENTAL/INTELECTUAL PERMANENTE"
+name = "V0617"
+start = 73
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    9 = "Ignorado"
+[[fields]]
+character = true
+decimals = 0
+label = "NASCEU NESTE MUNICÍPIO"
+name = "V0618"
+start = 74
+width = 1
+
+    [fields.values]
+    1 = "Sim e sempre morou"
+    2 = "Sim mas morou em outro município ou país estrangeiro"
+    3 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "NASCEU NESTA UNIDADE DA FEDERAÇÃO"
+name = "V0619"
+start = 75
+width = 1
+
+    [fields.values]
+    1 = "Sim, e sempre morou"
+    2 = "Sim, mas morou em outra UF ou país estrangeiro"
+    3 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "NACIONALIDADE"
+name = "V0620"
+start = 76
+width = 1
+
+    [fields.values]
+    1 = "Brasileiro nato"
+    2 = "Naturalizado brasileiro"
+    3 = "Estrangeiro Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "ANO QUE FIXOU RESIDÊNCIA NO BRASIL"
+name = "V0621"
+notes = ["- Branco", "- 1869 a 2010"]
+start = 77
+width = 4
+[[fields]]
+character = true
+decimals = 0
+label = "UF OU PAÍS ESTRANGEIRO DE NASCIMENTO"
+name = "V0622"
+start = 81
+width = 1
+
+    [fields.values]
+    1 = "UF"
+    2 = "País estrangeiro Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "UNIDADE DA FEDERAÇÃO DE NASCIMENTO – código"
+name = "V6222"
+notes = ["- A relação de códigos encontra-se no arquivo: “Migração_UFs_2010 V6222 V 6252 V6262 V6362 V6602.xls”"]
+start = 82
+width = 7
+[[fields]]
+character = true
+decimals = 0
+label = "QUAL É O PAÍS ESTRANGEIRO DE NASCIMENTO – código"
+name = "V6224"
+notes = ["- A relação de códigos encontra-se no arquivo: “Migração_Países_2010 V3061 V6224 V6256 V6266 V6366 V6606.xls”"]
+start = 89
+width = 7
+[[fields]]
+character = true
+decimals = 0
+label = "TEMPO DE MORADIA NA UF"
+name = "V0623"
+notes = ["- Branco", "- 0 a 140"]
+start = 96
+width = 3
+[[fields]]
+character = true
+decimals = 0
+label = "TEMPO DE MORADIA NO MUNICÍPIO"
+name = "V0624"
+notes = ["- Branco", "- 0 a 140"]
+start = 99
+width = 3
+[[fields]]
+character = true
+decimals = 0
+label = "UNIDADE DA FEDERAÇÃO E MUNICÍPIO OU PAÍS ESTRANGEIRO DE MORADIA ANTES DE MUDAR-SE PARA ESTE MUNICÍPIO"
+name = "V0625"
+start = 102
+width = 1
+
+    [fields.values]
+    1 = "UF/Município"
+    2 = "País estrangeiro Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "UF DE RESIDÊNCIA ANTERIOR – código"
+name = "V6252"
+notes = ["- A relação de códigos encontra-se no arquivo: “Migração_UFs_2010 V6222 V6252 V6262 V6362 V6602.xls”"]
+start = 103
+width = 7
+[[fields]]
+character = true
+decimals = 0
+label = "MUNICÍPIO DE RESIDÊNCIA ANTERIOR – código"
+name = "V6254"
+notes = ["- A relação de códigos encontra-se no arquivo: “Migração_Município_2010 V6254 V6264 V6364 V6604.xls”"]
+start = 110
+width = 7
+[[fields]]
+character = true
+decimals = 0
+label = "PAÍS DE RESIDÊNCIA ANTERIOR – código"
+name = "V6256"
+notes = ["- A relação de códigos encontra-se no arquivo: “Migração_Países_2010 V3061 V6224 V6256 V6266 V6366 V6606.xls”"]
+start = 117
+width = 7
+[[fields]]
+character = true
+decimals = 0
+label = "RESIDÊNCIA EM 31 DE JULHO DE 2005"
+name = "V0626"
+start = 124
+width = 1
+
+    [fields.values]
+    1 = "UF/Município"
+    2 = "País estrangeiro Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "UF DE RESIDÊNCIA EM 31 DE JULHO DE 2005 – código"
+name = "V6262"
+notes = ["- A relação de códigos encontra-se no arquivo: “Migração_UFs_2010 V6222 V6252 V6262 V6362 V6602.xls”"]
+start = 125
+width = 7
+[[fields]]
+character = true
+decimals = 0
+label = "MUNICÍPIO DE RESIDÊNCIA EM 31 DE JULHO DE 2005 – código"
+name = "V6264"
+notes = ["- A relação de códigos encontra-se no arquivo: “Migração_Município_2010 V6254 V6264 V6364 V6604.xls”"]
+start = 132
+width = 7
+[[fields]]
+character = true
+decimals = 0
+label = "PAÍS DE RESIDÊNCIA EM 31 DE JULHO DE 2005 – código"
+name = "V6266"
+notes = ["- A relação de códigos encontra-se no arquivo: “Migração_Países_2010 V3061 V6224 V6256 V6266 V6366 V6606.xls”"]
+start = 139
+width = 7
+[[fields]]
+character = true
+decimals = 0
+label = "SABE LER E ESCREVER"
+name = "V0627"
+start = 146
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "FREQUENTA ESCOLA OU CRECHE"
+name = "V0628"
+start = 147
+width = 1
+
+    [fields.values]
+    1 = "Sim, pública"
+    2 = "Sim, particular"
+    3 = "Não, já frequentou"
+    4 = "Não, nunca frequentou"
+[[fields]]
+character = true
+decimals = 0
+label = "CURSO QUE FREQUENTA"
+name = "V0629"
+start = 148
+width = 2
+
+    [fields.values]
+    01 = "Creche"
+    02 = "Pré-escolar (maternal e jardim da infância)"
+    03 = "Classe de alfabetização - CA"
+    04 = "Alfabetização de jovens e adultos"
+    05 = "Regular do ensino fundamental"
+    06 = "Educação de jovens e adultos - EJA - ou supletivo do ensino fundamental"
+    07 = "Regular do ensino médio"
+    08 = "Educação de jovens e adultos - EJA - ou supletivo do ensino médio"
+    09 = "Superior de graduação"
+    10 = "Especialização de nível superior ( mínimo de 360 horas )"
+    11 = "Mestrado"
+    12 = "Doutorado Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "SÉRIE / ANO QUE FREQUENTA"
+name = "V0630"
+start = 150
+width = 2
+
+    [fields.values]
+    01 = "Primeiro ano"
+    02 = "Primeira série / Segundo ano"
+    03 = "Segunda série / Terceiro ano"
+    04 = "Terceira série / Quarto ano"
+    05 = "Quarta série / Quinto ano"
+    06 = "Quinta série / Sexto ano"
+    07 = "Sexta série / Sétimo ano"
+    08 = "Sétima série / Oitavo ano"
+    09 = "Oitava série / Nono ano"
+    10 = "Não seriado Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "SÉRIE QUE FREQUENTA"
+name = "V0631"
+start = 152
+width = 1
+
+    [fields.values]
+    1 = "Primeira série"
+    2 = "Segunda série"
+    3 = "Terceira série"
+    4 = "Quarta série"
+    5 = "Não seriado Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "CONCLUSÃO DE OUTRO CURSO SUPERIOR DE GRADUAÇÃO"
+name = "V0632"
+start = 153
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "CURSO MAIS ELEVADO QUE FREQUENTOU"
+name = "V0633"
+start = 154
+width = 2
+
+    [fields.values]
+    01 = "Creche, pré-escolar (maternal e jardim de infância), classe de alfabetização - CA"
+    02 = "Alfabetização de jovens e adultos"
+    03 = "Antigo primário (elementar)"
+    04 = "Antigo ginásio (médio 1º ciclo)"
+    05 = "Ensino fundamental ou 1º grau (da 1ª a 3ª série/ do 1º ao 4º ano)"
+    06 = "Ensino fundamental ou 1º grau (4ª série/ 5º ano)"
+    07 = "Ensino fundamental ou 1º grau (da 5ª a 8ª série/ 6º ao 9º ano)"
+    08 = "Supletivo do ensino fundamental ou do 1º grau"
+    09 = "Antigo científico, clássico, etc.....(médio 2º ciclo)"
+    10 = "Regular ou supletivo do ensino médio ou do 2º grau"
+    11 = "Superior de graduação"
+    12 = "Especialização de nível superior ( mínimo de 360 horas )"
+    13 = "Mestrado"
+    14 = "Doutorado Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "CONCLUSÃO DESTE CURSO"
+name = "V0634"
+start = 156
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "ESPÉCIE DO CURSO MAIS ELEVADO CONCLUÍDO"
+name = "V0635"
+start = 157
+width = 1
+
+    [fields.values]
+    1 = "Superior de graduação"
+    2 = "Mestrado"
+    3 = "Doutorado Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "NÍVEL DE INSTRUÇÃO"
+name = "V6400"
+start = 158
+width = 1
+
+    [fields.values]
+    1 = "Sem instrução e fundamental incompleto"
+    2 = "Fundamental completo e médio incompleto"
+    3 = "Médio completo e superior incompleto"
+    4 = "Superior completo"
+    5 = "Não determinado"
+[[fields]]
+character = true
+decimals = 0
+label = "CURSO SUPERIOR DE GRADUAÇÃO – código"
+name = "V6352"
+notes = ["- A relação de códigos encontra-se no arquivo: “Cursos Superiores_Estrutura 2010 V6352.xls”"]
+start = 159
+width = 3
+[[fields]]
+character = true
+decimals = 0
+label = "CURSO DE MESTRADO – código"
+name = "V6354"
+notes = ["- A relação de códigos encontra-se no arquivo: “Cursos Mestrado_Estrutura 2010 V6354.xls”"]
+start = 162
+width = 3
+[[fields]]
+character = true
+decimals = 0
+label = "CURSO DE DOUTORADO – código"
+name = "V6356"
+notes = ["- A relação de códigos encontra-se no arquivo: “Cursos Doutorado_Estrutura 2010 V6356.xls”"]
+start = 165
+width = 3
+[[fields]]
+character = true
+decimals = 0
+label = "MUNICÍPIO E UNIDADE DA FEDERAÇÃO OU PAÍS ESTRANGEIRO QUE FREQUENTAVA ESCOLA (OU CRECHE)"
+name = "V0636"
+start = 168
+width = 1
+
+    [fields.values]
+    1 = "Neste município"
+    2 = "Em outro município"
+    3 = "Em país estrangeiro Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "UF QUE FREQUENTAVA ESCOLA (OU CRECHE) – código"
+name = "V6362"
+notes = ["- A relação de códigos encontra-se no arquivo: “Migração_UFs_2010 V6222 V6252 V6262 V6362 V6602.xls”"]
+start = 169
+width = 7
+[[fields]]
+character = true
+decimals = 0
+label = "MUNICÍPIO QUE FREQUENTAVA ESCOLA (OU CRECHE) – código"
+name = "V6364"
+notes = ["- A relação de códigos encontra-se no arquivo: “Migração_Municípios_2010 V6254 V6264 V6364 V6604.xls”"]
+start = 176
+width = 7
+[[fields]]
+character = true
+decimals = 0
+label = "PAÍS ESTRANGEIRO QUE FREQUENTAVA ESCOLA (OU CRECHE) – código"
+name = "V6366"
+notes = ["- A relação de códigos encontra-se no arquivo: “Migração_Países_2010 V3061 V6224 V6256 V6266 V6366 V6606.xls”"]
+start = 183
+width = 7
+[[fields]]
+character = true
+decimals = 0
+label = "VIVE EM COMPANHIA DE CÔNJUGE OU COMPANHEIRO(A)"
+name = "V0637"
+start = 190
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não, mas viveu"
+    3 = "Não, nunca viveu Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "NÚMERO DE ORDEM DO CÔNJUGE OU COMPANHEIRO(A)"
+name = "V0638"
+notes = ["- Branco", "- 1 a 98", "- 99 = ignorado"]
+start = 191
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "NATUREZA DA UNIÃO"
+name = "V0639"
+start = 193
+width = 1
+
+    [fields.values]
+    1 = "Casamento civil e religioso"
+    2 = "Só casamento civil"
+    3 = "Só casamento religioso"
+    4 = "União consensual Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "ESTADO CIVIL"
+name = "V0640"
+start = 194
+width = 1
+
+    [fields.values]
+    1 = "Casado(a)"
+    2 = "Desquitado(a) ou separado(a) judicialmente"
+    3 = "Divorciado(a)"
+    4 = "Viúvo(a)"
+    5 = "Solteiro(a) Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "NA SEMANA DE 25 A 31/07/10, DURANTE PELO MENOS 1 HORA, TRABALHOU GANHANDO EM DINHEIRO, PRODUTOS, MERCADORIAS OU BENEFÍCIOS"
+name = "V0641"
+start = 195
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "NA SEMANA DE 25 A 31/07/10, TINHA TRABALHO REMUNERADO DO QUAL ESTAVA TEMPORARIAMENTE AFASTADO(A)"
+name = "V0642"
+start = 196
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "NA SEMANA DE 25 A 31/07/10, DURANTE PELO MENOS 1 HORA, AJUDOU SEM QUALQUER PAGAMENTO NO TRABALHO REMUNERADO DE MORADOR DO DOMICÍLIO"
+name = "V0643"
+start = 197
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "NA SEMANA DE 25 A 31/07/10, DURANTE PELO MENOS 1 HORA, TRABALHOU NA PLANTAÇÃO, CRIAÇÃO DE ANIMAIS OU PESCA, SOMENTE PARA"
+name = "V0644"
+notes = ["ALIMENTAÇÃO DOS MORADORES DO DOMICÍLIO (INCLUSIVE CAÇA E EXTRAÇÃO VEGETAL):"]
+start = 198
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "QUANTOS TRABALHOS TINHA"
+name = "V0645"
+start = 199
+width = 1
+
+    [fields.values]
+    1 = "Um"
+    2 = "Dois ou mais Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "OCUPAÇÃO – código"
+name = "V6461"
+notes = ["(pode ter valor branco)", "- A relação de códigos encontra-se no arquivo: “Ocupação COD_Estrutura 2010.xls”"]
+start = 200
+width = 4
+[[fields]]
+character = true
+decimals = 0
+label = "ATIVIDADE – código"
+name = "V6471"
+notes = ["(pode ter valor branco)", "- A relação de códigos encontra-se no arquivo: “CNAEDOM2.0_Estrutura 2010.xls”"]
+start = 204
+width = 5
+[[fields]]
+character = true
+decimals = 0
+label = "NESSE TRABALHO ERA"
+name = "V0648"
+start = 209
+width = 1
+
+    [fields.values]
+    1 = "Empregado com carteira de trabalho assinada"
+    2 = "Militar do exército, marinha, aeronáutica, policia militar ou corpo de bombeiros"
+    3 = "Empregado pelo regime jurídico dos funcionários públicos"
+    4 = "Empregado sem carteira de trabalho assinada"
+    5 = "Conta própria"
+    6 = "Empregador"
+    7 = "Não remunerado Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "QUANTAS PESSOAS EMPREGAVA NESSE TRABALHO"
+name = "V0649"
+start = 210
+width = 1
+
+    [fields.values]
+    1 = "1 a 5 pessoas"
+    2 = "6 ou mais pessoas Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "ERA CONTRIBUINTE DE INSTITUTO DE PREVIDÊNCIA OFICIAL EM ALGUM TRABALHO QUE TINHA NA SEMANA DE 25 A 31 DE JULHO DE 2010"
+name = "V0650"
+start = 211
+width = 1
+
+    [fields.values]
+    1 = "Sim, no trabalho principal"
+    2 = "Sim, em outro trabalho"
+    3 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "NO TRABALHO PRINCIPAL, QUAL ERA O RENDIMENTO BRUTO (OU A RETIRADA) MENSAL QUE GANHAVA HABITUALMENTE EM JULHO DE 2010"
+name = "V0651"
+start = 212
+width = 1
+
+    [fields.values]
+    0 = "Não tem"
+    1 = "Em dinheiro, produtos ou mercadorias"
+    2 = "Somente em benefícios Branco"
+[[fields]]
+character = false
+decimals = 0
+label = "VALOR DO RENDIMENTO BRUTO (OU A RETIRADA) MENSAL NO TRABALHO PRINCIPAL: (pode ter valor branco)"
+name = "V6511"
+start = 213
+width = 6
+[[fields]]
+character = false
+decimals = 0
+label = "RENDIMENTO NO TRABALHO PRINCIPAL: (pode ter valor branco)"
+name = "V6513"
+start = 219
+width = 6
+[[fields]]
+character = false
+decimals = 2
+label = "RENDIMENTO NO TRABALHO PRINCIPAL EM Nº DE SALÁRIOS MÍNIMOS:  (pode ter valor branco)"
+name = "V6514"
+start = 225
+width = 6
+[[fields]]
+character = true
+decimals = 0
+label = "NOS DEMAIS TRABALHOS, QUAL ERA O RENDIMENTO BRUTO (OU A RETIRADA) MENSAL QUE GANHAVA HABITUALMENTE EM JULHO DE 2010"
+name = "V0652"
+start = 231
+width = 1
+
+    [fields.values]
+    0 = "Não tem"
+    1 = "Em dinheiro, produtos ou mercadorias"
+    2 = "Somente em benefícios Branco"
+[[fields]]
+character = false
+decimals = 0
+label = "VALOR DO RENDIMENTO BRUTO (OU A RETIRADA) MENSAL NOS DEMAIS TRABALHOS (EM REAIS)"
+name = "V6521"
+start = 232
+width = 6
+[[fields]]
+character = false
+decimals = 5
+label = "RENDIMENTO BRUTO NOS DEMAIS TRABALHOS EM Nº DE SALÁRIOS MÍNIMOS"
+name = "V6524"
+start = 238
+width = 9
+[[fields]]
+character = false
+decimals = 0
+label = "RENDIMENTO EM TODOS OS TRABALHOS"
+name = "V6525"
+start = 247
+width = 7
+[[fields]]
+character = false
+decimals = 5
+label = "RENDIMENTO EM TODOS OS TRABALHOS EM Nº DE SALÁRIOS MÍNIMOS"
+name = "V6526"
+start = 254
+width = 9
+[[fields]]
+character = false
+decimals = 0
+label = "RENDIMENTO MENSAL TOTAL EM JULHO DE 2010"
+name = "V6527"
+start = 263
+width = 7
+[[fields]]
+character = false
+decimals = 5
+label = "RENDIMENTO MENSAL TOTAL EM Nº DE SALÁRIOS MÍNIMOS EM JULHO DE 2010"
+name = "V6528"
+start = 270
+width = 9
+[[fields]]
+character = false
+decimals = 0
+label = "RENDIMENTO DOMICILIAR (DOMICÍLIO PARTICULAR) EM JULHO DE 2010"
+name = "V6529"
+start = 279
+width = 7
+[[fields]]
+character = false
+decimals = 5
+label = "RENDIMENTO DOMICILIAR (DOMICÍLIO PARTICULAR) EM Nº DE SALÁRIOS MÍNIMOS EM JULHO DE 2010"
+name = "V6530"
+start = 286
+width = 10
+[[fields]]
+character = false
+decimals = 2
+label = "RENDIMENTO DOMICILIAR (DOMICÍLIO PARTICULAR) PER CAPITA EM JULHO DE 2010"
+name = "V6531"
+start = 296
+width = 8
+[[fields]]
+character = false
+decimals = 5
+label = "RENDIMENTO DOMICILIAR (DOMICÍLIO PARTICULAR) PER CAPITA EM Nº DE SALÁRIOS MÍNIMOS EM JULHO DE 2010"
+name = "V6532"
+start = 304
+width = 9
+[[fields]]
+character = false
+decimals = 0
+label = "NO TRABALHO PRINCIPAL, QUANTAS HORAS TRABALHAVA HABITUALMENTE POR SEMANA"
+name = "V0653"
+notes = ["- Branco", "- 1 a 140"]
+start = 313
+width = 3
+[[fields]]
+character = true
+decimals = 0
+label = "NO PERÍODO DE 02 A 31 DE JULHO DE 2010, TOMOU ALGUMA PROVIDÊNCIA, DE FATO, PARA CONSEGUIR  TRABALHO?"
+name = "V0654"
+start = 316
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "SE TIVESSE CONSEGUIDO TRABALHO, ESTARIA DISPONÍVEL PARA ASSUMI-LO NA SEMANA DE 25 A 31 DE JULHO DE 2010?"
+name = "V0655"
+start = 317
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "EM JULHO DE 2010, TINHA RENDIMENTO MENSAL HABITUAL DE APOSENTADORIA OU PENSÃO DE INSTITUTO DE PREVIDÊNCIA OFICIAL (FEDERAL, ESTADUAL OU MUNICIPAL)?"
+name = "V0656"
+start = 318
+width = 1
+
+    [fields.values]
+    0 = "Não"
+    1 = "Sim"
+    9 = "Ignorado Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "EM JULHO DE 2010, TINHA RENDIMENTO MENSAL HABITUAL DE PROGRAMA SOCIAL BOLSA-FAMÍLIA OU PROGRAMA DE ERRADICAÇÃO DO TRABALHO INFANTIL (PETI)"
+name = "V0657"
+start = 319
+width = 1
+
+    [fields.values]
+    0 = "Não"
+    1 = "Sim"
+    9 = "Ignorado Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "EM JULHO 2010, TINHA RENDIMENTO MENSAL HABITUAL DE OUTROS PROGRAMAS SOCIAIS OU DE TRANSFERÊNCIAS"
+name = "V0658"
+start = 320
+width = 1
+
+    [fields.values]
+    0 = "Não"
+    1 = "Sim"
+    9 = "Ignorado Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "EM JULHO DE 2010, TINHA RENDIMENTO MENSAL HABITUAL DE OUTRAS FONTES (JUROS DE POUPANÇA, APLICAÇÕES FINANCEIRAS, ALUGUEL, PENSÃO, APOSENTADORIA DE PREVIDÊNCIA PRIVADA, ETC)?"
+name = "V0659"
+start = 321
+width = 1
+
+    [fields.values]
+    0 = "Não"
+    1 = "Sim"
+    9 = "Ignorado Branco"
+[[fields]]
+character = false
+decimals = 0
+label = "EM JULHO DE 2010 QUAL FOI O VALOR TOTAL DESTE(S) RENDIMENTO(S)"
+name = "V6591"
+start = 322
+width = 6
+[[fields]]
+character = true
+decimals = 0
+label = "EM QUE MUNICÍPIO E UNIDADE DA FEDERAÇÃO OU PAÍS ESTRANGEIRO TRABALHA"
+name = "V0660"
+start = 328
+width = 1
+
+    [fields.values]
+    1 = "No próprio domicílio"
+    2 = "Apenas neste município, mas não no próprio domicílio"
+    3 = "Em outro município"
+    4 = "Em país estrangeiro"
+    5 = "Em mais de um município ou país Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "EM QUE UNIDADE DA FEDERAÇÃO TRABALHAVA - código"
+name = "V6602"
+notes = ["- A relação de códigos encontra-se no arquivo: “Migração_UFs_2010 V6222 V6252 V6262 V6362 V6602.xls”"]
+start = 329
+width = 7
+[[fields]]
+character = true
+decimals = 0
+label = "EM QUE MUNICÍPIO TRABALHAVA - código"
+name = "V6604"
+notes = ["- A relação de códigos encontra-se no arquivo: “Migração_Municípios_2010 V6254 V6264 V6364 V6604.xls”"]
+start = 336
+width = 7
+[[fields]]
+character = true
+decimals = 0
+label = "EM QUE PAÍS ESTRANGEIRO TRABALHAVA - código"
+name = "V6606"
+notes = ["- A relação de códigos encontra-se no arquivo: “Migração_Países_2010 V3061 V6224 V6256 V6266 V6366 V6606.xls”"]
+start = 343
+width = 7
+[[fields]]
+character = true
+decimals = 0
+label = "RETORNA DO TRABALHO PARA CASA DIARIAMENTE"
+name = "V0661"
+start = 350
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "QUAL É O TEMPO HABITUAL GASTO DE DESLOCAMENTO DE SUA CASA ATÉ O TRABALHO"
+name = "V0662"
+start = 351
+width = 1
+
+    [fields.values]
+    1 = "Até 05 minutos"
+    2 = "De 06 minutos até meia hora"
+    3 = "Mais de meia hora até uma hora"
+    4 = "Mais de uma hora até duas horas"
+    5 = "Mais de duas horas Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "QUANTOS FILHOS E FILHAS NASCIDOS VIVOS TEVE ATÉ 31 DE JULHO DE 2010"
+name = "V0663"
+start = 352
+width = 1
+
+    [fields.values]
+    1 = "Teve filhos nascidos vivos"
+    2 = "Não teve nenhum filho nascido vivo Branco"
+[[fields]]
+character = false
+decimals = 0
+label = "QUANTOS FILHOS NASCIDOS VIVOS TEVE ATÉ 31 DE JULHO DE 2010"
+name = "V6631"
+notes = ["(branco; 0 a 31)"]
+start = 353
+width = 2
+[[fields]]
+character = false
+decimals = 0
+label = "QUANTAS FILHAS NASCIDAS VIVAS TEVE ATÉ 31 DE JULHO DE 2010"
+name = "V6632"
+notes = ["(branco; 0 a 31)"]
+start = 355
+width = 2
+[[fields]]
+character = false
+decimals = 0
+label = "TOTAL DE FILHOS NASCIDOS VIVOS QUE TEVE ATÉ 31 DE JULHO DE 2010"
+name = "V6633"
+notes = ["(branco; 0 a 31)"]
+start = 357
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "DOS FILHOS E FILHAS QUE TEVE, QUANTOS ESTAVAM VIVOS EM 31 DE JULHO DE 2010"
+name = "V0664"
+start = 359
+width = 1
+
+    [fields.values]
+    1 = "Filhos vivos"
+    2 = "Não sabe Branco"
+[[fields]]
+character = false
+decimals = 0
+label = "DOS FILHOS QUE TEVE, QUANTOS ESTAVAM VIVOS EM 31 DE JULHO DE 2010"
+name = "V6641"
+notes = ["- Branco", "- 0 a 31"]
+start = 360
+width = 2
+[[fields]]
+character = false
+decimals = 0
+label = "DAS FILHAS QUE TEVE, QUANTAS ESTAVAM VIVAS EM 31 DE JULHO DE 2010"
+name = "V6642"
+notes = ["- Branco", "- 0 a 31"]
+start = 362
+width = 2
+[[fields]]
+character = false
+decimals = 0
+label = "TOTAL DE FILHOS QUE TEVE, QUANTOS ESTAVAM VIVOS EM 31 DE JULHO DE 2010"
+name = "V6643"
+notes = ["- Branco", "- 0 a 31"]
+start = 364
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "QUAL É O SEXO DO ÚLTIMO FILHO TIDO NASCIDO VIVO ATÉ 31 DE JULHO DE 2010"
+name = "V0665"
+start = 366
+width = 1
+
+    [fields.values]
+    1 = "Masculino"
+    2 = "Feminino Branco"
+[[fields]]
+character = false
+decimals = 0
+label = "IDADE DO ÚLTIMO FILHO TIDO NASCIDO VIVO ATÉ 31 DE JULHO DE 2010"
+name = "V6660"
+notes = ["- Branco", "- 0 a 130"]
+start = 367
+width = 3
+[[fields]]
+character = true
+decimals = 0
+label = "EXISTÊNCIA DE FILHO TIDO NASCIDO VIVO NO PERÍODO DE REFERÊNCIA DE 12 MESES ANTERIORES A 31/07/2010"
+name = "V6664"
+start = 370
+width = 1
+
+    [fields.values]
+    0 = "Não Branco"
+    1 = "Sim"
+[[fields]]
+character = true
+decimals = 0
+label = "ESTE(A) FILHO(A) ESTAVA VIVO(A) EM 31 DE JULHO DE 2010"
+name = "V0667"
+start = 371
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    9 = "Não sabe Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "QUAL FOI O MÊS E O ANO QUE ESTE(A) FILHO(A) FALECEU"
+name = "V0668"
+start = 372
+width = 1
+
+    [fields.values]
+    1 = "Sabe o mês e ano ou somente o ano"
+    2 = "Não sabe Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "QUAL FOI O MÊS QUE ESTE(A) FILHO(A) FALECEU"
+name = "V6681"
+notes = ["- Branco", "- 1 a 12", "- 99 = ignorado"]
+start = 373
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "QUAL FOI O ANO QUE ESTE(A) FILHO(A) FALECEU"
+name = "V6682"
+notes = ["- Branco", "-  1879 a 2010", "- 9999 = ignorado"]
+start = 375
+width = 4
+[[fields]]
+character = true
+decimals = 0
+label = "QUANTOS FILHOS E FILHAS NASCIDOS MORTOS TEVE ATÉ 31 DE JULHO DE 2010"
+name = "V0669"
+start = 379
+width = 1
+
+    [fields.values]
+    1 = "Teve filho nascido morto"
+    2 = "Não teve filho nascido morto"
+    3 = "Não sabe Branco"
+[[fields]]
+character = false
+decimals = 0
+label = "QUANTOS FILHOS NASCIDOS MORTOS TEVE ATÉ 31 DE JULHO DE 2010"
+name = "V6691"
+notes = ["- Branco", "- 0 a 31"]
+start = 380
+width = 2
+[[fields]]
+character = false
+decimals = 0
+label = "QUANTOS FILHAS NASCIDAS MORTAS TEVE ATÉ 31 DE JULHO DE 2010"
+name = "V6692"
+notes = ["- Branco", "- 0 a 31"]
+start = 382
+width = 2
+[[fields]]
+character = false
+decimals = 0
+label = "QUANTOS FILHOS E FILHAS NASCIDOS MORTOS TEVE ATÉ 31 DE JULHO DE 2010"
+name = "V6693"
+notes = ["- Branco", "- 0 a 31"]
+start = 384
+width = 2
+[[fields]]
+character = false
+decimals = 0
+label = "TOTAL DE FILHOS TIDOS NASCIDOS VIVOS E NASCIDOS MORTOS"
+name = "V6800"
+notes = ["- Branco", "- 0 a 31"]
+start = 386
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "ASSINALE QUEM PRESTOU AS INFORMAÇÕES DESTA PESSOA"
+name = "V0670"
+start = 388
+width = 1
+
+    [fields.values]
+    1 = "A própria pessoa"
+    2 = "Outro morador"
+    3 = "Não morador"
+    9 = "Ignorado"
+[[fields]]
+character = true
+decimals = 0
+label = "NÚMERO DE ORDEM DO INFORMANTE (OUTRO MORADOR)"
+name = "V0671"
+start = 389
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "CONDIÇÃO DE ATIVIDADE NA SEMANA DE REFERÊNCIA"
+name = "V6900"
+start = 391
+width = 1
+
+    [fields.values]
+    1 = "Economicamente ativas"
+    2 = "Não economicamente ativas Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "CONDIÇÃO DE OCUPAÇÃO NA SEMANA DE REFERÊNCIA"
+name = "V6910"
+start = 392
+width = 1
+
+    [fields.values]
+    1 = "Ocupadas"
+    2 = "Desocupadas Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "SITUAÇÃO DE OCUPAÇÃO NA SEMANA DE REFERÊNCIA"
+name = "V6920"
+start = 393
+width = 1
+
+    [fields.values]
+    1 = "Ocupadas"
+    2 = "Não ocupadas Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "POSIÇÃO NA OCUPAÇÃO E CATEGORIA DO EMPREGO NO TRABALHO PRINCIPAL"
+name = "V6930"
+start = 394
+width = 1
+
+    [fields.values]
+    1 = "Empregados com carteira de trabalho assinada"
+    2 = "Militares e funcionários públicos estatutários"
+    3 = "Empregados sem carteira de trabalho assinada"
+    4 = "Conta própria"
+    5 = "Empregadores"
+    6 = "Não remunerados"
+    7 = "Trabalhadores na produção para o próprio consumo Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "SUBGRUPO E CATEGORIA DO EMPREGO NO TRABALHO PRINCIPAL"
+name = "V6940"
+start = 395
+width = 1
+
+    [fields.values]
+    1 = "Trabalhadores domésticos com carteira de trabalho assinada"
+    2 = "Trabalhadores domésticos sem carteira de trabalho assinada"
+    3 = "Demais empregados com carteira de trabalho assinada"
+    4 = "Militares e funcionários públicos estatutários"
+    5 = "Demais empregados sem carteira de trabalho assinada Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "Qual é a sua religião ou culto? -  código   (banco de códigos; 999 = ignorado)"
+name = "V6121"
+start = 396
+width = 3
+[[fields]]
+character = true
+decimals = 0
+label = "TEM MÃE VIVA?"
+name = "V0604"
+start = 399
+width = 1
+
+    [fields.values]
+    1 = "Sim e mora neste domicílio"
+    2 = "Sim e mora em outro domicílio"
+    3 = "Não"
+    4 = "Não sabe"
+    9 = "Ignorado"
+[[fields]]
+character = true
+decimals = 0
+label = "Número de ordem da mãe da pessoa   (branco; 1 a 98; 99 = ignorado)"
+name = "V0605"
+start = 400
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "NÚMERO DA FAMÍLIA"
+name = "V5020"
+start = 402
+width = 2
+
+    [fields.values]
+    01 = "Famílias únicas ou conviventes principais: Corresponde à família dos responsáveis pela unidade doméstica. 02 – Família convivente – segunda 03 – Família convivente – terceira 04 – Família convivente – quarta 05 – Família convivente – quinta 06 – Família convivente – sexta 07 – Família convivente – sétima 08 – Família convivente – oitava 09 – Família convivente – nona Branco – para pessoas residentes em domicílios coletivos e/ou em unidades domésticas localizadas em terras indígenas, onde não se fez a identificação de famílias."
+[[fields]]
+character = false
+decimals = 0
+label = "Número de Pessoas na Família"
+name = "V5060"
+start = 404
+width = 2
+[[fields]]
+character = false
+decimals = 2
+label = "Rendimento familiar per capita em julho de 2010 (0 a 999999,99)"
+name = "V5070"
+start = 406
+width = 8
+[[fields]]
+character = false
+decimals = 5
+label = "Rendimento familiar per capita em nº de salários mínimos em julho de 2010 (0 a 9999,99999)"
+name = "V5080"
+start = 414
+width = 9
+[[fields]]
+character = true
+decimals = 0
+label = "Qual era a ocupação que exercia no trabalho que tinha? - código 2000  (branco; banco de códigos de 2000)"
+name = "V6462"
+start = 423
+width = 4
+[[fields]]
+character = true
+decimals = 0
+label = "Qual era a atividade principal do empreendimento em que tinha esse trabalho? - código 2000  (branco; banco de códigos de 2000)"
+name = "V6472"
+start = 427
+width = 5
+[[fields]]
+character = true
+decimals = 0
+label = "CONDIÇÃO DE CONTRIBUIÇÃO PARA INSTITUTO DE PREVIDÊNCIA OFICIAL NO TRABALHO PRINCIPAL"
+name = "V5110"
+notes = ["Contribuintes", "Não contribuintes", "Branco"]
+start = 432
+width = 1
+[[fields]]
+character = true
+decimals = 0
+label = "CONDIÇÃO DE CONTRIBUIÇÃO PARA INSTITUTO DE PREVIDÊNCIA OFICIAL EM QUALQUER TRABALHO"
+name = "V5120"
+notes = ["Contribuintes", "Não contribuintes", "Branco"]
+start = 433
+width = 1
+[[fields]]
+character = true
+decimals = 0
+label = "TIPO DE UNIDADE DOMÉSTICA"
+name = "V5030"
+start = 434
+width = 1
+
+    [fields.values]
+    1 = "Unipessoal"
+    2 = "Duas pessoas ou mais sem parentesco"
+    3 = "Duas pessoas ou mais com parentesco Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE FAMÍLIA"
+name = "V5040"
+start = 435
+width = 1
+
+    [fields.values]
+    0 = "Arranjo não familiar Branco"
+    1 = "Arranjo familiar"
+[[fields]]
+character = true
+decimals = 0
+label = "TIPO DE COMPOSIÇÃO FAMILIAR DAS FAMÍLIAS ÚNICAS E CONVIVENTES PRINCIPAIS"
+name = "V5090"
+start = 436
+width = 1
+
+    [fields.values]
+    1 = "Casal sem filho(s)"
+    2 = "Casal sem filho(s) e com parente(s)"
+    3 = "Casal com filho(s)"
+    4 = "Casal com filho(s) e com parente(s)"
+    5 = "Mulher sem cônjuge com filho(s)"
+    6 = "Mulher sem cônjuge com filho(s) e com parente(s)"
+    7 = "Homem sem cônjuge com filho(s)"
+    8 = "Homem sem cônjuge com filho(s) e com parente(s)"
+    9 = "Outro Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "TIPO DE COMPOSIÇÃO FAMILIAR DAS FAMÍLIAS CONVIVENTES SECUNDÁRIAS"
+name = "V5100"
+start = 437
+width = 1
+
+    [fields.values]
+    1 = "Casal sem filho(s)"
+    2 = "Casal com filho(s)"
+    3 = "Mulher sem cônjuge com filho(s) Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "ORDEM LÓGICA NA FAMÍLIA"
+name = "V5130"
+start = 438
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0502"
+name = "M0502"
+start = 440
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0601"
+name = "M0601"
+start = 441
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6033"
+name = "M6033"
+start = 442
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0606"
+name = "M0606"
+start = 443
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0613"
+name = "M0613"
+start = 444
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0614"
+name = "M0614"
+start = 445
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0615"
+name = "M0615"
+start = 446
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0616"
+name = "M0616"
+start = 447
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0617"
+name = "M0617"
+start = 448
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0618"
+name = "M0618"
+start = 449
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0619"
+name = "M0619"
+start = 450
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0620"
+name = "M0620"
+start = 451
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0621"
+name = "M0621"
+start = 452
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0622"
+name = "M0622"
+start = 453
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6222"
+name = "M6222"
+start = 454
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6224"
+name = "M6224"
+start = 455
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0623"
+name = "M0623"
+start = 456
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0624"
+name = "M0624"
+start = 457
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0625"
+name = "M0625"
+start = 458
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6252"
+name = "M6252"
+start = 459
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6254"
+name = "M6254"
+start = 460
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6256"
+name = "M6256"
+start = 461
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0626"
+name = "M0626"
+start = 462
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6262"
+name = "M6262"
+start = 463
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6264"
+name = "M6264"
+start = 464
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6266"
+name = "M6266"
+start = 465
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0627"
+name = "M0627"
+start = 466
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0628"
+name = "M0628"
+start = 467
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0629"
+name = "M0629"
+start = 468
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0630"
+name = "M0630"
+start = 469
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0631"
+name = "M0631"
+start = 470
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0632"
+name = "M0632"
+start = 471
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0633"
+name = "M0633"
+start = 472
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0634"
+name = "M0634"
+start = 473
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0635"
+name = "M0635"
+start = 474
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6352"
+name = "M6352"
+start = 475
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6354"
+name = "M6354"
+start = 476
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6356"
+name = "M6356"
+start = 477
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0636"
+name = "M0636"
+start = 478
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6362"
+name = "M6362"
+start = 479
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6364"
+name = "M6364"
+start = 480
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6366"
+name = "M6366"
+start = 481
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0637"
+name = "M0637"
+start = 482
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0638"
+name = "M0638"
+start = 483
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0639"
+name = "M0639"
+start = 484
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0640"
+name = "M0640"
+start = 485
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0641"
+name = "M0641"
+start = 486
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0642"
+name = "M0642"
+start = 487
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0643"
+name = "M0643"
+start = 488
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0644"
+name = "M0644"
+start = 489
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0645"
+name = "M0645"
+start = 490
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6461"
+name = "M6461"
+start = 491
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6471"
+name = "M6471"
+start = 492
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0648"
+name = "M0648"
+start = 493
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0649"
+name = "M0649"
+start = 494
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0650"
+name = "M0650"
+start = 495
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0651"
+name = "M0651"
+start = 496
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6511"
+name = "M6511"
+start = 497
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0652"
+name = "M0652"
+start = 498
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6521"
+name = "M6521"
+start = 499
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0653"
+name = "M0653"
+start = 500
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0654"
+name = "M0654"
+start = 501
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0655"
+name = "M0655"
+start = 502
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0656"
+name = "M0656"
+start = 503
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0657"
+name = "M0657"
+start = 504
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0658"
+name = "M0658"
+start = 505
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0659"
+name = "M0659"
+start = 506
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6591"
+name = "M6591"
+start = 507
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0660"
+name = "M0660"
+start = 508
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6602"
+name = "M6602"
+start = 509
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6604"
+name = "M6604"
+start = 510
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6606"
+name = "M6606"
+start = 511
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0661"
+name = "M0661"
+start = 512
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0662"
+name = "M0662"
+start = 513
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0663"
+name = "M0663"
+start = 514
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6631"
+name = "M6631"
+start = 515
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6632"
+name = "M6632"
+start = 516
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6633"
+name = "M6633"
+start = 517
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0664"
+name = "M0664"
+start = 518
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6641"
+name = "M6641"
+start = 519
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6642"
+name = "M6642"
+start = 520
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6643"
+name = "M6643"
+start = 521
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0665"
+name = "M0665"
+start = 522
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6660"
+name = "M6660"
+start = 523
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0667"
+name = "M0667"
+start = 524
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0668"
+name = "M0668"
+start = 525
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6681"
+name = "M6681"
+start = 526
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6682"
+name = "M6682"
+start = 527
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0669"
+name = "M0669"
+start = 528
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6691"
+name = "M6691"
+start = 529
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6692"
+name = "M6692"
+start = 530
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6693"
+name = "M6693"
+start = 531
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0670"
+name = "M0670"
+start = 532
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0671"
+name = "M0671"
+start = 533
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6800"
+name = "M6800"
+start = 534
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6121"
+name = "M6121"
+start = 535
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0604"
+name = "M0604"
+start = 536
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0605"
+name = "M0605"
+start = 537
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6462"
+name = "M6462"
+start = 538
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V6472"
+name = "M6472"
+start = 539
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "Situação do setor"
+name = "V1005"
+start = 540
+width = 1
+
+    [fields.values]
+    1 = "Masculino"
+    2 = "Feminino"
+    3 = "Área urbanizada isolada"
+    4 = "Área rural de extensão urbana"
+    5 = "Aglomerado rural (povoado)"
+    6 = "Aglomerado rural (núcleo)"
+    7 = "Aglomerado rural (outros)"
+    8 = "Área rural exclusive aglomerado rural"

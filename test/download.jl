@@ -1,27 +1,27 @@
 @testitem "Census URL" begin
 	using CensoBR
 	# testing the URL resolution for different years
-	@test CensoBR._census_url(2000, "RJ") ==
+	@test CensoBR._censusurl(2000, "RJ") ==
 		  "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2000/Microdados/RJ.zip"
 
-	@test CensoBR._census_url(2010, :RJ) ==
+	@test CensoBR._censusurl(2010, :RJ) ==
 		  "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2010/Resultados_Gerais_da_Amostra/Microdados/RJ.zip"
 	# testing the URL resolution for lowercase UF codes
-	@test CensoBR._census_url(2000, "rj") ==
-		  CensoBR._census_url(2000, "RJ")
+	@test CensoBR._censusurl(2000, "rj") ==
+		  CensoBR._censusurl(2000, "RJ")
 
 	# testing invalid year and UF code
-	@test_throws ArgumentError CensoBR._census_url(1990, "RJ")
-	@test_throws ArgumentError CensoBR._census_url(2000, "XX")
+	@test_throws ArgumentError CensoBR._censusurl(1990, "RJ")
+	@test_throws ArgumentError CensoBR._censusurl(2000, "XX")
 
 	# Special IBGE distribution case
-	@test_throws ArgumentError CensoBR._census_url(2010, "SP")
+	@test_throws ArgumentError CensoBR._censusurl(2010, "SP")
 end
 
 @testitem "Default cache directory" begin
 	using CensoBR
 
-	cache_dir = CensoBR._default_cache_dir()
+	cache_dir = CensoBR._defaultcachedir()
 
 	@test cache_dir isa AbstractString
 	@test basename(cache_dir) == "CensoBR"
@@ -50,7 +50,7 @@ end
 		end
 
 		# extract the contents of the ZIP archive
-		destination = CensoBR._extract_census(zip_path)
+		destination = CensoBR._extractcensus(zip_path)
 
 		# check that the extracted files exist
 		@test destination == joinpath(tmpdir, "RJ")
@@ -64,17 +64,17 @@ end
 
 		# extraction reuses existing directory
 		write(joinpath(destination, "DOM33.TXT"), "modified")
-		destination2 = CensoBR._extract_census(zip_path)
+		destination2 = CensoBR._extractcensus(zip_path)
 		@test destination2 == destination
 		@test read(joinpath(destination, "DOM33.TXT"), String) == "modified"
 
 		# forced extraction replaces existing directory
-		destination3 = CensoBR._extract_census(zip_path; force = true)
+		destination3 = CensoBR._extractcensus(zip_path; force = true)
 		@test destination3 == destination
 		@test read(joinpath(destination, "DOM33.TXT"), String) == "domicile data"
 
 		# extraction rejects missing ZIP
-		@test_throws ArgumentError CensoBR._extract_census(joinpath(tmpdir, "MISSING.zip"))
+		@test_throws ArgumentError CensoBR._extractcensus(joinpath(tmpdir, "MISSING.zip"))
 	end
 end
 
@@ -86,7 +86,7 @@ end
         url = "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2000/Microdados/2_Atualizacoes_20170908.txt"
         destination = joinpath(tmpdir, "updates.txt")
 
-        path = CensoBR._download_file(url, destination; show_progress = false)
+        path = CensoBR._downloadfile(url, destination; show_progress = false)
 
         @test isfile(path)
 		@test filesize(path) > 0
@@ -100,7 +100,7 @@ end
 		url = "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2010/Resultados_Gerais_da_Amostra/Microdados/1_Atualizacoes_20160311.txt"
         destination = joinpath(tmpdir, "updates.txt")
 
-		path = CensoBR._download_file(url, destination; show_progress = false)
+		path = CensoBR._downloadfile(url, destination; show_progress = false)
 
 		@test isfile(path)
 		@test filesize(path) > 0
@@ -113,11 +113,11 @@ end
         url = "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2000/Microdados/2_Atualizacoes_20170908.txt"
         destination = joinpath(tmpdir, "updates.txt")
 
-        path = CensoBR._download_file(url, destination; show_progress = false)
+        path = CensoBR._downloadfile(url, destination; show_progress = false)
 
         mtime_before = mtime(path)
 
-        path2 = CensoBR._download_file(url, destination; show_progress = false)
+        path2 = CensoBR._downloadfile(url, destination; show_progress = false)
 
         @test path2 == path
         @test mtime(path2) == mtime_before
@@ -128,18 +128,18 @@ end
         url = "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2000/Microdados/2_Atualizacoes_20170908.txt"
         destination = joinpath(tmpdir, "updates.txt")
 
-        CensoBR._download_file(url, destination; show_progress = false)
+        CensoBR._downloadfile(url, destination; show_progress = false)
 
         write(destination, "corrupted")
 
-        CensoBR._download_file(url, destination; force = true, show_progress = false)
+        CensoBR._downloadfile(url, destination; force = true, show_progress = false)
 
         @test read(destination, String) != "corrupted"
 	end
 
 	# documentation download rejects unsupported year
 	mktempdir() do tmpdir
-		@test_throws ArgumentError CensoBR._download_documentation(1990; cache_dir = tmpdir, show_progress = false)
+		@test_throws ArgumentError CensoBR._downloaddocumentation(1990; cache_dir = tmpdir, show_progress = false)
 	end
 
 end

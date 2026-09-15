@@ -1,0 +1,229 @@
+lrecl = 66
+record = "mortality"
+source_file = "layout.ods"
+source_sheet = "MORT"
+
+[[fields]]
+character = true
+decimals = 0
+label = "UNIDADE DA FEDERAÇÃO"
+name = "V0001"
+start = 1
+width = 2
+
+    [fields.values]
+    11 = "Rondônia"
+    12 = "Acre"
+    13 = "Amazonas"
+    14 = "Roraima"
+    15 = "Pará"
+    16 = "Amapá"
+    17 = "Tocantins"
+    21 = "Maranhão"
+    22 = "Piauí"
+    23 = "Ceará"
+    24 = "Rio Grande do Norte"
+    25 = "Paraíba"
+    26 = "Pernambuco"
+    27 = "Alagoas"
+    28 = "Sergipe"
+    29 = "Bahia"
+    31 = "Minas Gerais"
+    32 = "Espírito Santo"
+    33 = "Rio de Janeiro"
+    35 = "São Paulo"
+    41 = "Paraná"
+    42 = "Santa Catarina"
+    43 = "Rio Grande do Sul"
+    50 = "Mato Grosso do Sul"
+    51 = "Mato Grosso"
+    52 = "Goiás"
+    53 = "Distrito Federal"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DO MUNICÍPIO"
+name = "V0002"
+start = 3
+width = 5
+[[fields]]
+character = true
+decimals = 0
+label = "ÁREA DE PONDERAÇÃO"
+name = "V0011"
+start = 8
+width = 13
+[[fields]]
+character = false
+decimals = 0
+label = "CONTROLE"
+name = "V0300"
+start = 21
+width = 8
+[[fields]]
+character = false
+decimals = 13
+label = "PESO AMOSTRAL"
+name = "V0010"
+start = 29
+width = 16
+[[fields]]
+character = true
+decimals = 0
+label = "REGIÃO GEOGRÁFICA"
+name = "V1001"
+start = 45
+width = 1
+
+    [fields.values]
+    1 = "Região norte (uf=11 a 17)"
+    2 = "Região nordeste (uf=21 a 29)"
+    3 = "Região sudeste (uf=31 a 33 e 35)"
+    4 = "Região sul (uf=41 a 43)"
+    5 = "Região centro-oeste (uf=50 a 53)"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DA MESORREGIÃO"
+name = "V1002"
+notes = ["A relação de códigos encontra-se no arquivo:"]
+start = 46
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DA MICRORREGIÃO"
+name = "V1003"
+notes = ["A relação de códigos encontra-se no arquivo:"]
+start = 48
+width = 3
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DA REGIÃO METROPOLITANA"
+name = "V1004"
+notes = ["A relação de códigos encontra-se no arquivo:"]
+start = 51
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "SITUAÇÃO DO DOMICÍLIO"
+name = "V1006"
+start = 53
+width = 1
+
+    [fields.values]
+    1 = "Urbana"
+    2 = "Rural"
+[[fields]]
+character = true
+decimals = 0
+label = "MÊS E ANO DE FALECIMENTO"
+name = "V0703"
+start = 54
+width = 2
+
+    [fields.values]
+    01 = "Agosto de 2009"
+    02 = "Setembro de 2009"
+    03 = "Outubro de 2009"
+    04 = "Novembro de 2009"
+    05 = "Dezembro de 2009"
+    06 = "Janeiro de 2010"
+    07 = "Fevereiro de 2010"
+    08 = "Março de 2010"
+    09 = "Abril de 2010"
+    10 = "Maio de 2010"
+    11 = "Junho de 2010"
+    12 = "Julho de 2010"
+    99 = "Ignorado Branco"
+[[fields]]
+character = true
+decimals = 0
+label = "SEXO DA PESSOA FALECIDA"
+name = "V0704"
+start = 56
+width = 1
+
+    [fields.values]
+    1 = "Masculino"
+    2 = "Feminino"
+    9 = "Ignorado Branco"
+[[fields]]
+character = false
+decimals = 0
+label = "IDADE AO FALECER, EM ANOS"
+name = "V7051"
+notes = ["- Branco", "- 1 a 140", "- 999 = ignorado"]
+start = 57
+width = 3
+[[fields]]
+character = false
+decimals = 0
+label = "IDADE AO FALECER, EM MESES"
+name = "V7052"
+notes = ["- Branco", "- 0 a 11", "- 99 = ignorado"]
+start = 60
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0703"
+name = "M0703"
+start = 62
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V0704"
+name = "M0704"
+start = 63
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V7051"
+name = "M7051"
+start = 64
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "MARCA DE IMPUTAÇÃO NA V7052"
+name = "M7052"
+start = 65
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "Situação do setor"
+name = "V1005"
+start = 66
+width = 1
+
+    [fields.values]
+    1 = "Masculino"
+    2 = "Feminino"
+    3 = "Área urbanizada isolada"
+    4 = "Área rural de extensão urbana"
+    5 = "Aglomerado rural (povoado)"
+    6 = "Aglomerado rural (núcleo)"
+    7 = "Aglomerado rural (outros)"
+    8 = "Área rural exclusive aglomerado rural"

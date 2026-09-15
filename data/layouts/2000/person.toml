@@ -1,0 +1,2823 @@
+lrecl = 390
+record = "person"
+source_file = "LE PESSOAS.sas"
+
+[[fields]]
+character = true
+decimals = 0
+label = "UNIDADE DA FEDERAÇÃO"
+name = "V0102"
+start = 1
+width = 2
+
+    [fields.values]
+    11 = "Rondônia"
+    12 = "Acre"
+    13 = "Amazonas"
+    14 = "Roraima"
+    15 = "Pará"
+    16 = "Amapá"
+    17 = "Tocantins"
+    21 = "Maranhão"
+    22 = "Piauí"
+    23 = "Ceará"
+    24 = "Rio Grande do Norte"
+    25 = "Paraíba"
+    26 = "Pernambuco"
+    27 = "Alagoas"
+    28 = "Sergipe"
+    29 = "Bahia"
+    31 = "Minas Gerais"
+    32 = "Espírito Santo"
+    33 = "Rio de Janeiro"
+    35 = "São Paulo"
+    41 = "Paraná"
+    42 = "Santa Catarina"
+    43 = "Rio Grande do Sul"
+    50 = "Mato Grosso do Sul"
+    51 = "Mato Grosso"
+    52 = "Goiás"
+    53 = "Distrito Federal"
+[[fields]]
+character = true
+decimals = 0
+label = "CODIGO DA MESORREGIÃO"
+name = "V1002"
+notes = ["A RELAÇÃO ENCONTRA-SE NO ARQUIVO “Divisão Territorial Brasileira.xls”"]
+start = 3
+width = 4
+[[fields]]
+character = true
+decimals = 0
+label = "CODIGO DA MICRORREGIÃO"
+name = "V1003"
+notes = ["A RELAÇÃO ENCONTRA-SE NO ARQUIVO “Divisão Territorial Brasileira.xls”"]
+start = 7
+width = 5
+[[fields]]
+character = true
+decimals = 0
+label = "CODIGO DO MUNICIPIO"
+name = "V1103"
+notes = ["A RELAÇÃO ENCONTRA-SE NO ARQUIVO “Divisão Territorial Brasileira.xls”"]
+start = 12
+width = 7
+[[fields]]
+character = true
+decimals = 0
+label = "CODIDO DO DISTRITO"
+name = "V0104"
+notes = ["A RELAÇÃO ENCONTRA-SE NO ARQUIVO “Divisão Territorial Brasileira.xls”"]
+start = 19
+width = 9
+[[fields]]
+character = true
+decimals = 0
+label = "CODIGO DO SUBDISTRITO"
+name = "V0105"
+notes = ["A RELAÇÃO ENCONTRA-SE NO ARQUIVO “Divisão Territorial Brasileira.xls”"]
+start = 28
+width = 11
+[[fields]]
+character = false
+decimals = 0
+label = "CONTROLE"
+name = "V0300"
+start = 39
+width = 8
+[[fields]]
+character = false
+decimals = 0
+label = "> 00 (PESSOA)"
+name = "V0400"
+start = 47
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "REGIÃO METROPOLITANA"
+name = "V1004"
+notes = ["VER ARQUIVO AUXILIAR"]
+start = 49
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "ÁREA DE PONDERAÇÃO"
+name = "AREAP"
+notes = ["A RELAÇÃO ENCONTRA-SE NO ARQUIVO “Municípios Com Mais de Uma Área de Ponderação.xls”"]
+start = 51
+width = 13
+[[fields]]
+character = true
+decimals = 0
+label = "REGIÃO GEOGRÁFICA"
+name = "V1001"
+start = 64
+width = 1
+
+    [fields.values]
+    1 = "Região Norte (uf = 11 a 17)"
+    2 = "Região Nordeste (uf = 21 a 29)"
+    3 = "Região Sudeste (uf = 31 a 35)"
+    4 = "Região Sul (uf = 41 a 43)"
+    5 = "Região Centro-Oeste (uf = 50 a 53)"
+[[fields]]
+character = true
+decimals = 0
+label = "SITUAÇÃO DO SETOR"
+name = "V1005"
+start = 65
+width = 1
+
+    [fields.values]
+    1 = "Área urbanizada de cidade ou vila"
+    2 = "Área não urbanizada de cidade ou vila"
+    3 = "Área urbanizada isolada"
+    4 = "Rural - de extensão urbana"
+    5 = "Rural - povoado"
+    6 = "Rural - núcleo"
+    7 = "Rural - outros aglomerados"
+    8 = "Rural - exclusive os aglomerados rurais"
+[[fields]]
+character = true
+decimals = 0
+label = "SITUAÇÃO DO DOMICÍLIO"
+name = "V1006"
+start = 66
+width = 1
+
+    [fields.values]
+    1 = "Urbano, se V1005 = 1, 2, 3"
+    2 = "Rural, se V1005 = 4, 5, 6, 7, 8"
+[[fields]]
+character = true
+decimals = 0
+label = "TIPO DO SETOR"
+name = "V1007"
+start = 67
+width = 1
+
+    [fields.values]
+    0 = "Setor comum ou não especial"
+    1 = "Setor especial de aglomerado subnormal"
+    2 = "Setor especial de quartéis, bases militares, etc."
+    3 = "Setor especial de alojamento, acampamentos, etc."
+    4 = "Setor especial de embarcações, barcos, navios, etc."
+    5 = "Setor especial de aldeia indígena"
+    6 = "Setor especial de penitenciárias, colônias penais, presídios, cadeias, etc."
+    7 = "Setor especial de asilos, orfanatos, conventos, hospitais, etc."
+[[fields]]
+character = true
+decimals = 0
+label = "SE A PRÓPRIA PESSOA PRESTOU AS INFORMAÇÕES"
+name = "MARCA"
+start = 68
+width = 1
+
+    [fields.values]
+    1 = "Se a própria pessoa prestou as informações"
+    Branco = "As informações foram prestadas por outra pessoa do domicílio"
+[[fields]]
+character = true
+decimals = 0
+label = "SEXO"
+name = "V0401"
+start = 69
+width = 1
+
+    [fields.values]
+    1 = "Masculino"
+    2 = "Feminino"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0401"
+name = "M0401"
+start = 70
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "RELAÇÃO COM RESPONSÁVEL PELO DOMICÍLIO"
+name = "V0402"
+start = 71
+width = 2
+
+    [fields.values]
+    01 = "Pessoa responsável"
+    02 = "Cônjuge, companheiro(a)"
+    03 = "Filho(a), enteado(a)"
+    04 = "Pai, mãe, sogro(a)"
+    05 = "Neto(a), bisneto(a)"
+    06 = "Irmão, irmã"
+    07 = "Outro parente"
+    08 = "Agregado(a)"
+    09 = "Pensionista"
+    10 = "Empregado(a) doméstico(a)"
+    11 = "Parente do(a) empregado(a) doméstico(a)"
+    12 = "Individual em domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0402"
+name = "M0402"
+start = 73
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "RELAÇÃO COM RESPONSÁVEL PELA FAMÍLIA"
+name = "V0403"
+start = 74
+width = 2
+
+    [fields.values]
+    01 = "Pessoa responsável"
+    02 = "Cônjuge, companheiro(a)"
+    03 = "Filho(a), enteado(a)"
+    04 = "Pai, mãe, sogro(a)"
+    05 = "Neto(a), bisneto(a)"
+    06 = "Irmão, irmã"
+    07 = "Outro parente"
+    08 = "Agregado(a)"
+    09 = "Pensionista"
+    10 = "Empregado(a) doméstico(a)"
+    11 = "Parente do(a) empregado(a) doméstico(a)"
+    12 = "Individual em domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0403"
+name = "M0403"
+start = 76
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "NÚMERO DA FAMÍLIA"
+name = "V0404"
+start = 77
+width = 1
+
+    [fields.values]
+    0 = "Individual em domicílio coletivo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0404"
+name = "M0404"
+start = 78
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "IDADE CALCULADA EM ANOS COMPLETOS - A PARTIR DE 1 ANO"
+name = "V4572"
+start = 79
+width = 3
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4752"
+name = "M4752"
+start = 82
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "IDADE CALCULADA EM MESES - MENOS DE UM ANO (Valores de 00 a 11)"
+name = "V4754"
+start = 83
+width = 2
+
+    [fields.values]
+    00 = "Inclusive para as pessoas com idade em anos completos a partir de um ano"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4754"
+name = "M4754"
+start = 85
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DA FORMA DE DECLARAÇÃO DA IDADE (DATA DE NASCIMENTO, IDADE INFORMADA OU IDADE ESTIMADA)"
+name = "V4070"
+start = 86
+width = 1
+
+    [fields.values]
+    1 = "Idade calculada"
+    2 = "Idade presumida/declarada"
+[[fields]]
+character = true
+decimals = 0
+label = "COR OU RAÇA"
+name = "V0408"
+start = 87
+width = 1
+
+    [fields.values]
+    1 = "Branca"
+    2 = "Preta"
+    3 = "Amarela"
+    4 = "Parda"
+    5 = "Indígena"
+    9 = "Ignorado"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0408"
+name = "M0408"
+start = 88
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DA RELIGIÃO"
+name = "V4090"
+notes = ["CATEGORIAS NO ARQUIVO “Estrutura de Religião-V4090.doc”"]
+start = 89
+width = 3
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4090 (0 e 1)"
+name = "M4090"
+start = 92
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "PROBLEMA MENTAL PERMANENTE"
+name = "V0410"
+start = 93
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    9 = "Ignorado"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0410"
+name = "M0410"
+start = 94
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "CAPACIDADE DE ENXERGAR"
+name = "V0411"
+start = 95
+width = 1
+
+    [fields.values]
+    1 = "Incapaz"
+    2 = "Grande dificuldade permanente"
+    3 = "Alguma dificuldade permanente"
+    4 = "Nenhuma dificuldade"
+    9 = "Ignorado"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0411"
+name = "M0411"
+start = 96
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "CAPACIDADE DE OUVIR"
+name = "V0412"
+start = 97
+width = 1
+
+    [fields.values]
+    1 = "Incapaz"
+    2 = "Grande dificuldade permanente"
+    3 = "Alguma dificuldade permanente"
+    4 = "Nenhuma dificuldade"
+    9 = "Ignorado"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0412"
+name = "M0412"
+start = 98
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "CAPACIDADE DE CAMINHAR/SUBIR ESCADAS"
+name = "V0413"
+start = 99
+width = 1
+
+    [fields.values]
+    1 = "Incapaz"
+    2 = "Grande dificuldade permanente"
+    3 = "Alguma dificuldade permanente"
+    4 = "Nenhuma dificuldade"
+    9 = "Ignorado"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0413"
+name = "M0413"
+start = 100
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "DEFICIÊNCIAS"
+name = "V0414"
+start = 101
+width = 1
+
+    [fields.values]
+    1 = "Paralisia permanente total"
+    2 = "Paralisia permanente das pernas"
+    3 = "Paralisia permanente de um dos lados do corpo"
+    4 = "Falta de perna, braço, mão, pé ou dedo polegar"
+    5 = "Nenhuma das enumeradas"
+    9 = "Ignorado"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0414"
+name = "M0414"
+start = 102
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "SEMPRE MOROU NESTE MUNICÍPIO"
+name = "V0415"
+start = 103
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0415"
+name = "M0415"
+start = 104
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "TEMPO DE MORADIA NESTE MUNICÍPIO"
+name = "V0416"
+start = 105
+width = 2
+
+    [fields.values]
+    Branco = "para os não migrantes"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0416"
+name = "M0416"
+start = 107
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "NASCEU NESTE MUNICÍPIO"
+name = "V0417"
+start = 108
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    Branco = "para os não migrantes"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0417"
+name = "M0417"
+start = 109
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "NASCEU NESTA UF"
+name = "V0418"
+start = 110
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    Branco = "para os não migrantes e os naturais do município"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0418"
+name = "M0418"
+start = 111
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "NACIONALIDADE"
+name = "V0419"
+start = 112
+width = 1
+
+    [fields.values]
+    1 = "Brasileiro nato"
+    2 = "Naturalizado brasileiro"
+    3 = "Estrangeiro"
+    Branco = "para os não migrantes e os naturais da Unidade da Federação onde foi realizado o Censo 2000"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0419"
+name = "M0419"
+start = 113
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "ANO QUE FIXOU RESIDÊNCIA NO BRASIL"
+name = "V0420"
+start = 114
+width = 4
+
+    [fields.values]
+    Branco = "para os não migrantes e os brasileiros natos"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0420"
+name = "M0420"
+start = 118
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DA UF OU PAÍS DE NASCIMENTO"
+name = "V4210"
+start = 119
+width = 2
+
+    [fields.values]
+    Branco = "para os não migrantes e os naturais da Unidade da Federação onde foi realizado o Censo 2000 CATEGORIAS NO ARQUIVO “Estrutura Migração V4210, V4260.xls”"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4210"
+name = "M4210"
+start = 121
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "TEMPO DE MORADIA NA UF"
+name = "V0422"
+start = 122
+width = 2
+
+    [fields.values]
+    Branco = "para os não migrantes"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0422"
+name = "M0422"
+start = 124
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DA UF OU PAÍS DE RESIDÊNCIA ANTERIOR"
+name = "V4230"
+notes = ["Branco– para os não migrantes e os que moram na Unidade da Federação há 10 anos ou mais.", "CATEGORIAS NO ARQUIVO ”Estrutura de Migração V4230.xls”"]
+start = 125
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4230"
+name = "M4230"
+start = 127
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "RESIDÊNCIA EM 31 DE JULHO DE 1995"
+name = "V0424"
+start = 128
+width = 1
+
+    [fields.values]
+    1 = "Neste município, na zona urbana"
+    2 = "Neste município, na zona rural"
+    3 = "Em outro município, na zona urbana"
+    4 = "Em outro município, na zona rural"
+    5 = "Em outro país"
+    6 = "Não era nascido"
+    Branco = "para os não migrantes"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0424"
+name = "M0424"
+start = 129
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DO MUNICÍPIO DE RESIDÊNCIA"
+name = "V4250"
+start = 130
+width = 7
+
+    [fields.values]
+    Branco = "para os não migrantes, os moradores no município onde foi realizado o Censo 2000, os moradores em outro país e aos não nascidos em 31/07/1995. CATEGORIAS NO ARQUIVO “Municípios-V4250.xls”"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4250"
+name = "M4250"
+start = 137
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DA UF OU PAÍS DE RESIDÊNCIA EM 31/07/1995"
+name = "V4260"
+start = 138
+width = 2
+
+    [fields.values]
+    Branco = "para os não migrantes, os moradores no município onde foi realizado o Censo 2000 e os não nascidos em 31/07/1995. CATEGORIAS NO ARQUIVO “Estrutura de Migração V4210, V4260.xls”"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4260"
+name = "M4260"
+start = 140
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DO MUNICÍPIO E UF OU PAÍS ESTRANGEIRO QUE TRABALHA OU ESTUDA"
+name = "V4276"
+notes = ["CATEGORIAS NO ARQUIVO “Municípios e País Estrangeiro-V4276.xls”"]
+start = 141
+width = 7
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4276"
+name = "M4276"
+start = 148
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "SABE LER E ESCREVER"
+name = "V0428"
+start = 149
+width = 1
+
+    [fields.values]
+    1 = "Sabe ler e escrever"
+    2 = "Não sabe"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0428"
+name = "M0428"
+start = 150
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "FREQÜENTA ESCOLA OU CRECHE"
+name = "V0429"
+start = 151
+width = 1
+
+    [fields.values]
+    1 = "Sim, rede particular"
+    2 = "Sim, rede pública"
+    3 = "Não, já freqüentou"
+    4 = "Nunca freqüentou"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0429"
+name = "M0429"
+start = 152
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "CURSO QUE FREQÜENTA"
+name = "V0430"
+start = 153
+width = 2
+
+    [fields.values]
+    01 = "Creche"
+    02 = "Pré-escolar"
+    03 = "Classe de alfabetização"
+    04 = "Alfabetização de adultos"
+    05 = "Ensino fundamental ou 1º grau - regular seriado"
+    06 = "Ensino fundamental ou 1º grau - regular não-seriado"
+    07 = "Supletivo (ensino fundamental ou 1º grau)"
+    08 = "Ensino médio ou 2º grau - regular seriado"
+    09 = "Ensino médio ou 2º grau - regular não-seriado"
+    10 = "Supletivo (ensino médio ou 2º grau)"
+    11 = "Pré-vestibular"
+    12 = "Superior – graduação"
+    13 = "Superior – mestrado ou doutorado"
+    Branco = "para os não estudantes"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0430"
+name = "M0430"
+start = 155
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "SÉRIE QUE FREQÜENTA"
+name = "V0431"
+start = 156
+width = 1
+
+    [fields.values]
+    1 = "Primeira Série"
+    2 = "Segunda Série"
+    3 = "Terceira Série"
+    4 = "Quarta Série"
+    5 = "Quinta Série"
+    6 = "Sexta Série"
+    7 = "Sétima Série"
+    8 = "Oitava Série"
+    9 = "Curso não-seriado"
+    Branco = "para os não estudantes"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0431"
+name = "M0431"
+start = 157
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "CURSO MAIS ELEVADO QUE FREQÜENTOU, CONCLUINDO PELO MENOS UMA SÉRIE"
+name = "V0432"
+start = 158
+width = 1
+
+    [fields.values]
+    1 = "Alfabetização de adultos"
+    2 = "Antigo primário"
+    3 = "Antigo ginásio"
+    4 = "Antigo clássico, científico, etc."
+    5 = "Ensino fundamental ou 1º grau"
+    6 = "Ensino médio ou 2º grau"
+    7 = "Superior - graduação"
+    8 = "Mestrado ou doutorado"
+    9 = "Nenhum"
+    Branco = "para os estudantes"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0432"
+name = "M0432"
+start = 159
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "ÚLTIMA SÉRIE CONCLUÍDA COM APROVAÇÃO"
+name = "V0433"
+start = 160
+width = 2
+
+    [fields.values]
+    01 = "Primeira Série"
+    02 = "Segunda Série"
+    03 = "Terceira Série"
+    04 = "Quarta Série"
+    05 = "Quinta Série"
+    06 = "Sexta Série"
+    07 = "Sétima Série"
+    08 = "Oitava Série"
+    09 = "Curso não-seriado"
+    10 = "Nenhuma"
+    Branco = "para os estudantes"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0433"
+name = "M0433"
+start = 162
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "CONCLUIU O CURSO NO QUAL ESTUDOU"
+name = "V0434"
+start = 163
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    Branco = "para os estudantes"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0434"
+name = "M0434"
+start = 164
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DO CURSO MAIS ELEVADO CONCLUÍDO"
+name = "V4355"
+start = 165
+width = 2
+
+    [fields.values]
+    Branco = "para os estudantes e os não estudantes que não concluíram curso. CATEGORIAS NO ARQUIVO “Cursos Superiores-Estrutura V4535.xls”"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0435"
+name = "M0435"
+start = 167
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "ANOS DE ESTUDO"
+name = "V4300"
+start = 168
+width = 2
+
+    [fields.values]
+    00 = "Sem instrução ou menos de 1 ano"
+    01 = "1 ano"
+    02 = "2 anos"
+    03 = "3 anos"
+    04 = "4 anos"
+    05 = "5 anos"
+    06 = "6 anos"
+    07 = "7 anos"
+    08 = "8 anos"
+    09 = "9 anos"
+    10 = "10 anos"
+    11 = "11 anos"
+    12 = "12 anos"
+    13 = "13 anos"
+    14 = "14 anos"
+    15 = "15 anos"
+    16 = "16 anos"
+    17 = "17 anos ou mais"
+    20 = "Não determinado"
+    30 = "Alfabetização de adultos"
+[[fields]]
+character = true
+decimals = 0
+label = "VIVE EM COMPANHIA DE CÔNJUGE OU COMPANHEIRO(A)"
+name = "V0436"
+start = 170
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não, mas viveu"
+    3 = "Nunca viveu"
+    Branco = "para as pessoas com menos de 10 anos de idade"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0436"
+name = "M0436"
+start = 171
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "NATUREZA DA ÚLTIMA UNIÃO"
+name = "V0437"
+start = 172
+width = 1
+
+    [fields.values]
+    1 = "Casamento civil e religioso"
+    2 = "Só casamento civil"
+    3 = "Só casamento religioso"
+    4 = "União consensual"
+    5 = "Nunca viveu"
+    Branco = "para as pessoas com menos de 10 anos de idade"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0437"
+name = "M0437"
+start = 173
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "ESTADO CIVIL"
+name = "V0438"
+start = 174
+width = 1
+
+    [fields.values]
+    1 = "Casado(a)"
+    2 = "Desquitado(a) ou separado(a) judicialmente"
+    3 = "Divorciado(a)"
+    4 = "Viúvo(a)"
+    5 = "Solteiro(a)"
+    Branco = "para as pessoas com menos de 10 anos de idade"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0438"
+name = "M0438"
+start = 175
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "NA SEMANA DE 23 A 29 DE JULHO DE 2000, TRABALHOU REMUNERADO"
+name = "V0439"
+start = 176
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    Branco = "para as pessoas com menos de 10 anos de idade"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0439"
+name = "M0439"
+start = 177
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "NA SEMANA, TINHA TRABALHO MAS ESTAVA AFASTADO"
+name = "V0440"
+start = 178
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    Branco = "para as pessoas com menos de 10 anos de idade e pessoas com 10 anos ou mais de idade que exerceram algum trabalho remunerado na totalidade ou em parte da semana de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0440"
+name = "M0440"
+start = 179
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "NA SEMANA, AJUDOU SEM REMUNERAÇÃO, NO TRABALHO EXERCIDO POR PESSOA MORADORA DO DOMICÍLIO, OU COMO APRENDIZ/ESTAGIÁRIO"
+name = "V0441"
+start = 180
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    Branco = "para as pessoas com menos de 10 anos de idade e pessoas com 10 anos ou mais de idade que exerceram algum trabalho remunerado na totalidade ou em parte da semana de referência do Censo ou tinham algum trabalho remunerado na semana de referência do qual estava temporariamente afastado"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0441"
+name = "M0441"
+start = 181
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "NA SEMANA, AJUDOU SEM REMUNERAÇÃO, NO TRABALHO EXERCIDO POR PESSOA MORADORA DO DOMICÍLIO EM ATIVIDADE DE CULTIVO,"
+name = "V0442"
+notes = ["EXTRAÇÃO VEGETAL..."]
+start = 182
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    Branco = "para as pessoas com menos de 10 anos de idade e pessoas com 10 anos ou mais de idade que exerceram algum trabalho remunerado na totalidade ou em parte da semana de referência do Censo ou tinham algum trabalho remunerado na semana de referência do qual estavam temporariamente afastado ou ajudaram sem remuneração pessoa conta-própria ou empregadora moradora no domicílio, ou como aprendiz ou estagiário"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0442"
+name = "M0442"
+start = 183
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "NA SEMANA, TRABALHOU EM CULTIVO, ETC.,  PARA ALIMENTAÇÃO DE PESSOAS MORADORAS NO DOMICÍLIO"
+name = "V0443"
+start = 184
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    Branco = "para as pessoas com menos de 10 anos de idade e pessoas com 10 anos ou mais de idade que exerceram algum trabalho remunerado na totalidade ou em parte da semana de referência do Censo ou tinham algum trabalho remunerado na semana de referência do qual estavam temporariamente afastado ou ajudaram sem remuneração pessoa conta-própria ou empregadora moradora no domicílio, ou como aprendiz ou estagiário ou ajudaram sem remuneração pessoa moradora no domicílio empregada em atividade de produção de bens primários"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0443"
+name = "M0443"
+start = 185
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "QUANTOS TRABALHOS, TINHA NA SEMANA DE 23 A 29 DE JULHO DE 2000 ?"
+name = "V0444"
+start = 186
+width = 1
+
+    [fields.values]
+    1 = "Um"
+    2 = "Dois ou mais"
+    Branco = "para as pessoas com menos de 10 anos de idade e pessoas com 10 anos ou mais de idade que não tinham trabalho na semana de referência"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0444"
+name = "M0444"
+start = 187
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO NOVO DA OCUPAÇÃO"
+name = "V4452"
+start = 188
+width = 4
+
+    [fields.values]
+    Branco = "para pessoa de menos de 10 anos de idade ou pessoa de 10 ou mais anos de idade que não tinha trabalho na semana de referência CATEGORIAS NO ARQUIVO “Ocupação-Estrutura.doc”"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4452"
+name = "M4452"
+start = 192
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO NOVO DA ATIVIDADE"
+name = "V4462"
+start = 193
+width = 5
+
+    [fields.values]
+    Branco = "para pessoa de menos de 10 anos de idade ou pessoa de 10 ou mais anos de idade que não tinha trabalho na semana de referência do Censo. CATEGORIAS NO ARQUIVO “CnaeDom-Estrutura.xls”"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4462"
+name = "M4462"
+start = 198
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "NESSE TRABALHO ERA..."
+name = "V0447"
+start = 199
+width = 1
+
+    [fields.values]
+    1 = "Trabalhador doméstico com carteira de trabalho assinada"
+    2 = "Trabalhador doméstico sem carteira de trabalho assinada"
+    3 = "Empregado com carteira de trabalho assinada"
+    4 = "Empregado sem carteira de trabalho assinada"
+    5 = "Empregador"
+    6 = "Conta-própria"
+    7 = "Aprendiz ou estagiário sem remuneração"
+    8 = "Não remunerado em ajuda a membro do domicílio"
+    9 = "Trabalhador na produção para o próprio consumo"
+    Branco = "para as pessoas com menos de 10 anos de idade e pessoas com 10 anos ou mais de idade que não tinham trabalho na semana de referência"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0447"
+name = "M0447"
+start = 200
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "ERA EMPREGADO PELO RJUOU COMO MILITAR"
+name = "V0448"
+start = 201
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    Branco = "para as pessoas com menos de 10 anos de idade e pessoas com 10 anos ou mais de idade que não tinham trabalho na semana de referência do Censo e as que não tenham sido classificadas como empregado sem carteira de trabalho assinada no trabalho principal, posição na ocupação"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0448"
+name = "M0448"
+start = 202
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "QUANTOS EMPREGADOS TRABALHAVAM NESSA FIRMA"
+name = "V0449"
+start = 203
+width = 1
+
+    [fields.values]
+    1 = "Um empregado"
+    2 = "Dois empregados"
+    3 = "Três a cinco empregados"
+    4 = "Seis a dez empregados"
+    5 = "Onze ou mais empregados"
+    Branco = "para as pessoas com menos de 10 anos de idade e pessoas com 10 anos ou mais de idade que não tinham trabalho na semana de referência do Censo e as que não tenham sido classificadas como empregador no trabalho principal, posição na ocupação"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0449"
+name = "M0449"
+start = 204
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "ERA CONTRIBUINTE DE INSTITUTO DE PREVIDÊNCIA OFICIAL"
+name = "V0450"
+start = 205
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    Branco = "para as pessoas com menos de 10 anos de idade e pessoas com 10 anos ou mais de idade que não tinham trabalho na semana de referência do Censo e as que tenham sido classificadas como aprendiz ou estagiário sem remuneração, exerciam trabalho não remunerado em ajuda a membro do domicílio, ou trabalhavam para o próprio consumo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0450"
+name = "M0450"
+start = 206
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "NÃO TEM RENDIMENTO NO TRABALHO PRINCIPAL"
+name = "V4511"
+start = 207
+width = 1
+
+    [fields.values]
+    0 = "Não tem"
+    1 = "Somente em benefícios"
+    Branco = "para as pessoas com menos de 10 anos de idade e pessoas com 10 anos ou mais de idade que não tinham trabalho na semana de referência do Censo e as que tinham rendimento do trabalho principal remunerado na semana de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4511"
+name = "M4511"
+start = 208
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "RENDIMENTO BRUTO NO TRABALHO PRINCIPAL"
+name = "V4512"
+start = 209
+width = 6
+
+    [fields.values]
+    Branco = "para as pessoas com menos de 10 anos de idade e pessoas com 10 anos ou mais de idade que não tinham trabalho, a pessoa que tinha trabalho principal remunerado recebendo somente em benefícios e a pessoa que tinha trabalho principal não remunerado na semana de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4512"
+name = "M4512"
+start = 215
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "TOTAL DE RENDIMENTOS NO TRABALHO PRINCIPAL"
+name = "V4513"
+start = 216
+width = 6
+
+    [fields.values]
+    Branco = "para as pessoas com menos de 10 anos de idade e pessoas com 10 anos ou mais de idade que não tinham trabalho na semana de referência do Censo"
+[[fields]]
+character = false
+decimals = 2
+label = "TOTAL DE RENDIMENTOS NO TRABALHO PRINCIPAL, EM SALÁRIOS MÍNIMOS"
+name = "V4514"
+start = 222
+width = 6
+
+    [fields.values]
+    Branco = "para as pessoas com menos de 10 anos de idade e pessoas com 10 anos ou mais de idade que não tinham trabalho na semana de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "NÃO TEM RENDIMENTO NOS DEMAIS TRABALHOS"
+name = "V4521"
+start = 228
+width = 1
+
+    [fields.values]
+    0 = "Não tem"
+    1 = "Somente em benefícios"
+    Branco = "para as pessoas com menos de 10 anos de idade e pessoas com 10 anos ou mais de idade que não tinham trabalho na semana de referência do Censo e as que tinham rendimento de outro trabalho remunerado na semana de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4521"
+name = "M4521"
+start = 229
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "RENDIMENTO BRUTO NOS DEMAIS TRABALHOS"
+name = "V4522"
+start = 230
+width = 6
+
+    [fields.values]
+    Branco = "para a pessoa com menos de 10 anos de idade e pessoa com 10 anos ou mais de idade que não tinham trabalho, a pessoa que tinha outro trabalho remunerado recebendo somente em benefícios e a pessoa que tinha outro trabalho não remunerado na semana de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4522"
+name = "M4522"
+start = 236
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "TOTAL DE RENDIMENTOS NOS DEMAIS TRABALHOS"
+name = "V4523"
+start = 237
+width = 6
+
+    [fields.values]
+    Branco = "para a pessoa com menos de 10 anos de idade e a pessoa com 10 anos ou mais de idade que não tinham trabalho na semana de referência do Censo"
+[[fields]]
+character = false
+decimals = 2
+label = "TOTAL DE RENDIMENTOS NOS DEMAIS TRABALHOS, EM SALÁRIOS MÍNIMOS"
+name = "V4524"
+start = 243
+width = 6
+
+    [fields.values]
+    Branco = "para a pessoa com menos de 10 anos de idade e a pessoa com 10 anos ou mais de idade que não tinham trabalho na semana de referência do Censo"
+[[fields]]
+character = false
+decimals = 0
+label = "TOTAL DE RENDIMENTOS EM TODOS OS TRABALHOS"
+name = "V4525"
+start = 249
+width = 6
+
+    [fields.values]
+    Branco = "para a pessoa com menos de 10 anos de idade e a pessoa com 10 anos ou mais de idade que não tinham trabalho na semana de referência do Censo"
+[[fields]]
+character = false
+decimals = 2
+label = "TOTAL DE RENDIMENTOS EM TODOS OS TRABALHOS, EM SALÁRIOS MÍNIMOS"
+name = "V4526"
+start = 255
+width = 6
+
+    [fields.values]
+    Branco = "para a pessoa com menos de 10 anos de idade e a pessoa com 10 anos ou mais de idade que não tinham trabalho na semana de referência do Censo"
+[[fields]]
+character = false
+decimals = 0
+label = "HORAS TRABALHADAS POR SEMANA NO TRABALHO PRINCIPAL"
+name = "V0453"
+start = 261
+width = 2
+
+    [fields.values]
+    Branco = "para a pessoa com menos de 10 anos de idade e a pessoa com 10 anos ou mais de idade que não tinham trabalho na semana de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4523"
+name = "M4523"
+start = 263
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "HORAS TRABALHADAS NOS DEMAIS TRABALHOS"
+name = "V0454"
+start = 264
+width = 2
+
+    [fields.values]
+    Branco = "para a pessoa com menos de 10 anos de idade e a pessoa com 10 anos ou mais de idade que não tinham trabalho na semana de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0454"
+name = "M0454"
+start = 266
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "TOTAL DE HORAS TRABALHADAS"
+name = "V4534"
+start = 267
+width = 3
+
+    [fields.values]
+    Branco = "para a pessoa com menos de 10 anos de idade e a pessoa com 10 anos ou mais de idade que não tinham trabalho na semana de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "PROVIDÊNCIA PARA CONSEGUIR TRABALHO"
+name = "V0455"
+notes = ["1– Sim"]
+start = 270
+width = 1
+
+    [fields.values]
+    2 = "Não Branco– para a pessoa com menos de 10 anos de idade e a pessoa com 10 anos ou mais de idade que tinha trabalho na semana de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0455"
+name = "M0455"
+start = 271
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "EM JULHO DE 2000, ERA APOSENTADO DE INSTITUTO DE PREVIDÊNCIA OFICIAL"
+name = "V0456"
+start = 272
+width = 1
+
+    [fields.values]
+    1 = "Sim"
+    2 = "Não"
+    Branco = "para as pessoas com menos de 10 anos de idade"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0456"
+name = "M0456"
+start = 273
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "RENDIMENTO DE APOSENTADORIA, PENSÃO"
+name = "V4573"
+start = 274
+width = 6
+
+    [fields.values]
+    Branco = "para a pessoa com menos de 10 anos de idade na data de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4573"
+name = "M4573"
+start = 280
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "RENDIMENTO DE ALUGUEL"
+name = "V4583"
+start = 281
+width = 6
+
+    [fields.values]
+    Branco = "para a pessoa com menos de 10 anos de idade na data de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4583"
+name = "M4583"
+start = 287
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "RENDIMENTO DE PENSÃO ALIMENTÍCIA, MESADA, DOAÇÃO"
+name = "V4593"
+start = 288
+width = 6
+
+    [fields.values]
+    Branco = "para a pessoa com menos de 10 anos de idade na data de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4593"
+name = "M4593"
+start = 294
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "RENDIMENTO DE RENDA MÍNIMA, BOLSA-ESCOLA, SEGURO-DESEMPREGO"
+name = "V4603"
+start = 295
+width = 6
+
+    [fields.values]
+    Branco = "para a pessoa com menos de 10 anos de idade na data de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4603"
+name = "M4603"
+start = 301
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "OUTROS RENDIMENTOS"
+name = "V4613"
+start = 302
+width = 6
+
+    [fields.values]
+    Branco = "para a pessoa com menos de 10 anos de idade na data de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4613"
+name = "M4613"
+start = 308
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "TOTAL DE RENDIMENTOS"
+name = "V4614"
+start = 309
+width = 6
+
+    [fields.values]
+    Branco = "para a pessoa com menos de 10 anos de idade na data de referência do Censo"
+[[fields]]
+character = false
+decimals = 2
+label = "TOTAL DE RENDIMENTOS, EM SALÁRIOS MÍNIMOS"
+name = "V4615"
+start = 315
+width = 6
+
+    [fields.values]
+    Branco = "para a pessoa com menos de 10 anos de idade na data de referência do Censo"
+[[fields]]
+character = false
+decimals = 0
+label = "TOTAL DE FILHOS NASCIDOS VIVOS"
+name = "V4620"
+start = 321
+width = 2
+
+    [fields.values]
+    Branco = "para os homens e as mulheres com menos de 10 anos de idade na data de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4620"
+name = "M4620"
+start = 323
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "TOTAL DE FILHOS NASCIDOS VIVOS QUE ESTAVAM VIVOS"
+name = "V0463"
+start = 324
+width = 2
+
+    [fields.values]
+    Branco = "para os homens, as mulheres com menos de 10 anos de idade e as mulheres com 10 anos ou mais de idade que não tiveram filhos vivos até a data de referência do Censo"
+[[fields]]
+character = false
+decimals = 0
+label = "IDADE CALCULADA DO ÚLTIMO FILHO NASCIDO VIVO"
+name = "V4654"
+start = 326
+width = 2
+
+    [fields.values]
+    Branco = "para os homens, as mulheres com menos de 10 anos de idade e as mulheres com 10 anos de idade ou mais que não tiveram filhos vivos até a data de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4654"
+name = "M4654"
+start = 328
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "TOTAL DE FILHOS NASCIDOS MORTOS"
+name = "V4670"
+start = 329
+width = 2
+
+    [fields.values]
+    Branco = "para os homens e as mulheres com menos de 10 anos de idade na data de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4670"
+name = "M4670"
+start = 331
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "TOTAL DE FILHOS TIDOS"
+name = "V4690"
+start = 332
+width = 2
+
+    [fields.values]
+    Branco = "para os homens e as mulheres com menos de 10 anos de idade na data de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0463"
+name = "M0463"
+start = 334
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 8
+label = "PESO (Peso atribuído à pessoa)"
+name = "P001"
+start = 335
+width = 11
+[[fields]]
+character = true
+decimals = 0
+label = "ESTRATO DE IMPUTAÇÃO DE RENDA"
+name = "ESTR"
+start = 346
+width = 2
+[[fields]]
+character = true
+decimals = 0
+label = "ESTRATO DE IMPUTAÇÃO DE RENDA PARCIAL"
+name = "ESTRP"
+start = 348
+width = 2
+[[fields]]
+character = false
+decimals = 0
+label = "FILHOS NASCIDOS VIVOS: HOMENS"
+name = "V4621"
+start = 350
+width = 2
+
+    [fields.values]
+    Branco = "para os homens e as mulheres com menos de 10 anos de idade na data de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4621"
+name = "M4621"
+start = 352
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "FILHOS NASCIDOS VIVOS: MULHERES"
+name = "V4622"
+start = 353
+width = 2
+
+    [fields.values]
+    Branco = "para os homens e as mulheres com menos de 10 anos de idade na data de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4622"
+name = "M4622"
+start = 355
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "FILHOS QUE ESTAVAM VIVOS: HOMENS"
+name = "V4631"
+start = 356
+width = 2
+
+    [fields.values]
+    Branco = "para os homens, as mulheres com menos de 10 anos de idade e as mulheres com 10 anos de idade ou mais que não tiveram filhos vivos até a data de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4631"
+name = "M4631"
+start = 358
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "FILHOS QUE ESTAVAM VIVOS: MULHERES"
+name = "V4632"
+start = 359
+width = 2
+
+    [fields.values]
+    Branco = "para os homens, as mulheres com menos de 10 anos de idade e as mulheres com 10 anos de idade ou mais que não tiveram filhos vivos até a data de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4632"
+name = "M4632"
+start = 361
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "SEXO DO ÚLTIMO FILHO NASCIDO VIVO"
+name = "V0464"
+start = 362
+width = 1
+
+    [fields.values]
+    1 = "Masculino"
+    2 = "Feminino"
+    Branco = "para os homens, as mulheres com menos de 10 anos de idade e as mulheres com 10 anos ou mais que não tiveram  filhos vivos até a data de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V0464"
+name = "M0464"
+start = 363
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "FILHOS NASCIDOS MORTOS: HOMENS"
+name = "V4671"
+start = 364
+width = 2
+
+    [fields.values]
+    Branco = "para os homens e as mulheres com menos de 10 anos de idade na data de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4671"
+name = "M4671"
+start = 366
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = false
+decimals = 0
+label = "FILHOS NASCIDOS MORTOS: MULHERES"
+name = "V4672"
+start = 367
+width = 2
+
+    [fields.values]
+    Branco = "para os homens e as mulheres com menos de 10 anos de idade na data de referência do Censo"
+[[fields]]
+character = true
+decimals = 0
+label = "INDICADORA DE IMPUTAÇÃO NA V4672"
+name = "M4672"
+start = 369
+width = 1
+
+    [fields.values]
+    0 = "Sem imputação"
+    1 = "NIM/IMPS"
+    2 = "PRÉ-DIA"
+    3 = "DIA"
+    4 = "PRÉ-DIA e DIA"
+    5 = "SPLUS"
+    6 = "DIA e SPLUS"
+    7 = "PÓS-SPLUS"
+    8 = "PRÉ-DIA e PÓS-SPLUS"
+    9 = "DIA e PÓS-SPLUS"
+    A = "PRÉ-DIA, DIA e PÓS-SPLUS"
+    C = "DIA, SPLUS e PÓS-SPLUS"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DO CURSO MAIS ELEVADO CONCLUÍDO (CONCLA)"
+name = "V4354"
+start = 370
+width = 3
+
+    [fields.values]
+    Branco = "para os estudantes que não concluíram curso CATEGORIAS NO ARQUIVO “Cursos Superiores-Estrutura V4534.xls”"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DA UF OU PAÍS DE NASCIMENTO (ONU)"
+name = "V4219"
+start = 373
+width = 3
+
+    [fields.values]
+    Branco = "para os não migrantes e os naturais da Unidade da Federação onde foi realizado o Censo 2000. CATEGORIAS NO ARQUIVO “Estrutura ONU V4219, V4269.xls”"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DA UF OU PAÍS (ONU) DE RESIDÊNCIA ANTERIOR"
+name = "V4239"
+start = 376
+width = 3
+
+    [fields.values]
+    Branco = "para os não migrantes e os que moram na Unidade da Federação há 10 anos ou mais CATEGORIAS NO ARQUIVO “Estrutura ONU  V4239.xls”"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DA UF OU PAÍS (ONU) DE RESIDÊNCIA EM 31/07/1995"
+name = "V4269"
+start = 379
+width = 3
+
+    [fields.values]
+    Branco = "para os não migrantes, os moradores no município onde foi realizado o Censo 2000 e os nascidos em 31/07/1995. CATEGORIAS NO ARQUIVO “Estrutura ONU V4219, V4269.xls”"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO DO PAÍS ESTRANGEIRO (ONU) QUE TRABALHA OU ESTUDA CATEGORIAS NO ARQUIVO “Estrutura ONU V4279.xls”"
+name = "V4279"
+start = 382
+width = 3
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO ANTIGO DA OCUPAÇÃO"
+name = "V4451"
+start = 385
+width = 3
+
+    [fields.values]
+    Branco = "para pessoa de 10 anos de idade ou pessoa de 10 ou mais anos de idade que não tinha trabalho na semana de referência CATEGORIAS NO ARQUIVO “Ocupação91-Estrutura.xls”"
+[[fields]]
+character = true
+decimals = 0
+label = "CÓDIGO ANTIGO DA ATIVIDADE"
+name = "V4461"
+start = 388
+width = 3
+
+    [fields.values]
+    Branco = "para pessoa de 10 anos de idade ou pessoa de 10 ou mais anos de idade que não tinha trabalho na semana de referência CATEGORIAS NO ARQUIVO “Atividade91-Estrutura.xls”"
