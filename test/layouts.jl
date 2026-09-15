@@ -1,22 +1,18 @@
-@testitem "Layout path resolution" begin
-	using CensoBR
+@testitem "Load Census layout" begin
+    using CensoBR
 
-	# layout path resolution
-	path2000 = CensoBR._layoutpath(2000, :household)
-	path2010 = CensoBR._layoutpath(2010, :person)
+    household = CensoBR._loadlayout(2000, :household)
+    person = CensoBR._loadlayout(2010, :person)
 
-	@test isfile(path2000)
-	@test isfile(path2010)
+    @test household isa CensoBR.CensusLayout
+    @test household.record == :household
 
-	@test basename(path2000) == "household.toml"
-	@test basename(path2010) == "person.toml"
+    @test person isa CensoBR.CensusLayout
+    @test person.record == :person
 
-	@test occursin(joinpath("layouts", "2000"), path2000)
-	@test occursin(joinpath("layouts", "2010"), path2010)
-
-	@test_throws ArgumentError CensoBR._layoutpath(1991, :household)
-	@test_throws ArgumentError CensoBR._layoutpath(2000, :mortality)
-	@test_throws ArgumentError CensoBR._layoutpath(2010, :family)
+    @test_throws ArgumentError CensoBR._loadlayout(1991, :household)
+    @test_throws ArgumentError CensoBR._loadlayout(2000, :mortality)
+    @test_throws ArgumentError CensoBR._loadlayout(2010, :family)
 end
 
 @testitem "Load bundled Census layouts" begin

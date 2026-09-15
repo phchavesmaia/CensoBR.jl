@@ -32,29 +32,21 @@ const LAYOUT_FILES = Dict(
 )
 
 """
-	_layoutpath(year, record)
-
-Return the path to the bundled normalized layout for `year` and `record`.
-"""
-function _layoutpath(year::Integer, record::Symbol)
-	# retrieve the filename for the given year and record from the LAYOUT_FILES dictionary.
-	filename = get(LAYOUT_FILES, (year, record), nothing)
-	isnothing(filename) && throw(ArgumentError("Unsupported Census layout: year=$year, record=$record"))
-
-	# construct the full path to the layout file within the package's data directory.
-	path = joinpath(pkgdir(CensoBR), "data", "layouts", string(year), filename)
-	isfile(path) || error("Bundled Census layout not found: $path")
-
-	path
-end
-
-"""
     _loadlayout(year, record)
 
 Load a bundled Census layout into CensoBR's internal representation.
 """
 function _loadlayout(year::Integer, record::Symbol)
-    data = TOML.parsefile(_layoutpath(year, record))
+
+    # retrieve the filename for the given year and record from the LAYOUT_FILES dictionary.
+	haskey(LAYOUT_FILES, (year, record)) || throw(ArgumentError("Unsupported Census layout: year=$year, record=$record"))
+    filename = LAYOUT_FILES[(year, record)]
+
+	# construct the full path to the layout file within the package's data directory.
+	path = joinpath(pkgdir(CensoBR), "data", "layouts", string(year), filename)
+	isfile(path) || error("Bundled Census layout not found: $path")
+
+    data = TOML.parsefile(path)
 
     fields = LayoutField[]
 
