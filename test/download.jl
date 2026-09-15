@@ -78,3 +78,61 @@ end
 	end
 end
 
+@testitem "Download Census documentation" tags=[:integration] begin
+	using CensoBR
+
+	# download Census documentation year 2000
+	mktempdir() do tmpdir
+		path = CensoBR._download_documentation(2000; cache_dir = tmpdir, show_progress = false)
+
+		@test isfile(path)
+		@test basename(path) == "1_Documentacao_20170908.zip"
+		@test filesize(path) > 0
+
+		expected = joinpath(tmpdir, "raw", "2000", "1_Documentacao_20170908.zip")
+
+		@test path == expected
+
+		# second call should reuse the cached file
+		mtime_before = mtime(path)
+
+		path2 = CensoBR._download_documentation(2000; cache_dir = tmpdir, show_progress = false)
+
+		@test path2 == path
+		@test mtime(path2) == mtime_before
+	end
+
+	# download Census documentation 2010
+	mktempdir() do tmpdir
+		path = CensoBR._download_documentation(2010; cache_dir = tmpdir, show_progress = false)
+
+		@test isfile(path)
+		@test basename(path) == "Documentacao.zip"
+		@test filesize(path) > 0
+
+		expected = joinpath(tmpdir, "raw", "2010", "Documentacao.zip")
+
+		@test path == expected
+	end
+
+	# documentation download rejects unsupported year
+	mktempdir() do tmpdir
+		@test_throws ArgumentError CensoBR._download_documentation(1990; cache_dir = tmpdir, show_progress = false)
+	end
+
+end
+
+@testitem "Prepare Census documentation and data" tags=[:integration] begin
+	using CensoBR
+
+	mktempdir() do tmpdir
+		prepared = CensoBR._prepare_census(2000, "RJ"; cache_dir = tmpdir, show_progress = false)
+
+		@test prepared isa NamedTuple
+		@test haskey(prepared, :census)
+		@test haskey(prepared, :documentation)
+
+		@test isdir(prepared.census)
+		@test isdir(prepared.documentation)
+	end
+end

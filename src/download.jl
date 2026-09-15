@@ -130,7 +130,7 @@ function _download_file(url::AbstractString, destination::AbstractString; force:
         rethrow()
     end
 
-    return destination
+    destination
 end
 
 """
@@ -159,6 +159,27 @@ function _download_census(year::Integer, uf; cache_dir::AbstractString = _defaul
 end
 
 """
+    _download_documentation(year; cache_dir=_default_cache_dir(),
+                            force=false, show_progress=true)
+
+Download the official IBGE documentation archive for a Census year.
+
+Returns the path to the cached ZIP file.
+"""
+function _download_documentation(year::Integer; cache_dir::AbstractString = _default_cache_dir(), 
+	force::Bool = false,show_progress::Bool = true)
+
+    haskey(DOCUMENTATION_FILES, year) || throw(ArgumentError("Unsupported census year: $year"))
+
+    filename = DOCUMENTATION_FILES[year]
+    url = "$(IBGE_URLS[year])/$filename"
+
+    destination = joinpath(cache_dir, "raw", string(year), filename,)
+
+    _download_file(url, destination; force = force, show_progress = show_progress, description = "Downloading documentation $year")
+end
+
+"""
 extract_census(zip_path; destination=nothing, force=false)
 
 Extract a Census ZIP archive with 7-Zip.
@@ -183,27 +204,6 @@ function _extract_census(zip_path::AbstractString; force::Bool = false)
 	run(pipeline(`$(p7zip_jll.p7zip()) x $zip_path -o$destination -y`, stdout = devnull, stderr = devnull))
 	
 	destination
-end
-
-"""
-    _download_documentation(year; cache_dir=_default_cache_dir(),
-                            force=false, show_progress=true)
-
-Download the official IBGE documentation archive for a Census year.
-
-Returns the path to the cached ZIP file.
-"""
-function _download_documentation(year::Integer; cache_dir::AbstractString = _default_cache_dir(), 
-	force::Bool = false,show_progress::Bool = true)
-
-    haskey(DOCUMENTATION_FILES, year) || throw(ArgumentError("Unsupported census year: $year"))
-
-    filename = DOCUMENTATION_FILES[year]
-    url = "$(IBGE_URLS[year])/$filename"
-
-    destination = joinpath(cache_dir, "raw", string(year), filename,)
-
-    _download_file(url, destination; force = force, show_progress = show_progress, description = "Downloading documentation $year")
 end
 
 """
