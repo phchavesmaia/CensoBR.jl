@@ -227,3 +227,50 @@ end
 
   @test isdefined(CensoBR, :opencensus)
 end
+
+@testitem "Reject truncated Census field" begin
+  using CensoBR
+
+  field = CensoBR.LayoutField("A", 2, 3, 0, true, nothing, Dict{String,String}(), String[])
+
+  @test_throws ArgumentError CensoBR._parsefield(field, codeunits("12"))
+end
+
+@testitem "Parse short Census line" begin
+  using CensoBR
+
+  fields = [
+    CensoBR.LayoutField("A", 1, 2, 0, true, nothing, Dict{String,String}(), String[]),
+    CensoBR.LayoutField("B", 5, 2, 0, true, nothing, Dict{String,String}(), String[])
+  ]
+
+  layout = CensoBR.CensusLayout(2000, :household, 6, fields)
+
+  row = CensoBR._parseline(layout, codeunits("33"))
+
+  @test row.A == "33"
+  @test ismissing(row.B)
+end
+
+@testitem "Process Census" begin
+  using CensoBR
+  using Parquet2
+
+  mktempdir() do tmpdir
+    CensoBR._processcensus(2000, "RR"; cachedir=tmpdir, showprogress=false)
+
+    # Every record was converted to Parquet.
+    for record in CensoBR.CENSUS_RECORDS[2000]
+      parquetpath = CensoBR._parquetpath(2000, "RR", record; cachedir=tmpdir)
+
+      @test isfile(parquetpath)
+      @test Parquet2.Dataset(parquetpath) isa Parquet2.Dataset
+    end
+
+    # Raw archive and extracted data were removed.
+    rawdir = joinpath(tmpdir, "raw", "2000")
+
+    @test !isfile(joinpath(rawdir, "RR.zip"))
+    @test !isdir(joinpath(rawdir, "RR"))
+  end
+end

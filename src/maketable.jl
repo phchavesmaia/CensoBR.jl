@@ -61,10 +61,15 @@ according to `field.decimals`.
 function _parsefield(field::LayoutField, bytes::AbstractVector{UInt8})
   stop = field.start + field.width - 1
 
-  stop <= length(bytes) || throw(
+  # entire field is beyond the physical end of the record.
+  field.start > length(bytes) && return missing
+
+  # field starts in the record but is truncated.
+  stop > length(bytes) && throw(
     ArgumentError(
-      "Field $(field.name) extends beyond record length: " *
-      "field ends at byte $stop, record has $(length(bytes)) bytes"
+      "Field $(field.name) is truncated: " *
+      "starts at byte $(field.start), ends at byte $stop, " *
+      "record has $(length(bytes)) bytes"
     )
   )
 
@@ -107,12 +112,12 @@ Returns a `NamedTuple` whose field names correspond to the variables defined in
 `layout`.
 """
 function _parseline(layout::CensusLayout, bytes::AbstractVector{UInt8})
-  length(bytes) >= layout.lrecl || throw(
-    ArgumentError(
-      "Record is shorter than expected for Census $(layout.year) $(layout.record): " *
-      "got $(length(bytes)) bytes, expected at least $(layout.lrecl)"
-    )
-  )
+  # length(bytes) >= layout.lrecl || throw(
+  #   ArgumentError(
+  #     "Record is shorter than expected for Census $(layout.year) $(layout.record): " *
+  #     "got $(length(bytes)) bytes, expected at least $(layout.lrecl)"
+  #   )
+  # )
 
   names = Tuple(Symbol(field.name) for field in layout.fields)
 
