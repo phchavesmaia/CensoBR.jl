@@ -5,6 +5,6 @@ include("download.jl")
 include("layouts.jl")
 include("maketable.jl")
 
-export opencensus, fieldmetadata, label, valuecodes, notes
+export opencensus, fieldmetadata, fieldlabel, fieldvalues, fieldnotes
 
 end

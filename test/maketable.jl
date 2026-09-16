@@ -376,9 +376,9 @@ end
   using Parquet2
 
   mktempdir() do tmpdir
-    first = CensoBR.opencensus(2000, "RR", :household; cachedir=tmpdir, showprogress=false, chunksize=5_000)
+    first = opencensus(2000, "RR", :household; cachedir=tmpdir, showprogress=false, chunksize=5_000)
 
-    second = CensoBR.opencensus(2000, "RR", :person; cachedir=tmpdir, showprogress=false, chunksize=5_000)
+    second = opencensus(2000, "RR", :person; cachedir=tmpdir, showprogress=false, chunksize=5_000)
 
     @test first isa Parquet2.Dataset
     @test second isa Parquet2.Dataset
@@ -386,4 +386,66 @@ end
     @test !isdir(joinpath(tmpdir, "raw", "2000", "RR"))
     @test !isfile(joinpath(tmpdir, "raw", "2000", "RR.zip"))
   end
+end
+
+@testitem "Census field metadata" begin
+  using CensoBR
+
+  metadata = fieldmetadata(2000, :household, :V0102)
+
+  @test metadata.label == "UNIDADE DA FEDERAÇÃO"
+  @test metadata.values["33"] == "Rio de Janeiro"
+  @test metadata.values["35"] == "São Paulo"
+  @test isempty(metadata.notes)
+end
+
+@testitem "Census value codes" begin
+  using CensoBR
+
+  values = fieldvalues(2000, :household, :V0102)
+
+  @test values["33"] == "Rio de Janeiro"
+  @test values["35"] == "São Paulo"
+  @test values["14"] == "Roraima"
+end
+
+@testitem "Census field notes" begin
+  using CensoBR
+
+  notes = fieldnotes(2000, :household, :V1002)
+
+  @test !isempty(notes)
+  @test any(occursin("Divisão Territorial Brasileira"), notes[1])
+end
+
+@testitem "Census label" begin
+  using CensoBR
+
+  @test fieldlabel(2000, :household, :V0102) == "UNIDADE DA FEDERAÇÃO"
+  @test fieldlabel(2000, :household, :V0300) == "CONTROLE"
+end
+
+@testitem "Empty Census metadata" begin
+  using CensoBR
+
+  @test isempty(fieldvalues(2000, :household, :V0300))
+  @test isempty(fieldnotes(2000, :household, :V0300))
+end
+
+@testitem "Census metadata errors" begin
+  using CensoBR
+
+  @test_throws ArgumentError fieldmetadata(2000, :household, :DOES_NOT_EXIST)
+  @test_throws ArgumentError fieldvalues(2000, :household, :DOES_NOT_EXIST)
+  @test_throws ArgumentError fieldnotes(2000, :household, :DOES_NOT_EXIST)
+end
+
+@testitem "Census 2010 metadata" begin
+  using CensoBR
+
+  metadata = fieldmetadata(2010, :person, :V0001)
+
+  @test metadata.label !== nothing
+  @test metadata.values isa Dict{String,String}
+  @test metadata.notes isa Vector{String}
 end
