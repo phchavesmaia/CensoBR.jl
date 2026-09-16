@@ -3,6 +3,12 @@ using Tables, Parquet2
 struct CensusTable
   path::String
   layout::CensusLayout
+  names::Tuple{Vararg{Symbol}}
+end
+
+function CensusTable(path::AbstractString, layout::CensusLayout)
+  names = Tuple(Symbol(field.name) for field in layout.fields)
+  CensusTable(String(path), layout, names)
 end
 
 const RAW_FILE_PREFIXES = Dict(
@@ -90,17 +96,40 @@ function _parsefield(field::LayoutField, bytes::AbstractVector{UInt8})
   firstbyte > lastbyte && return missing
 
   valuebytes = @view rawbytes[firstbyte:lastbyte]
-  raw = String(copy(valuebytes))
 
-  field.ischaracter && return raw
+  field.ischaracter && return String(copy(valuebytes))
 
-  value = tryparse(Int, raw)
-
-  isnothing(value) && throw(ArgumentError("Could not parse numeric field $(field.name) " * "from value `$raw`"))
+  value = _parseint(valuebytes, field.name)
 
   field.decimals == 0 && return value
 
   value / 10^field.decimals
+end
+
+function _parseint(bytes::AbstractVector{UInt8}, fieldname::AbstractString)
+  isempty(bytes) && return nothing
+
+  i = firstindex(bytes)
+  last = lastindex(bytes)
+  sign = 1
+  if bytes[i] == UInt8('-')
+    sign = -1
+    i += 1
+  elseif bytes[i] == UInt8('+')
+    i += 1
+  end
+
+  i > last && throw(ArgumentError("Could not parse numeric field $fieldname"))
+
+  value = 0
+  while i <= last
+    byte = bytes[i]
+    UInt8('0') <= byte <= UInt8('9') || throw(ArgumentError("Could not parse numeric field $fieldname"))
+    value = 10value + Int(byte - UInt8('0'))
+    i += 1
+  end
+
+  sign * value
 end
 
 """
@@ -111,18 +140,8 @@ Parse a raw fixed-width Census record represented as bytes.
 Returns a `NamedTuple` whose field names correspond to the variables defined in
 `layout`.
 """
-function _parseline(layout::CensusLayout, bytes::AbstractVector{UInt8})
-  # length(bytes) >= layout.lrecl || throw(
-  #   ArgumentError(
-  #     "Record is shorter than expected for Census $(layout.year) $(layout.record): " *
-  #     "got $(length(bytes)) bytes, expected at least $(layout.lrecl)"
-  #   )
-  # )
-
-  names = Tuple(Symbol(field.name) for field in layout.fields)
-
+function _parseline(layout::CensusLayout, names::Tuple{Vararg{Symbol}}, bytes::AbstractVector{UInt8})
   values = Tuple(_parsefield(field, bytes) for field in layout.fields)
-
   NamedTuple{names}(values)
 end
 
@@ -143,7 +162,7 @@ function Base.iterate(table::CensusTable)
 
   line = readline(io)
 
-  (_parseline(table.layout, codeunits(line)), io)
+  (_parseline(table.layout, table.names, codeunits(line)), io)
 end
 
 function Base.iterate(table::CensusTable, state::IOStream)
@@ -155,7 +174,7 @@ function Base.iterate(table::CensusTable, state::IOStream)
   end
 
   line = readline(io)
-  (_parseline(table.layout, codeunits(line)), io)
+  (_parseline(table.layout, table.names, codeunits(line)), io)
 end
 
 function Tables.schema(table::CensusTable)
@@ -197,7 +216,7 @@ function _processcensus(
   censusdir = _preparecensus(year, uf; cachedir=cachedir, force=force, showprogress=showprogress)
 
   # process each record for the given year and UF
-  for record in CENSUS_RECORDS[year]
+  Threads.@threads for record in CENSUS_RECORDS[year]
     # determine the path for the processed Parquet file
     parquetpath = _parquetpath(year, uf, record; cachedir=cachedir)
     # reuse the processed cache
