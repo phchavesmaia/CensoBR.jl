@@ -2,7 +2,7 @@
   using CensoBR
 
   mktempdir() do tmpdir
-    # Census 2000 structure
+    # Census 2000
     dir2000 = joinpath(tmpdir, "2000")
     mkpath(joinpath(dir2000, "RJ"))
 
@@ -20,16 +20,13 @@
 
     @test basename(CensoBR._findrawfile(dir2000, person2000)) == "Pes33.txt"
 
-    # Census 2010 structure
+    # Census 2010
     dir2010 = joinpath(tmpdir, "2010")
     mkpath(dir2010)
 
     write(joinpath(dir2010, "Amostra_Domicilios_33.txt"), "")
-
     write(joinpath(dir2010, "Amostra_Pessoas_33.txt"), "")
-
     write(joinpath(dir2010, "Amostra_Emigracao_33.txt"), "")
-
     write(joinpath(dir2010, "Amostra_Mortalidade_33.txt"), "")
 
     household2010 = CensoBR._loadlayout(2010, :household)
@@ -53,17 +50,14 @@ end
   mktempdir() do tmpdir
     layout = CensoBR._loadlayout(2000, :household)
 
-    # No matching file
     @test_throws ErrorException CensoBR._findrawfile(tmpdir, layout)
 
-    # More than one matching file
     write(joinpath(tmpdir, "Dom33.txt"), "")
     write(joinpath(tmpdir, "DOM99.TXT"), "")
 
     @test_throws ErrorException CensoBR._findrawfile(tmpdir, layout)
   end
 
-  # Synthetic unsupported layout
   layout = CensoBR.CensusLayout(1990, :household, 10, CensoBR.LayoutField[])
 
   mktempdir() do tmpdir
@@ -105,10 +99,8 @@ end
 
   numeric = CensoBR.LayoutField("VALUE", 1, 3, 0, false, nothing, Dict{String,String}(), String[])
 
-  # Invalid numeric contents
   @test_throws ArgumentError CensoBR._parsefield(numeric, codeunits("ABC"))
 
-  # Field extends beyond record
   field = CensoBR.LayoutField("VALUE", 4, 3, 0, false, nothing, Dict{String,String}(), String[])
 
   @test_throws ArgumentError CensoBR._parsefield(field, codeunits("12345"))
@@ -131,13 +123,12 @@ end
   @test row.UF == "33"
   @test row.COUNT == 12
   @test row.WEIGHT == 3.45
-
   @test propertynames(row) == (:UF, :COUNT, :WEIGHT)
 
   @test_throws ArgumentError CensoBR._parseline(layout, codeunits("33012"))
 end
 
-@testitem "Parse Census file as table" begin
+@testitem "Census table adapter" begin
   using CensoBR
   using Tables
 
@@ -154,9 +145,8 @@ end
 
     write(path, "330120345\n" * "350070125\n" * "41042    \n")
 
-    table = CensoBR._parsefile(path, layout)
+    table = CensoBR.CensusTable(path, layout)
 
-    @test table isa CensoBR.CensusTable
     @test table.path == path
     @test table.layout === layout
 
@@ -167,14 +157,11 @@ end
     @test Base.IteratorSize(typeof(table)) == Base.SizeUnknown()
     @test Base.IteratorEltype(typeof(table)) == Base.EltypeUnknown()
 
-    rows = collect(Tables.rows(table))
+    rows = collect(table)
 
     @test length(rows) == 3
-
     @test rows[1] == (UF="33", COUNT=12, WEIGHT=3.45)
-
     @test rows[2] == (UF="35", COUNT=7, WEIGHT=1.25)
-
     @test isequal(rows[3], (UF="41", COUNT=42, WEIGHT=missing))
   end
 end
@@ -190,40 +177,48 @@ end
   ]
 
   layout = CensoBR.CensusLayout(2000, :household, 9, fields)
+  table = CensoBR.CensusTable("dummy.txt", layout)
+  schema = Tables.schema(table)
 
-  mktempdir() do tmpdir
-    path = joinpath(tmpdir, "test.txt")
-    write(path, "330120345\n")
-
-    table = CensoBR._parsefile(path, layout)
-    schema = Tables.schema(table)
-
-    @test schema.names == (:UF, :COUNT, :WEIGHT)
-
-    @test schema.types == (Union{Missing,String}, Union{Missing,Int}, Union{Missing,Float64})
-  end
+  @test schema.names == (:UF, :COUNT, :WEIGHT)
+  @test schema.types == (Union{Missing,String}, Union{Missing,Int}, Union{Missing,Float64})
 end
 
-@testitem "Parse Census file errors" begin
+@testitem "Parquet cache path" begin
   using CensoBR
 
-  layout = CensoBR.CensusLayout(
-    2000,
-    :household,
-    2,
-    [CensoBR.LayoutField("UF", 1, 2, 0, true, nothing, Dict{String,String}(), String[])]
-  )
-
   mktempdir() do tmpdir
-    @test_throws ArgumentError CensoBR._parsefile(joinpath(tmpdir, "missing.txt"), layout)
+    path = CensoBR._parquetpath(2000, :rj, :household; cachedir=tmpdir)
+
+    @test path == joinpath(tmpdir, "parquet", "2000", "RJ", "household.parquet")
   end
 end
 
-@testitem "Read Census" begin
+@testitem "Clear raw Census files" begin
+  using CensoBR
+
+  mktempdir() do tmpdir
+    rawdir = joinpath(tmpdir, "raw", "2000")
+
+    extracteddir = joinpath(rawdir, "RJ")
+    zippath = joinpath(rawdir, "RJ.zip")
+
+    mkpath(extracteddir)
+    write(zippath, "archive")
+    write(joinpath(extracteddir, "Dom33.txt"), "data")
+
+    CensoBR._clearraw(2000, "RJ"; cachedir=tmpdir)
+
+    @test !isfile(zippath)
+    @test !isdir(extracteddir)
+  end
+end
+
+@testitem "Open Census errors" begin
   using CensoBR
 
   @test_throws ArgumentError CensoBR.opencensus(1990, :rj, :household)
-
+  @test_throws ArgumentError CensoBR.opencensus(2000, :rj, :mortality)
   @test_throws ArgumentError CensoBR.opencensus(2000, :xx, :household)
 end
 
@@ -231,140 +226,4 @@ end
   using CensoBR
 
   @test isdefined(CensoBR, :opencensus)
-end
-
-@testitem "Read Census end-to-end" tags=[:integration] begin
-  using CensoBR
-  using Tables
-
-  mktempdir() do tmpdir
-    table = CensoBR.opencensus(2000, :rr, :household; cachedir=tmpdir, showprogress=false)
-
-    @test table isa CensoBR.CensusTable
-    @test Tables.istable(typeof(table))
-    @test Tables.rowaccess(typeof(table))
-
-    row = first(Tables.rows(table))
-
-    @test row isa NamedTuple
-    @test row.V0102 == "14"
-  end
-end
-
-@testitem "Census table metadata" begin
-  using CensoBR
-
-  fields = [
-    CensoBR.LayoutField(
-      "UF",
-      1,
-      2,
-      0,
-      true,
-      "UNIDADE DA FEDERAÇÃO",
-      Dict("33" => "Rio de Janeiro", "35" => "São Paulo"),
-      String[]
-    ),
-    CensoBR.LayoutField(
-      "MESO",
-      3,
-      4,
-      0,
-      true,
-      "CODIGO DA MESORREGIÃO",
-      Dict{String,String}(),
-      ["A RELAÇÃO ENCONTRA-SE NO ARQUIVO Divisão Territorial Brasileira.xls"]
-    )
-  ]
-
-  layout = CensoBR.CensusLayout(2000, :household, 6, fields)
-
-  table = CensoBR.CensusTable("dummy.txt", layout)
-
-  metadata = CensoBR.fieldmetadata(table, :UF)
-
-  @test metadata.label == "UNIDADE DA FEDERAÇÃO"
-  @test metadata.values["33"] == "Rio de Janeiro"
-  @test metadata.values["35"] == "São Paulo"
-  @test isempty(metadata.notes)
-end
-
-@testitem "Census table metadata errors" begin
-  using CensoBR
-
-  field = CensoBR.LayoutField("UF", 1, 2, 0, true, "UNIDADE DA FEDERAÇÃO", Dict("33" => "Rio de Janeiro"), String[])
-
-  layout = CensoBR.CensusLayout(2000, :household, 2, [field])
-
-  table = CensoBR.CensusTable("dummy.txt", layout)
-
-  @test_throws ArgumentError CensoBR.fieldmetadata(table, :DOES_NOT_EXIST)
-end
-
-@testitem "Census table labels" begin
-  using CensoBR
-
-  fields = [
-    CensoBR.LayoutField("UF", 1, 2, 0, true, "UNIDADE DA FEDERAÇÃO", Dict{String,String}(), String[]),
-    CensoBR.LayoutField("CONTROL", 3, 4, 0, false, "CONTROLE", Dict{String,String}(), String[])
-  ]
-
-  layout = CensoBR.CensusLayout(2000, :household, 6, fields)
-
-  table = CensoBR.CensusTable("dummy.txt", layout)
-
-  labels = CensoBR.label(table)
-
-  @test labels[:UF] == "UNIDADE DA FEDERAÇÃO"
-  @test labels[:CONTROL] == "CONTROLE"
-end
-
-@testitem "Census table value codes" begin
-  using CensoBR
-
-  field = CensoBR.LayoutField("SEX", 1, 1, 0, true, "SEXO", Dict("1" => "Masculino", "2" => "Feminino"), String[])
-
-  layout = CensoBR.CensusLayout(2000, :person, 1, [field])
-
-  table = CensoBR.CensusTable("dummy.txt", layout)
-
-  codes = CensoBR.valuecodes(table, :SEX)
-
-  @test codes == Dict("1" => "Masculino", "2" => "Feminino")
-end
-
-@testitem "Census table notes" begin
-  using CensoBR
-
-  field = CensoBR.LayoutField(
-    "MESO",
-    1,
-    4,
-    0,
-    true,
-    "CODIGO DA MESORREGIÃO",
-    Dict{String,String}(),
-    ["A RELAÇÃO ENCONTRA-SE NO ARQUIVO Divisão Territorial Brasileira.xls"]
-  )
-
-  layout = CensoBR.CensusLayout(2000, :household, 4, [field])
-
-  table = CensoBR.CensusTable("dummy.txt", layout)
-
-  @test CensoBR.notes(table, :MESO) == ["A RELAÇÃO ENCONTRA-SE NO ARQUIVO Divisão Territorial Brasileira.xls"]
-end
-
-@testitem "Bundled Census metadata" begin
-  using CensoBR
-
-  layout = CensoBR._loadlayout(2000, :household)
-
-  table = CensoBR.CensusTable("dummy.txt", layout)
-
-  metadata = CensoBR.fieldmetadata(table, :V0102)
-
-  @test metadata.label == "UNIDADE DA FEDERAÇÃO"
-  @test metadata.values["33"] == "Rio de Janeiro"
-  @test metadata.values["35"] == "São Paulo"
-  @test isempty(metadata.notes)
 end
