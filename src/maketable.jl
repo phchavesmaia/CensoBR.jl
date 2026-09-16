@@ -1,15 +1,38 @@
 using Tables, Parquet2
 
-struct CensusTable
+struct CensusChunks
   path::String
   layout::CensusLayout
-  names::Tuple{Vararg{Symbol}}
+  names::Tuple
+  chunksize::Int
 end
 
-function CensusTable(path::AbstractString, layout::CensusLayout)
+function CensusChunks(path::AbstractString, layout::CensusLayout; chunksize::Integer=100_000)
   names = Tuple(Symbol(field.name) for field in layout.fields)
-  CensusTable(String(path), layout, names)
+  CensusChunks(String(path), layout, names, chunksize)
 end
+
+function Base.iterate(chunks::CensusChunks)
+  io = open(chunks.path, "r")
+  chunk = _parsechunk!(io, chunks.layout, chunks.names; chunksize=chunks.chunksize)
+  if isnothing(chunk)
+    close(io)
+    return nothing
+  end
+  chunk, io
+end
+
+function Base.iterate(chunks::CensusChunks, io::IOStream)
+  chunk = _parsechunk!(io, chunks.layout, chunks.names; chunksize=chunks.chunksize)
+  if isnothing(chunk)
+    close(io)
+    return nothing
+  end
+  chunk, io
+end
+
+Base.IteratorSize(::Type{CensusChunks}) = Base.SizeUnknown()
+Base.IteratorEltype(::Type{CensusChunks}) = Base.EltypeUnknown()
 
 const RAW_FILE_PREFIXES = Dict(
   (2000, :household) => "DOM",
@@ -132,63 +155,43 @@ function _parseint(bytes::AbstractVector{UInt8}, fieldname::AbstractString)
   sign * value
 end
 
-"""
-	_parseline(layout, bytes)
-
-Parse a raw fixed-width Census record represented as bytes.
-
-Returns a `NamedTuple` whose field names correspond to the variables defined in
-`layout`.
-"""
-function _parseline(layout::CensusLayout, names::Tuple{Vararg{Symbol}}, bytes::AbstractVector{UInt8})
-  values = Tuple(_parsefield(field, bytes) for field in layout.fields)
-  NamedTuple{names}(values)
-end
-
-Tables.istable(::Type{CensusTable}) = true
-Tables.rowaccess(::Type{CensusTable}) = true
-Tables.rows(table::CensusTable) = table
-
-Base.IteratorSize(::Type{CensusTable}) = Base.SizeUnknown()
-Base.IteratorEltype(::Type{CensusTable}) = Base.EltypeUnknown()
-
-function Base.iterate(table::CensusTable)
-  io = open(table.path, "r")
-
-  eof(io) && begin
-    close(io)
-    return nothing
-  end
-
-  line = readline(io)
-
-  (_parseline(table.layout, table.names, codeunits(line)), io)
-end
-
-function Base.iterate(table::CensusTable, state::IOStream)
-  io = state
-
-  if eof(io)
-    close(io)
-    return nothing
-  end
-
-  line = readline(io)
-  (_parseline(table.layout, table.names, codeunits(line)), io)
-end
-
-function Tables.schema(table::CensusTable)
-  names = Tuple(Symbol(field.name) for field in table.layout.fields)
-
-  types = Tuple(if field.ischaracter
+function _columneltype(field::LayoutField)
+  if field.ischaracter
     Union{Missing,String}
   elseif field.decimals == 0
     Union{Missing,Int}
   else
     Union{Missing,Float64}
-  end for field in table.layout.fields)
+  end
+end
 
-  Tables.Schema(names, types)
+function _makecolumns(layout::CensusLayout, capacity::Integer)
+  Tuple(Vector{_columneltype(field)}(undef, capacity) for field in layout.fields)
+end
+
+function _parsechunk!(io::IO, layout::CensusLayout, names::Tuple; chunksize::Integer=100_000)
+  # create empty columns for the chunk
+  columns = _makecolumns(layout, chunksize)
+
+  # read lines from the input IO until the chunk is full or EOF is reached
+  nrows = 0
+  while nrows < chunksize && !eof(io)
+    line = readline(io)
+    bytes = codeunits(line)
+
+    nrows += 1
+    for (j, field) in enumerate(layout.fields)
+      columns[j][nrows] = _parsefield(field, bytes)
+    end
+  end
+
+  # return nothing if no rows were read
+  nrows == 0 && return nothing
+
+  # trim the columns to the number of rows actually read
+  nrows == chunksize && return NamedTuple{names}(columns)
+  trimmed = map(column -> column[1:nrows], columns)
+  NamedTuple{names}(trimmed)
 end
 
 function _parquetpath(year::Integer, uf, record::Symbol; cachedir::AbstractString=_defaultcachedir())
@@ -208,9 +211,10 @@ end
 function _processcensus(
   year::Integer,
   uf;
-  cachedir::AbstractString=_defaultcachedir(),
+  cachedir::AbstractString,
   force::Bool=false,
-  showprogress::Bool=true
+  showprogress::Bool=true,
+  chunksize::Integer
 )
   # prepare the Census data directory and paths
   censusdir = _preparecensus(year, uf; cachedir=cachedir, force=force, showprogress=showprogress)
@@ -227,15 +231,18 @@ function _processcensus(
     layout = _loadlayout(year, record)
     path = _findrawfile(censusdir, layout)
 
-    # make table
-    table = CensusTable(String(path), layout)
+    # create an iterable of chunks from the raw file
+    chunks = CensusChunks(path, layout; chunksize=chunksize)
     mkpath(dirname(parquetpath))
 
-    # avoid leaving a corrupt final cache entry if writing fails.
+    # avoid leaving a corrupt final cache entry if writing fails
     temporary = parquetpath * ".part"
     isfile(temporary) && rm(temporary; force=true)
     try
-      Parquet2.writefile(temporary, table)
+      open(temporary, "w") do io
+        fw = Parquet2.FileWriter(io, temporary)
+        Parquet2.writeiterable!(fw, chunks)
+      end
       mv(temporary, parquetpath; force=true)
     catch
       isfile(temporary) && rm(temporary; force=true)
@@ -262,7 +269,8 @@ function opencensus(
   record::Symbol;
   cachedir::AbstractString=_defaultcachedir(),
   force::Bool=false,
-  showprogress::Bool=true
+  showprogress::Bool=true,
+  chunksize::Integer=10_000
 )
 
   # checks
@@ -275,7 +283,7 @@ function opencensus(
   parquetpath = _parquetpath(year, uf, record; cachedir=cachedir)
 
   if !isfile(parquetpath) || force
-    _processcensus(year, uf; cachedir=cachedir, force=force, showprogress=showprogress)
+    _processcensus(year, uf; cachedir=cachedir, force=force, showprogress=showprogress, chunksize=chunksize)
   end
 
   Parquet2.Dataset(parquetpath)

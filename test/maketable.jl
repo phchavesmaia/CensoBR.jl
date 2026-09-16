@@ -2,7 +2,6 @@
   using CensoBR
 
   mktempdir() do tmpdir
-    # Census 2000
     dir2000 = joinpath(tmpdir, "2000")
     mkpath(joinpath(dir2000, "RJ"))
 
@@ -20,7 +19,6 @@
 
     @test basename(CensoBR._findrawfile(dir2000, person2000)) == "Pes33.txt"
 
-    # Census 2010
     dir2010 = joinpath(tmpdir, "2010")
     mkpath(dir2010)
 
@@ -65,6 +63,22 @@ end
   end
 end
 
+@testitem "Parse fixed-width fields" begin
+  using CensoBR
+
+  character = CensoBR.LayoutField("CODE", 1, 4, 0, true, nothing, Dict{String,String}(), String[])
+
+  integer = CensoBR.LayoutField("COUNT", 5, 4, 0, false, nothing, Dict{String,String}(), String[])
+
+  decimal = CensoBR.LayoutField("VALUE", 9, 5, 2, false, nothing, Dict{String,String}(), String[])
+
+  bytes = codeunits(" 33 001200345")
+
+  @test CensoBR._parsefield(character, bytes) == "33"
+  @test CensoBR._parsefield(integer, bytes) == 12
+  @test CensoBR._parsefield(decimal, bytes) == 3.45
+end
+
 @testitem "Parse blank fixed-width fields" begin
   using CensoBR
 
@@ -90,35 +104,58 @@ end
   @test_throws ArgumentError CensoBR._parsefield(field, codeunits("12345"))
 end
 
-@testitem "Parse fixed-width Census line" begin
+@testitem "Parse integer bytes" begin
   using CensoBR
 
-  fields = [
-    CensoBR.LayoutField("UF", 1, 2, 0, true, nothing, Dict{String,String}(), String[]),
-    CensoBR.LayoutField("COUNT", 3, 3, 0, false, nothing, Dict{String,String}(), String[]),
-    CensoBR.LayoutField("WEIGHT", 6, 4, 2, false, nothing, Dict{String,String}(), String[])
-  ]
+  @test CensoBR._parseint(codeunits("123"), "VALUE") == 123
 
-  layout = CensoBR.CensusLayout(2000, :household, 9, fields)
+  @test CensoBR._parseint(codeunits("-123"), "VALUE") == -123
 
-  row = CensoBR._parseline(layout, codeunits("330120345"))
+  @test CensoBR._parseint(codeunits("+123"), "VALUE") == 123
 
-  @test row isa NamedTuple
-  @test row.UF == "33"
-  @test row.COUNT == 12
-  @test row.WEIGHT == 3.45
-  @test propertynames(row) == (:UF, :COUNT, :WEIGHT)
+  @test_throws ArgumentError CensoBR._parseint(codeunits("12A"), "VALUE")
 
-  shortrow = CensoBR._parseline(layout, codeunits("33012"))
-
-  @test shortrow.UF == "33"
-  @test shortrow.COUNT == 12
-  @test ismissing(shortrow.WEIGHT)
+  @test_throws ArgumentError CensoBR._parseint(codeunits("+"), "VALUE")
 end
 
-@testitem "Census table adapter" begin
+@testitem "Parse short trailing fields" begin
   using CensoBR
-  using Tables
+
+  fields = [
+    CensoBR.LayoutField("A", 1, 2, 0, true, nothing, Dict{String,String}(), String[]),
+    CensoBR.LayoutField("B", 5, 2, 0, true, nothing, Dict{String,String}(), String[])
+  ]
+
+  bytes = codeunits("33")
+
+  @test CensoBR._parsefield(fields[1], bytes) == "33"
+  @test ismissing(CensoBR._parsefield(fields[2], bytes))
+end
+
+@testitem "Reject truncated Census field" begin
+  using CensoBR
+
+  field = CensoBR.LayoutField("A", 2, 3, 0, true, nothing, Dict{String,String}(), String[])
+
+  @test_throws ArgumentError CensoBR._parsefield(field, codeunits("12"))
+end
+
+@testitem "Column element types" begin
+  using CensoBR
+
+  character = CensoBR.LayoutField("A", 1, 2, 0, true, nothing, Dict{String,String}(), String[])
+
+  integer = CensoBR.LayoutField("B", 3, 2, 0, false, nothing, Dict{String,String}(), String[])
+
+  decimal = CensoBR.LayoutField("C", 5, 2, 1, false, nothing, Dict{String,String}(), String[])
+
+  @test CensoBR._columneltype(character) == Union{Missing,String}
+  @test CensoBR._columneltype(integer) == Union{Missing,Int}
+  @test CensoBR._columneltype(decimal) == Union{Missing,Float64}
+end
+
+@testitem "Make Census columns" begin
+  using CensoBR
 
   fields = [
     CensoBR.LayoutField("UF", 1, 2, 0, true, nothing, Dict{String,String}(), String[]),
@@ -128,48 +165,138 @@ end
 
   layout = CensoBR.CensusLayout(2000, :household, 9, fields)
 
-  mktempdir() do tmpdir
-    path = joinpath(tmpdir, "test.txt")
+  columns = CensoBR._makecolumns(layout, 10)
 
-    write(path, "330120345\n" * "350070125\n" * "41042    \n")
+  @test length(columns) == 3
 
-    table = CensoBR.CensusTable(path, layout)
+  @test eltype(columns[1]) == Union{Missing,String}
+  @test eltype(columns[2]) == Union{Missing,Int}
+  @test eltype(columns[3]) == Union{Missing,Float64}
 
-    @test table.path == path
-    @test table.layout === layout
+  @test all(length(column) == 10 for column in columns)
+end
 
-    @test Tables.istable(typeof(table))
-    @test Tables.rowaccess(typeof(table))
-    @test Tables.rows(table) === table
+@testitem "Parse Census chunk" begin
+  using CensoBR
 
-    @test Base.IteratorSize(typeof(table)) == Base.SizeUnknown()
-    @test Base.IteratorEltype(typeof(table)) == Base.EltypeUnknown()
+  fields = [
+    CensoBR.LayoutField("UF", 1, 2, 0, true, nothing, Dict{String,String}(), String[]),
+    CensoBR.LayoutField("COUNT", 3, 3, 0, false, nothing, Dict{String,String}(), String[]),
+    CensoBR.LayoutField("WEIGHT", 6, 4, 2, false, nothing, Dict{String,String}(), String[])
+  ]
 
-    rows = collect(table)
+  layout = CensoBR.CensusLayout(2000, :household, 9, fields)
 
-    @test length(rows) == 3
-    @test rows[1] == (UF="33", COUNT=12, WEIGHT=3.45)
-    @test rows[2] == (UF="35", COUNT=7, WEIGHT=1.25)
-    @test isequal(rows[3], (UF="41", COUNT=42, WEIGHT=missing))
+  names = (:UF, :COUNT, :WEIGHT)
+
+  mktemp() do path, io
+    write(io, "330120345\n" * "350070125\n" * "41042    \n")
+
+    seekstart(io)
+
+    chunk = CensoBR._parsechunk!(io, layout, names; chunksize=10)
+
+    @test propertynames(chunk) == names
+    @test length(chunk.UF) == 3
+
+    @test chunk.UF == ["33", "35", "41"]
+    @test chunk.COUNT == [12, 7, 42]
+
+    @test isequal(chunk.WEIGHT, Union{Missing,Float64}[3.45, 1.25, missing])
+
+    @test isnothing(CensoBR._parsechunk!(io, layout, names; chunksize=10))
   end
 end
 
-@testitem "Census table schema" begin
+@testitem "Parse Census chunk boundaries" begin
   using CensoBR
+
+  fields = [CensoBR.LayoutField("UF", 1, 2, 0, true, nothing, Dict{String,String}(), String[])]
+
+  layout = CensoBR.CensusLayout(2000, :household, 2, fields)
+
+  names = (:UF,)
+
+  mktemp() do path, io
+    write(io, "33\n35\n41\n")
+
+    seekstart(io)
+
+    firstchunk = CensoBR._parsechunk!(io, layout, names; chunksize=2)
+
+    secondchunk = CensoBR._parsechunk!(io, layout, names; chunksize=2)
+
+    @test firstchunk.UF == ["33", "35"]
+    @test secondchunk.UF == ["41"]
+
+    @test isnothing(CensoBR._parsechunk!(io, layout, names; chunksize=2))
+  end
+end
+
+@testitem "Census chunk iterator" begin
+  using CensoBR
+
+  fields = [CensoBR.LayoutField("UF", 1, 2, 0, true, nothing, Dict{String,String}(), String[])]
+
+  layout = CensoBR.CensusLayout(2000, :household, 2, fields)
+
+  mktempdir() do tmpdir
+    path = joinpath(tmpdir, "data.txt")
+
+    write(path, "33\n35\n41\n")
+
+    chunks = CensoBR.CensusChunks(path, layout; chunksize=2)
+
+    collected = collect(chunks)
+
+    @test length(collected) == 2
+    @test collected[1].UF == ["33", "35"]
+    @test collected[2].UF == ["41"]
+  end
+end
+
+@testitem "Chunked Parquet write" begin
+  using CensoBR
+  using Parquet2
   using Tables
 
   fields = [
     CensoBR.LayoutField("UF", 1, 2, 0, true, nothing, Dict{String,String}(), String[]),
-    CensoBR.LayoutField("COUNT", 3, 3, 0, false, nothing, Dict{String,String}(), String[]),
-    CensoBR.LayoutField("WEIGHT", 6, 4, 2, false, nothing, Dict{String,String}(), String[])
+    CensoBR.LayoutField("COUNT", 3, 3, 0, false, nothing, Dict{String,String}(), String[])
   ]
 
-  layout = CensoBR.CensusLayout(2000, :household, 9, fields)
-  table = CensoBR.CensusTable("dummy.txt", layout)
-  schema = Tables.schema(table)
+  layout = CensoBR.CensusLayout(2000, :household, 5, fields)
 
-  @test schema.names == (:UF, :COUNT, :WEIGHT)
-  @test schema.types == (Union{Missing,String}, Union{Missing,Int}, Union{Missing,Float64})
+  mktempdir() do tmpdir
+    rawpath = joinpath(tmpdir, "data.txt")
+    parquetpath = joinpath(tmpdir, "data.parquet")
+
+    write(rawpath, "33012\n" * "35007\n" * "41042\n")
+
+    chunks = CensoBR.CensusChunks(rawpath, layout; chunksize=2)
+
+    open(parquetpath, "w") do io
+      writer = Parquet2.FileWriter(io, parquetpath)
+
+      Parquet2.writeiterable!(writer, chunks)
+    end
+
+    @test isfile(parquetpath)
+
+    dataset = Parquet2.Dataset(parquetpath)
+    rows = collect(Tables.rows(dataset))
+
+    @test length(rows) == 3
+
+    @test rows[1].UF == "33"
+    @test rows[1].COUNT == 12
+
+    @test rows[2].UF == "35"
+    @test rows[2].COUNT == 7
+
+    @test rows[3].UF == "41"
+    @test rows[3].COUNT == 42
+  end
 end
 
 @testitem "Parquet cache path" begin
@@ -189,10 +316,13 @@ end
     rawdir = joinpath(tmpdir, "raw", "2000")
 
     extracteddir = joinpath(rawdir, "RJ")
+
     zippath = joinpath(rawdir, "RJ.zip")
 
     mkpath(extracteddir)
+
     write(zippath, "archive")
+
     write(joinpath(extracteddir, "Dom33.txt"), "data")
 
     CensoBR._clearraw(2000, "RJ"; cachedir=tmpdir)
@@ -206,7 +336,9 @@ end
   using CensoBR
 
   @test_throws ArgumentError CensoBR.opencensus(1990, :rj, :household)
+
   @test_throws ArgumentError CensoBR.opencensus(2000, :rj, :mortality)
+
   @test_throws ArgumentError CensoBR.opencensus(2000, :xx, :household)
 end
 
@@ -216,38 +348,15 @@ end
   @test isdefined(CensoBR, :opencensus)
 end
 
-@testitem "Reject truncated Census field" begin
-  using CensoBR
-
-  field = CensoBR.LayoutField("A", 2, 3, 0, true, nothing, Dict{String,String}(), String[])
-
-  @test_throws ArgumentError CensoBR._parsefield(field, codeunits("12"))
-end
-
-@testitem "Parse short Census line" begin
-  using CensoBR
-
-  fields = [
-    CensoBR.LayoutField("A", 1, 2, 0, true, nothing, Dict{String,String}(), String[]),
-    CensoBR.LayoutField("B", 5, 2, 0, true, nothing, Dict{String,String}(), String[])
-  ]
-
-  layout = CensoBR.CensusLayout(2000, :household, 6, fields)
-
-  row = CensoBR._parseline(layout, codeunits("33"))
-
-  @test row.A == "33"
-  @test ismissing(row.B)
-end
-
-@testitem "Process Census" begin
+@testitem "Open Census" begin
   using CensoBR
   using Parquet2
 
   mktempdir() do tmpdir
-    CensoBR._processcensus(2000, "RR"; cachedir=tmpdir, showprogress=false)
+    dataset = CensoBR.opencensus(2000, "RR", :household; cachedir=tmpdir, showprogress=false, chunksize=5_000)
 
-    # Every record was converted to Parquet.
+    @test dataset isa Parquet2.Dataset
+
     for record in CensoBR.CENSUS_RECORDS[2000]
       parquetpath = CensoBR._parquetpath(2000, "RR", record; cachedir=tmpdir)
 
@@ -255,10 +364,26 @@ end
       @test Parquet2.Dataset(parquetpath) isa Parquet2.Dataset
     end
 
-    # Raw archive and extracted data were removed.
     rawdir = joinpath(tmpdir, "raw", "2000")
 
     @test !isfile(joinpath(rawdir, "RR.zip"))
     @test !isdir(joinpath(rawdir, "RR"))
+  end
+end
+
+@testitem "Reuse Census Parquet cache" begin
+  using CensoBR
+  using Parquet2
+
+  mktempdir() do tmpdir
+    first = CensoBR.opencensus(2000, "RR", :household; cachedir=tmpdir, showprogress=false, chunksize=5_000)
+
+    second = CensoBR.opencensus(2000, "RR", :person; cachedir=tmpdir, showprogress=false, chunksize=5_000)
+
+    @test first isa Parquet2.Dataset
+    @test second isa Parquet2.Dataset
+
+    @test !isdir(joinpath(tmpdir, "raw", "2000", "RR"))
+    @test !isfile(joinpath(tmpdir, "raw", "2000", "RR.zip"))
   end
 end

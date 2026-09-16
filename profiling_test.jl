@@ -1,109 +1,138 @@
 using CensoBR
-using BenchmarkTools
+using Parquet2
 
-# Prepare the real RR 2000 person file.
-layout = CensoBR._loadlayout(2000, :person)
+year = 2000
+uf = :rj
+record = :person
 
-censusdir = CensoBR._preparecensus(2000, :rr; showprogress=false)
+println("=== Setup ===")
+
+layout = CensoBR._loadlayout(year, record)
+
+censusdir = CensoBR._preparecensus(year, uf; showprogress=false)
 
 path = CensoBR._findrawfile(censusdir, layout)
 
-# Construct the optimized Tables.jl adapter.
-table = CensoBR.CensusTable(path, layout)
+names = Tuple(Symbol(field.name) for field in layout.fields)
 
-# Grab one physical line for microbenchmarking.
-line = open(readline, path)
-bytes = codeunits(line)
+println("Raw file: ", path)
+println("Columns: ", length(layout.fields))
 
-println("=== Single row ===")
-
-@btime CensoBR._parseline($layout, $(table.names), $bytes)
+# -------------------------------------------------------------------
+# 1. Benchmark parsing only
+# -------------------------------------------------------------------
 
 println()
-println("=== Entire file through CensusTable ===")
+println("=== Parse chunk benchmark ===")
 
-@time begin
-  n = 0
+for chunksize in (5_000, 10_000, 25_000, 50_000, 100_000)
+  stats = open(path, "r") do io
+    GC.gc()
 
-  for row in table
-    n += 1
+    @timed CensoBR._parsechunk!(io, layout, names; chunksize=chunksize)
   end
 
-  println("Rows parsed: ", n)
+  chunk = stats.value
+
+  println(
+    "chunksize=$chunksize: ",
+    "rows=$(length(first(chunk))), ",
+    "time=$(round(stats.time, digits=3)) s, ",
+    "gc=$(round(stats.gctime, digits=3)) s, ",
+    "allocated=$(Base.format_bytes(stats.bytes))"
+  )
 end
 
+# -------------------------------------------------------------------
+# 2. Benchmark full serial Parquet pipeline
+# -------------------------------------------------------------------
+
 println()
-println("=== Allocations for entire file ===")
+println("=== Full chunked Parquet pipeline ===")
 
-stats = @timed begin
-  n = 0
+for chunksize in (5_000, 10_000, 25_000, 50_000, 100_000)
+  mktempdir() do tmpdir
+    parquetpath = joinpath(tmpdir, "person.parquet")
 
-  for row in table
-    n += 1
+    chunks = CensoBR.CensusChunks(path, layout; chunksize=chunksize)
+
+    GC.gc()
+
+    stats = @timed begin
+      open(parquetpath, "w") do io
+        writer = Parquet2.FileWriter(io, parquetpath)
+
+        Parquet2.writeiterable!(writer, chunks)
+      end
+    end
+
+    println(
+      "chunksize=$chunksize: ",
+      "time=$(round(stats.time, digits=3)) s, ",
+      "gc=$(round(stats.gctime, digits=3)) s, ",
+      "allocated=$(Base.format_bytes(stats.bytes)), ",
+      "size=$(Base.format_bytes(filesize(parquetpath)))"
+    )
   end
-
-  n
 end
 
-println("Rows: ", stats.value)
-println("Time: ", stats.time, " seconds")
-println("Allocated: ", Base.format_bytes(stats.bytes))
-
-using Parquet2
+# -------------------------------------------------------------------
+# 3. Repeat best candidates to reduce noise
+# -------------------------------------------------------------------
 
 println()
-println("=== Parquet conversion ===")
+println("=== Repeated trials ===")
 
-mktempdir() do tmpdir
-  parquetpath = joinpath(tmpdir, "person.parquet")
+for chunksize in (5_000, 10_000, 25_000)
+  println()
+  println("chunksize=$chunksize")
 
-  @time Parquet2.writefile(parquetpath, table)
+  for trial in 1:5
+    mktempdir() do tmpdir
+      parquetpath = joinpath(tmpdir, "person.parquet")
 
-  println("Parquet size: ", Base.format_bytes(filesize(parquetpath)))
+      chunks = CensoBR.CensusChunks(path, layout; chunksize=chunksize)
+
+      GC.gc()
+
+      stats = @timed begin
+        open(parquetpath, "w") do io
+          writer = Parquet2.FileWriter(io, parquetpath)
+
+          Parquet2.writeiterable!(writer, chunks)
+        end
+      end
+
+      println(
+        "trial=$trial: ",
+        "time=$(round(stats.time, digits=3)) s, ",
+        "gc=$(round(stats.gctime, digits=3)) s, ",
+        "allocated=$(Base.format_bytes(stats.bytes))"
+      )
+    end
+  end
 end
 
-using Tables
-using Parquet2
-using BenchmarkTools
-
-rows = collect(table)
-
-mktempdir() do tmpdir
-  path = joinpath(tmpdir, "person.parquet")
-
-  @time Parquet2.writefile(path, rows)
-end
-
-cols = Tables.columntable(table)
-mktempdir() do tmpdir
-  path = joinpath(tmpdir, "person.parquet")
-
-  @time Parquet2.writefile(path, cols)
-end
-
-println("=== Build column table ===")
-
-cols_stats = @timed Tables.columntable(table)
-
-println("Time: ", cols_stats.time)
-println("Allocated: ", Base.format_bytes(cols_stats.bytes))
-
-cols = cols_stats.value
+# -------------------------------------------------------------------
+# 4. Optional: full user-facing path
+# -------------------------------------------------------------------
 
 println()
-println("=== Write column table ===")
+println("=== Full opencensus path ===")
 
-mktempdir() do tmpdir
-  path = joinpath(tmpdir, "person.parquet")
+for chunksize in (5_000, 10_000, 25_000)
+  println()
+  println("chunksize=$chunksize")
 
-  # First run warms compilation.
-  Parquet2.writefile(path, cols)
+  mktempdir() do tmpdir
+    GC.gc()
 
-  rm(path)
+    stats = @timed CensoBR.opencensus(year, uf, record; cachedir=tmpdir, showprogress=false, chunksize=chunksize)
 
-  # Second run is the useful timing.
-  stats = @timed Parquet2.writefile(path, cols)
-
-  println("Time: ", stats.time)
-  println("Allocated: ", Base.format_bytes(stats.bytes))
+    println(
+      "time=$(round(stats.time, digits=3)) s, ",
+      "gc=$(round(stats.gctime, digits=3)) s, ",
+      "allocated=$(Base.format_bytes(stats.bytes))"
+    )
+  end
 end
