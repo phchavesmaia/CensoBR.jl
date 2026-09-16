@@ -263,7 +263,7 @@ If a processed Parquet file is not already cached, CensoBR downloads and
 extracts the corresponding Census archive, parses the fixed-width microdata,
 writes the result to Parquet, and removes the temporary raw files.
 
-See also [`metadata`](@ref), [`label`](@ref), [`values`](@ref), and [`notes`](@ref)
+See also [`fieldmetadata`](@ref), [`fieldlabel`](@ref), [`fieldvalues`](@ref), and [`fieldnotes`](@ref)
 """
 function opencensus(
   year::Integer,
@@ -324,7 +324,7 @@ Return the descriptive label for `variable` in the specified Census `year` and
 
 Returns `nothing` if the variable has no label.
 
-See also [`fieldmetadata`](@ref), [`fieldvalues`](@ref), and [`fieldnotes`](@ref), and [`fieldlabel`](@ref)
+See also [`fieldmetadata`](@ref), [`fieldvalues`](@ref), and [`fieldnotes`](@ref), and [`fieldlabel`](@ref).
 """
 function fieldlabel(year::Integer, record::Symbol, variable::Symbol)
   fieldmetadata(year, record, variable).label

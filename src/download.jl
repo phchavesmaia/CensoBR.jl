@@ -33,7 +33,9 @@ const VALID_UFS = Set([
   "SC",
   "SE",
   "SP",
-  "TO"
+  "TO",
+  "SP1",
+  "SP2_RM"
 ])
 
 """
