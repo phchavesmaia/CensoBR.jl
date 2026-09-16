@@ -270,7 +270,7 @@ function opencensus(
   cachedir::AbstractString=_defaultcachedir(),
   force::Bool=false,
   showprogress::Bool=true,
-  chunksize::Integer=10_000
+  chunksize::Integer=5_000
 )
 
   # checks
@@ -287,4 +287,28 @@ function opencensus(
   end
 
   Parquet2.Dataset(parquetpath)
+end
+
+function fieldmetadata(year::Integer, record::Symbol, variable::Symbol)
+  layout = _loadlayout(year, record)
+
+  for field in layout.fields
+    if Symbol(field.name) == variable
+      return (label=field.label, values=field.values, notes=field.notes)
+    end
+  end
+
+  throw(ArgumentError("Variable `$variable` not found in Census $year $record layout"))
+end
+
+function label(year::Integer, record::Symbol, variable::Symbol)
+  fieldmetadata(year, record, variable).label
+end
+
+function values(year::Integer, record::Symbol, variable::Symbol)
+  fieldmetadata(year, record, variable).values
+end
+
+function notes(year::Integer, record::Symbol, variable::Symbol)
+  fieldmetadata(year, record, variable).notes
 end
