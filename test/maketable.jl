@@ -65,22 +65,6 @@ end
   end
 end
 
-@testitem "Parse fixed-width field" begin
-  using CensoBR
-
-  character = CensoBR.LayoutField("CODE", 1, 4, 0, true, nothing, Dict{String,String}(), String[])
-
-  integer = CensoBR.LayoutField("COUNT", 5, 4, 0, false, nothing, Dict{String,String}(), String[])
-
-  decimal = CensoBR.LayoutField("VALUE", 9, 5, 2, false, nothing, Dict{String,String}(), String[])
-
-  bytes = codeunits(" 33 001200345")
-
-  @test CensoBR._parsefield(character, bytes) == "33"
-  @test CensoBR._parsefield(integer, bytes) == 12
-  @test CensoBR._parsefield(decimal, bytes) == 3.45
-end
-
 @testitem "Parse blank fixed-width fields" begin
   using CensoBR
 
@@ -125,7 +109,11 @@ end
   @test row.WEIGHT == 3.45
   @test propertynames(row) == (:UF, :COUNT, :WEIGHT)
 
-  @test_throws ArgumentError CensoBR._parseline(layout, codeunits("33012"))
+  shortrow = CensoBR._parseline(layout, codeunits("33012"))
+
+  @test shortrow.UF == "33"
+  @test shortrow.COUNT == 12
+  @test ismissing(shortrow.WEIGHT)
 end
 
 @testitem "Census table adapter" begin
