@@ -1,13 +1,8 @@
-using Tables
+using Tables, Parquet2
 
 struct CensusTable
   path::String
   layout::CensusLayout
-end
-
-struct CensusRowState
-  io::IOStream
-  line::Int
 end
 
 const RAW_FILE_PREFIXES = Dict(
@@ -20,6 +15,9 @@ const RAW_FILE_PREFIXES = Dict(
   (2010, :mortality) => "AMOSTRA_MORTALIDADE_"
 )
 
+const CENSUS_RECORDS =
+  Dict(2000 => (:household, :family, :person), 2010 => (:household, :person, :emigration, :mortality))
+
 """
 	_findrawfile(censusdir, layout)
 
@@ -31,7 +29,6 @@ function _findrawfile(censusdir::AbstractString, layout::CensusLayout)
   key = (layout.year, layout.record)
   !haskey(RAW_FILE_PREFIXES, key) &&
     throw(ArgumentError("Unsupported Census file: year=$(layout.year), record=$(layout.record)"))
-  key = (layout.year, layout.record)
 
   # retrieve the file prefix for the requested Census file.
   prefix = RAW_FILE_PREFIXES[key]
@@ -124,20 +121,6 @@ function _parseline(layout::CensusLayout, bytes::AbstractVector{UInt8})
   NamedTuple{names}(values)
 end
 
-"""
-	_parsefile(path, layout)
-
-Return a lazy Tables.jl-compatible view of a fixed-width Census file.
-
-Rows are parsed on demand using `layout`; the entire file is not loaded into
-memory.
-"""
-function _parsefile(path::AbstractString, layout::CensusLayout)
-  isfile(path) || throw(ArgumentError("Census file does not exist: $path"))
-
-  CensusTable(String(path), layout)
-end
-
 Tables.istable(::Type{CensusTable}) = true
 Tables.rowaccess(::Type{CensusTable}) = true
 Tables.rows(table::CensusTable) = table
@@ -155,11 +138,11 @@ function Base.iterate(table::CensusTable)
 
   line = readline(io)
 
-  (_parseline(table.layout, codeunits(line)), CensusRowState(io, 1))
+  (_parseline(table.layout, codeunits(line)), io)
 end
 
-function Base.iterate(table::CensusTable, state::CensusRowState)
-  io = state.io
+function Base.iterate(table::CensusTable, state::IOStream)
+  io = state
 
   if eof(io)
     close(io)
@@ -167,9 +150,7 @@ function Base.iterate(table::CensusTable, state::CensusRowState)
   end
 
   line = readline(io)
-  linenumber = state.line + 1
-
-  (_parseline(table.layout, codeunits(line)), CensusRowState(io, linenumber))
+  (_parseline(table.layout, codeunits(line)), io)
 end
 
 function Tables.schema(table::CensusTable)
@@ -186,36 +167,70 @@ function Tables.schema(table::CensusTable)
   Tables.Schema(names, types)
 end
 
-"""
-	fieldmetadata(table, variable)
-
-Return variable metadata for all fields in a Census table.
-"""
-function fieldmetadata(table::CensusTable, variable::Symbol)
-  for field in table.layout.fields
-    if Symbol(field.name) == variable
-      return (label=field.label, values=field.values, notes=field.notes)
-    end
-  end
-
-  throw(ArgumentError("Variable `$variable` not found in Census table"))
+function _parquetpath(year::Integer, uf, record::Symbol; cachedir::AbstractString=_defaultcachedir())
+  uf = uppercase(String(uf))
+  joinpath(cachedir, "parquet", string(year), uf, "$(record).parquet")
 end
 
-label(table::CensusTable) = Dict(Symbol(field.name) => field.label for field in table.layout.fields)
+function _clearraw(year::Integer, uf; cachedir::AbstractString=_defaultcachedir())
+  # get paths
+  rawdir = joinpath(cachedir, "raw", string(year))
 
-valuecodes(table::CensusTable, variable::Symbol) = fieldmetadata(table, variable).values
+  # removing the raw zip file and the extracted directory
+  rm(joinpath(rawdir, "$uf.zip"); force=true)
+  rm(joinpath(rawdir, uf); recursive=true, force=true)
+end
 
-notes(table::CensusTable, variable::Symbol) = fieldmetadata(table, variable).notes
+function _processcensus(
+  year::Integer,
+  uf;
+  cachedir::AbstractString=_defaultcachedir(),
+  force::Bool=false,
+  showprogress::Bool=true
+)
+  # prepare the Census data directory and paths
+  censusdir = _preparecensus(year, uf; cachedir=cachedir, force=force, showprogress=showprogress)
+
+  # process each record for the given year and UF
+  for record in CENSUS_RECORDS[year]
+    # determine the path for the processed Parquet file
+    parquetpath = _parquetpath(year, uf, record; cachedir=cachedir)
+    # reuse the processed cache
+    if isfile(parquetpath) && !force
+      continue
+    end
+    # load the layout and find the raw file for this record
+    layout = _loadlayout(year, record)
+    path = _findrawfile(censusdir, layout)
+
+    # make table
+    table = CensusTable(String(path), layout)
+    mkpath(dirname(parquetpath))
+
+    # avoid leaving a corrupt final cache entry if writing fails.
+    temporary = parquetpath * ".part"
+    isfile(temporary) && rm(temporary; force=true)
+    try
+      Parquet2.writefile(temporary, table)
+      mv(temporary, parquetpath; force=true)
+    catch
+      isfile(temporary) && rm(temporary; force=true)
+      rethrow()
+    end
+  end
+  # raw files are no longer necessary once the Parquet cache is complete.
+  _clearraw(year, uf; cachedir=cachedir)
+end
 
 """
 	opencensus(year, uf, record; cachedir=_defaultcachedir(),
 			   force=false, showprogress=true)
 
-Return a lazy Tables.jl-compatible view of IBGE Census microdata.
+Open IBGE Census microdata as a Parquet2 dataset.
 
-The corresponding Census archive is downloaded and extracted if necessary.
-CensoBR then loads the bundled layout for `year` and `record`, locates the
-matching fixed-width microdata file, and parses records on demand.
+If a processed Parquet file is not already cached, CensoBR downloads and
+extracts the corresponding Census archive, parses the fixed-width microdata,
+writes the result to Parquet, and removes the temporary raw files.
 """
 function opencensus(
   year::Integer,
@@ -225,11 +240,19 @@ function opencensus(
   force::Bool=false,
   showprogress::Bool=true
 )
-  censusdir = _preparecensus(year, uf; cachedir=cachedir, force=force, showprogress=showprogress)
 
-  layout = _loadlayout(year, record)
+  # checks
+  haskey(CENSUS_RECORDS, year) || throw(ArgumentError("Unsupported census year: $year"))
+  record in CENSUS_RECORDS[year] || throw(ArgumentError("Unsupported record `$record` for Census $year"))
 
-  path = _findrawfile(censusdir, layout)
+  # setup
+  uf = uppercase(String(uf))
 
-  _parsefile(path, layout)
+  parquetpath = _parquetpath(year, uf, record; cachedir=cachedir)
+
+  if !isfile(parquetpath) || force
+    _processcensus(year, uf; cachedir=cachedir, force=force, showprogress=showprogress)
+  end
+
+  Parquet2.Dataset(parquetpath)
 end

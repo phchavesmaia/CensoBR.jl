@@ -242,7 +242,7 @@ end
 
 function main(args)
   length(args) <= 1 || error("Usage:\n" * "  julia --project=dev dev/generatelayouts2010.jl [outputdir]")
-  
+
   documentationdir = preparedocumentation(2010)
   try
     outputdir = isempty(args) ? joinpath(dirname(@__DIR__), "data", "layouts", "2010") : expanduser(only(args))
