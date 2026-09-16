@@ -180,18 +180,18 @@ function _downloadcensus(
 end
 
 """
-	_extractarchive(zip_path; destination=nothing, force=false)
+	_extractarchive(zippath; destination=nothing, force=false)
 
 Extract a Census ZIP archive with 7-Zip.
 
 Returns the extraction directory.
 """
-function _extractarchive(zip_path::AbstractString; force::Bool=false)
+function _extractarchive(zippath::AbstractString; force::Bool=false)
   # verifying that the ZIP file exists
-  isfile(zip_path) || throw(ArgumentError("ZIP file does not exist: $zip_path"))
+  isfile(zippath) || throw(ArgumentError("ZIP file does not exist: $zippath"))
 
   # ensuring the destination directory is set
-  destination = splitext(zip_path)[1]
+  destination = splitext(zippath)[1]
   if isdir(destination)
     if !force
       return destination
@@ -201,7 +201,7 @@ function _extractarchive(zip_path::AbstractString; force::Bool=false)
   mkpath(destination)
 
   # extract archive with 7-Zip
-  run(pipeline(`$(p7zip_jll.p7zip()) x $zip_path -o$destination -y`, stdout=devnull, stderr=devnull))
+  run(pipeline(`$(p7zip_jll.p7zip()) x $zippath -o$destination -y`, stdout=devnull, stderr=devnull))
 
   destination
 end
@@ -221,8 +221,8 @@ function _preparecensus(
   showprogress::Bool=true
 )
   # downloading the ZIP file for the specified year and UF
-  zip_path = _downloadcensus(year, uf; cachedir=cachedir, force=force, showprogress=showprogress)
+  zippath = _downloadcensus(year, uf; cachedir=cachedir, force=force, showprogress=showprogress)
 
   # extracting the downloaded ZIP file
-  _extractarchive(zip_path; force=force)
+  _extractarchive(zippath; force=force)
 end

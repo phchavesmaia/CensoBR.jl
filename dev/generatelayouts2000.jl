@@ -181,9 +181,13 @@ function main(args)
 
   documentationdir = preparedocumentation(2000)
 
-  outputdir = isempty(args) ? joinpath(dirname(@__DIR__), "data", "layouts", "2000") : expanduser(only(args))
-
-  generatelayouts2000(documentationdir, outputdir)
+  try
+    outputdir = isempty(args) ? joinpath(dirname(@__DIR__), "data", "layouts", "2000") : expanduser(only(args))
+    generatelayouts2000(documentationdir, outputdir)
+  finally
+    rm(documentationdir; recursive=true, force=true)
+    rm(documentationdir * ".zip"; force=true)
+  end
 end
 
 if abspath(PROGRAM_FILE) == abspath(@__FILE__)

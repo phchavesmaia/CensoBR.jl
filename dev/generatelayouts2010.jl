@@ -242,12 +242,15 @@ end
 
 function main(args)
   length(args) <= 1 || error("Usage:\n" * "  julia --project=dev dev/generatelayouts2010.jl [outputdir]")
-
+  
   documentationdir = preparedocumentation(2010)
-
-  outputdir = isempty(args) ? joinpath(dirname(@__DIR__), "data", "layouts", "2010") : expanduser(only(args))
-
-  _generatelayouts2010(documentationdir, outputdir)
+  try
+    outputdir = isempty(args) ? joinpath(dirname(@__DIR__), "data", "layouts", "2010") : expanduser(only(args))
+    _generatelayouts2010(documentationdir, outputdir)
+  finally
+    rm(documentationdir; recursive=true, force=true)
+    rm(documentationdir * ".zip"; force=true)
+  end
 end
 
 if abspath(PROGRAM_FILE) == abspath(@__FILE__)
