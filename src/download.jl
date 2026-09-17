@@ -33,22 +33,13 @@ const VALID_UFS = Set([
   "SC",
   "SE",
   "SP",
-  "TO",
-  "SP1",
-  "SP2_RM"
+  "TO"
 ])
 
 """
 	_censusurl(year, uf)
 
 Return the official IBGE URL for a Census microdata archive.
-
-# Examples
-
-```julia
-_census_url(2000, "RJ")
-_census_url(2010, :RJ)
-```
 """
 function _censusurl(year::Integer, uf::Union{String,Symbol})
   # checking if the year is supported
@@ -62,10 +53,10 @@ function _censusurl(year::Integer, uf::Union{String,Symbol})
 
   # 2010 São Paulo is a special case in the IBGE distribution.
   if year == 2010 && uf == "SP"
-    throw(ArgumentError("Census 2010 SP is split into multiple archives; support for SP should be handled separately."))
+    return ["$(IBGE_URLS[year])/SP1.zip", "$(IBGE_URLS[year])/SP2_RM.zip"]
   end
 
-  "$(IBGE_URLS[year])/$uf.zip"
+  ["$(IBGE_URLS[year])/$uf.zip"]
 end
 
 """
@@ -96,11 +87,11 @@ and `force=false`, the existing file is returned.
 Returns the path to the downloaded file.
 """
 function _downloadfile(
-  url::AbstractString,
-  destination::AbstractString;
+  url::String,
+  destination::String;
   force::Bool=false,
   showprogress::Bool=true,
-  description::AbstractString="Downloading"
+  description::String="Downloading"
 )
 
   # determining the destination path for the downloaded ZIP file
@@ -160,25 +151,27 @@ Returns the path to the cached ZIP file.
 function _downloadcensus(
   year::Integer,
   uf;
-  cachedir::AbstractString=_defaultcachedir(),
+  cachedir::String=_defaultcachedir(),
   force::Bool=false,
   showprogress::Bool=true
 )
   # determining the URL for the Census archive
-  url = _censusurl(year, uf)
-
-  # converting the UF code to an uppercase string
-  uf = uppercase(String(uf))
+  urls = _censusurl(year, uf)
 
   # ensuring the cache directory exists
   raw_dir = joinpath(cachedir, "raw", string(year))
   mkpath(raw_dir)
 
-  # determining the destination path for the downloaded ZIP file
-  destination = joinpath(raw_dir, "$uf.zip")
-
-  # downloading the file using the helper function
-  _downloadfile(url, destination; force=force, showprogress=showprogress, description="Downloading $uf $year")
+  # downloading with the helper function
+  [
+    _downloadfile(
+      url,
+      joinpath(raw_dir, basename(url));
+      force=force,
+      showprogress=showprogress,
+      description="Downloading $(basename(url))"
+    ) for url in urls
+  ]
 end
 
 """
@@ -188,24 +181,27 @@ Extract a Census ZIP archive with 7-Zip.
 
 Returns the extraction directory.
 """
-function _extractarchive(zippath::AbstractString; force::Bool=false)
-  # verifying that the ZIP file exists
-  isfile(zippath) || throw(ArgumentError("ZIP file does not exist: $zippath"))
+function _extractarchive(zippaths::Vector{String}; force::Bool=false)
+  destinations = String[]
+  for zippath in zippaths
+    # verifying that the ZIP file exists
+    isfile(zippath) || throw(ArgumentError("ZIP file does not exist: $zippath"))
 
-  # ensuring the destination directory is set
-  destination = splitext(zippath)[1]
-  if isdir(destination)
-    if !force
-      return destination
+    # ensuring the destination directory is set
+    destination = splitext(zippath)[1]
+    push!(destinations, destination)
+    if isdir(destination)
+      if !force
+        return destination
+      end
+      rm(destination; recursive=true)
     end
-    rm(destination; recursive=true)
+    mkpath(destination)
+
+    # extract archive with 7-Zip
+    run(pipeline(`$(p7zip_jll.p7zip()) x $zippath -o$destination -y`, stdout=devnull, stderr=devnull))
   end
-  mkpath(destination)
-
-  # extract archive with 7-Zip
-  run(pipeline(`$(p7zip_jll.p7zip()) x $zippath -o$destination -y`, stdout=devnull, stderr=devnull))
-
-  destination
+  destinations
 end
 
 """
@@ -218,13 +214,13 @@ Returns the directory containing the extracted raw files.
 function _preparecensus(
   year::Integer,
   uf;
-  cachedir::AbstractString=_defaultcachedir(),
+  cachedir::String=_defaultcachedir(),
   force::Bool=false,
   showprogress::Bool=true
 )
   # downloading the ZIP file for the specified year and UF
-  zippath = _downloadcensus(year, uf; cachedir=cachedir, force=force, showprogress=showprogress)
+  zippaths = _downloadcensus(year, uf; cachedir=cachedir, force=force, showprogress=showprogress)
 
   # extracting the downloaded ZIP file
-  _extractarchive(zippath; force=force)
+  _extractarchive(zippaths; force=force)
 end
