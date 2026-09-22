@@ -299,7 +299,7 @@ end
   using CensoBR
 
   mktempdir() do tmpdir
-    path = CensoBR._parquetpath(2000, :rj, :household; cachedir=tmpdir)
+    path = joinpath(tmpdir, "parquet", string(2000), uppercase(String(:rj)), "household.parquet")
 
     @test path == joinpath(tmpdir, "parquet", "2000", "RJ", "household.parquet")
   end
@@ -347,7 +347,7 @@ end
     @test length(collect(Tables.rows(dataset))) == 2
 
     for record in CensoBR.CENSUS_RECORDS[2000]
-      path = CensoBR._parquetpath(2000, :rj, record; cachedir=tmpdir)
+      path = joinpath(tmpdir, "parquet", string(2000), uppercase(String(:rj)), "$(record).parquet")
       @test isfile(path)
       @test length(collect(Tables.rows(Parquet2.Dataset(path)))) == 2
     end
