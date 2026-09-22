@@ -198,7 +198,7 @@ function _extractarchive(zippaths::Vector{String}; force::Bool=false)
     end
     mkpath(destination)
 
-    # A failed extraction must not leave a directory that looks complete.
+    # extract archive with 7-Zip
     try
       run(pipeline(`$(p7zip_jll.p7zip()) x $zippath -o$destination -y`, stdout=devnull, stderr=devnull))
     catch
