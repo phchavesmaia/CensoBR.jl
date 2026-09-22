@@ -18,7 +18,7 @@ function opencensus(
   year::Integer,
   uf::Union{String,Symbol},
   record::Symbol;
-  cachedir::AbstractString=_defaultcachedir(),
+  cachedir::String=_defaultcachedir(),
   force::Bool=false,
   showprogress::Bool=true,
   chunksize::Integer=5_000
@@ -27,11 +27,12 @@ function opencensus(
   # checks
   haskey(CENSUS_RECORDS, year) || throw(ArgumentError("Unsupported census year: $year"))
   record in CENSUS_RECORDS[year] || throw(ArgumentError("Unsupported record `$record` for Census $year"))
+  chunksize > 0 || throw(ArgumentError("chunksize must be positive"))
 
   # setup
   uf = uppercase(String(uf))
 
-  parquetpath = _parquetpath(year, uf, record; cachedir=cachedir)
+  parquetpath = joinpath(cachedir, "parquet", string(year), uppercase(String(uf)), "$(record).parquet")
 
   if !isfile(parquetpath) || force
     _processcensus(year, uf; cachedir=cachedir, force=force, showprogress=showprogress, chunksize=chunksize)

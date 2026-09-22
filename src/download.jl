@@ -199,7 +199,12 @@ function _extractarchive(zippaths::Vector{String}; force::Bool=false)
     mkpath(destination)
 
     # extract archive with 7-Zip
-    run(pipeline(`$(p7zip_jll.p7zip()) x $zippath -o$destination -y`, stdout=devnull, stderr=devnull))
+    try
+      run(pipeline(`$(p7zip_jll.p7zip()) x $zippath -o$destination -y`, stdout=devnull, stderr=devnull))
+    catch
+      rm(destination; recursive=true, force=true)
+      rethrow()
+    end
   end
   destinations
 end
