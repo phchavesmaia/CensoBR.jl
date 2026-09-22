@@ -2,43 +2,44 @@
   using CensoBR
 
   mktempdir() do tmpdir
-    dir2000 = joinpath(tmpdir, "2000")
-    mkpath(joinpath(dir2000, "RJ"))
+    dir2000 = joinpath(tmpdir, "2000", "RJ")
+    dir2010 = joinpath(tmpdir, "2010", "RJ")
+    mkpath(dir2000)
+    mkpath(dir2010)
 
-    write(joinpath(dir2000, "RJ", "Dom33.txt"), "")
-    write(joinpath(dir2000, "RJ", "FAMI33.TXT"), "")
-    write(joinpath(dir2000, "RJ", "Pes33.txt"), "")
+    for name in ("Dom33.txt", "FAMI33.TXT", "Pes33.txt")
+      write(joinpath(dir2000, name), "")
+    end
 
     household2000 = CensoBR._loadlayout(2000, :household)
     family2000 = CensoBR._loadlayout(2000, :family)
     person2000 = CensoBR._loadlayout(2000, :person)
 
-    @test basename(CensoBR._findrawfile(dir2000, household2000)) == "Dom33.txt"
+    @test basename.(CensoBR._findrawfiles([dir2000], household2000)) == ["Dom33.txt"]
+    @test basename.(CensoBR._findrawfiles([dir2000], family2000)) == ["FAMI33.TXT"]
+    @test basename.(CensoBR._findrawfiles([dir2000], person2000)) == ["Pes33.txt"]
 
-    @test basename(CensoBR._findrawfile(dir2000, family2000)) == "FAMI33.TXT"
-
-    @test basename(CensoBR._findrawfile(dir2000, person2000)) == "Pes33.txt"
-
-    dir2010 = joinpath(tmpdir, "2010")
-    mkpath(dir2010)
-
-    write(joinpath(dir2010, "Amostra_Domicilios_33.txt"), "")
-    write(joinpath(dir2010, "Amostra_Pessoas_33.txt"), "")
-    write(joinpath(dir2010, "Amostra_Emigracao_33.txt"), "")
-    write(joinpath(dir2010, "Amostra_Mortalidade_33.txt"), "")
+    for name in ("Amostra_Domicilios_33.txt", "Amostra_Pessoas_33.txt", "Amostra_Emigracao_33.txt", "Amostra_Mortalidade_33.txt")
+      write(joinpath(dir2010, name), "")
+    end
 
     household2010 = CensoBR._loadlayout(2010, :household)
     person2010 = CensoBR._loadlayout(2010, :person)
     emigration2010 = CensoBR._loadlayout(2010, :emigration)
     mortality2010 = CensoBR._loadlayout(2010, :mortality)
 
-    @test basename(CensoBR._findrawfile(dir2010, household2010)) == "Amostra_Domicilios_33.txt"
+    @test basename.(CensoBR._findrawfiles([dir2010], household2010)) == ["Amostra_Domicilios_33.txt"]
+    @test basename.(CensoBR._findrawfiles([dir2010], person2010)) == ["Amostra_Pessoas_33.txt"]
+    @test basename.(CensoBR._findrawfiles([dir2010], emigration2010)) == ["Amostra_Emigracao_33.txt"]
+    @test basename.(CensoBR._findrawfiles([dir2010], mortality2010)) == ["Amostra_Mortalidade_33.txt"]
 
-    @test basename(CensoBR._findrawfile(dir2010, person2010)) == "Amostra_Pessoas_33.txt"
-
-    @test basename(CensoBR._findrawfile(dir2010, emigration2010)) == "Amostra_Emigracao_33.txt"
-
-    @test basename(CensoBR._findrawfile(dir2010, mortality2010)) == "Amostra_Mortalidade_33.txt"
+    # The 2010 SP archive is split. All matching files must be used in order.
+    second = joinpath(tmpdir, "2010", "SP2")
+    mkpath(second)
+    write(joinpath(second, "amostra_pessoas_35_b.txt"), "")
+    write(joinpath(dir2010, "amostra_pessoas_35_a.txt"), "")
+    @test basename.(CensoBR._findrawfiles([second, dir2010], person2010)) ==
+          ["Amostra_Pessoas_33.txt", "amostra_pessoas_35_a.txt", "amostra_pessoas_35_b.txt"]
   end
 end
 
@@ -48,18 +49,13 @@ end
   mktempdir() do tmpdir
     layout = CensoBR._loadlayout(2000, :household)
 
-    @test_throws ErrorException CensoBR._findrawfile(tmpdir, layout)
-
-    write(joinpath(tmpdir, "Dom33.txt"), "")
-    write(joinpath(tmpdir, "DOM99.TXT"), "")
-
-    @test_throws ErrorException CensoBR._findrawfile(tmpdir, layout)
+    @test_throws ErrorException CensoBR._findrawfiles([tmpdir], layout)
   end
 
   layout = CensoBR.CensusLayout(1990, :household, 10, CensoBR.LayoutField[])
 
   mktempdir() do tmpdir
-    @test_throws ArgumentError CensoBR._findrawfile(tmpdir, layout)
+    @test_throws ArgumentError CensoBR._findrawfiles([tmpdir], layout)
   end
 end
 
@@ -309,82 +305,57 @@ end
   end
 end
 
-@testitem "Clear raw Census files" begin
+@testitem "Open Census validation" begin
   using CensoBR
 
-  mktempdir() do tmpdir
-    rawdir = joinpath(tmpdir, "raw", "2000")
-
-    extracteddir = joinpath(rawdir, "RJ")
-
-    zippath = joinpath(rawdir, "RJ.zip")
-
-    mkpath(extracteddir)
-
-    write(zippath, "archive")
-
-    write(joinpath(extracteddir, "Dom33.txt"), "data")
-
-    CensoBR._clearraw(2000, "RJ"; cachedir=tmpdir)
-
-    @test !isfile(zippath)
-    @test !isdir(extracteddir)
-  end
+  @test_throws ArgumentError opencensus(1990, :rj, :household)
+  @test_throws ArgumentError opencensus(2000, :rj, :mortality)
+  @test_throws ArgumentError opencensus(2000, :xx, :household)
+  @test_throws ArgumentError opencensus(2000, :rj, :household; chunksize=0)
+  @test_throws ArgumentError opencensus(2000, :rj, :household; chunksize=-1)
 end
 
-@testitem "Open Census errors" begin
-  using CensoBR
-
-  @test_throws ArgumentError CensoBR.opencensus(1990, :rj, :household)
-
-  @test_throws ArgumentError CensoBR.opencensus(2000, :rj, :mortality)
-
-  @test_throws ArgumentError CensoBR.opencensus(2000, :xx, :household)
-end
-
-@testitem "Public API" begin
-  using CensoBR
-
-  @test isdefined(CensoBR, :opencensus)
-end
-
-@testitem "Open Census" begin
+@testitem "Open Census from a local archive" begin
   using CensoBR
   using Parquet2
+  using Tables
+  using p7zip_jll
 
   mktempdir() do tmpdir
-    dataset = CensoBR.opencensus(2000, "RR", :household; cachedir=tmpdir, showprogress=false, chunksize=5_000)
+    source = joinpath(tmpdir, "source")
+    raw = joinpath(tmpdir, "raw", "2000")
+    mkpath(source)
+    mkpath(raw)
 
-    @test dataset isa Parquet2.Dataset
-
+    filenames = Dict(:household => "DOM33.TXT", :family => "FAMI33.TXT", :person => "PES33.TXT")
     for record in CensoBR.CENSUS_RECORDS[2000]
-      parquetpath = CensoBR._parquetpath(2000, "RR", record; cachedir=tmpdir)
-
-      @test isfile(parquetpath)
-      @test Parquet2.Dataset(parquetpath) isa Parquet2.Dataset
+      layout = CensoBR._loadlayout(2000, record)
+      bytes = fill(UInt8(' '), layout.lrecl)
+      for field in layout.fields
+        fill!(view(bytes, field.start:(field.start + field.width - 1)), field.ischaracter ? UInt8('A') : UInt8('0'))
+      end
+      write(joinpath(source, filenames[record]), vcat(bytes, UInt8('\n'), bytes, UInt8('\n')))
     end
 
-    rawdir = joinpath(tmpdir, "raw", "2000")
+    zippath = joinpath(raw, "RJ.zip")
+    cd(source) do
+      run(pipeline(`$(p7zip_jll.p7zip()) a -tzip $zippath DOM33.TXT FAMI33.TXT PES33.TXT`, stdout=devnull, stderr=devnull))
+    end
 
-    @test !isfile(joinpath(rawdir, "RR.zip"))
-    @test !isdir(joinpath(rawdir, "RR"))
-  end
-end
+    dataset = opencensus(2000, :rj, :household; cachedir=tmpdir, showprogress=false, chunksize=1)
+    @test dataset isa Parquet2.Dataset
+    @test length(collect(Tables.rows(dataset))) == 2
 
-@testitem "Reuse Census Parquet cache" begin
-  using CensoBR
-  using Parquet2
+    for record in CensoBR.CENSUS_RECORDS[2000]
+      path = CensoBR._parquetpath(2000, :rj, record; cachedir=tmpdir)
+      @test isfile(path)
+      @test length(collect(Tables.rows(Parquet2.Dataset(path)))) == 2
+    end
+    @test !isfile(zippath)
+    @test !isdir(joinpath(raw, "RJ"))
 
-  mktempdir() do tmpdir
-    first = opencensus(2000, "RR", :household; cachedir=tmpdir, showprogress=false, chunksize=5_000)
-
-    second = opencensus(2000, "RR", :person; cachedir=tmpdir, showprogress=false, chunksize=5_000)
-
-    @test first isa Parquet2.Dataset
-    @test second isa Parquet2.Dataset
-
-    @test !isdir(joinpath(tmpdir, "raw", "2000", "RR"))
-    @test !isfile(joinpath(tmpdir, "raw", "2000", "RR.zip"))
+    # A second record is served from Parquet without the deleted archive.
+    @test opencensus(2000, :rj, :person; cachedir=tmpdir, showprogress=false) isa Parquet2.Dataset
   end
 end
 
@@ -415,7 +386,7 @@ end
   notes = fieldnotes(2000, :household, :V1002)
 
   @test !isempty(notes)
-  @test any(occursin("Divisão Territorial Brasileira"), notes[1])
+  @test occursin("Divisão Territorial Brasileira", notes[1])
 end
 
 @testitem "Census label" begin

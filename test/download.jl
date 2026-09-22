@@ -7,6 +7,8 @@
         ["https://ftp.ibge.gov.br/Censos/Censo_Demografico_2010/Resultados_Gerais_da_Amostra/Microdados/RJ.zip"]
   # testing the URL resolution for lowercase UF codes
   @test CensoBR._censusurl(2000, "rj") == CensoBR._censusurl(2000, "RJ")
+  @test length(CensoBR._censusurl(2010, :sp)) == 2
+  @test endswith.(CensoBR._censusurl(2010, :sp), ["SP1.zip", "SP2_RM.zip"]) == [true, true]
 
   # testing invalid year and UF code
   @test_throws ArgumentError CensoBR._censusurl(1990, "RJ")
@@ -54,7 +56,7 @@ end
     # extraction reuses existing directory
     write(joinpath(destinations[1], "DOM33.TXT"), "modified")
     destination2 = CensoBR._extractarchive([zippath])
-    @test destination2 == destinations[1]
+    @test destination2 == destinations
     @test read(joinpath(destinations[1], "DOM33.TXT"), String) == "modified"
 
     # forced extraction replaces existing directory
@@ -64,65 +66,33 @@ end
 
     # extraction rejects missing ZIP
     @test_throws ArgumentError CensoBR._extractarchive([joinpath(tmpdir, "MISSING.zip")])
+
+    invalid = joinpath(tmpdir, "invalid.zip")
+    write(invalid, "not a zip archive")
+    @test_throws ProcessFailedException CensoBR._extractarchive([invalid])
+    @test !isdir(joinpath(tmpdir, "invalid"))
   end
 end
 
-@testitem "Download Census function" begin
+@testitem "Download file cache and replacement" begin
   using CensoBR
 
-  # download aux file for year 2000
   mktempdir() do tmpdir
-    url = "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2000/Microdados/2_Atualizacoes_20170908.txt"
-    destination = joinpath(tmpdir, "updates.txt")
+    source = joinpath(tmpdir, "source.txt")
+    destination = joinpath(tmpdir, "cached", "data.txt")
+    write(source, "original")
+    url = "file://" * source
 
-    path = CensoBR._downloadfile(url, destination; showprogress=false)
-
-    @test isfile(path)
-    @test filesize(path) > 0
-    @test path == destination
+    @test CensoBR._downloadfile(url, destination; showprogress=false) == destination
+    @test read(destination, String) == "original"
     @test !isfile(destination * ".part")
-  end
 
-  # download aux file for year 2010
-  mktempdir() do tmpdir
-    url = "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2010/Resultados_Gerais_da_Amostra/Microdados/1_Atualizacoes_20160311.txt"
-    destination = joinpath(tmpdir, "updates.txt")
+    write(source, "updated")
+    @test CensoBR._downloadfile(url, destination; showprogress=false) == destination
+    @test read(destination, String) == "original"
 
-    path = CensoBR._downloadfile(url, destination; showprogress=false)
-
-    @test isfile(path)
-    @test filesize(path) > 0
-    @test path == destination
-    @test !isfile(destination * ".part")
-  end
-
-  # `_download_file` uses cache
-  mktempdir() do tmpdir
-    url = "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2000/Microdados/2_Atualizacoes_20170908.txt"
-    destination = joinpath(tmpdir, "updates.txt")
-
-    path = CensoBR._downloadfile(url, destination; showprogress=false)
-
-    mtime_before = mtime(path)
-
-    path2 = CensoBR._downloadfile(url, destination; showprogress=false)
-
-    @test path2 == path
-    @test mtime(path2) == mtime_before
-  end
-
-  # forced download replaces cached file
-  mktempdir() do tmpdir
-    url = "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2000/Microdados/2_Atualizacoes_20170908.txt"
-    destination = joinpath(tmpdir, "updates.txt")
-
-    CensoBR._downloadfile(url, destination; showprogress=false)
-
-    write(destination, "corrupted")
-
-    CensoBR._downloadfile(url, destination; force=true, showprogress=false)
-
-    @test read(destination, String) != "corrupted"
+    @test CensoBR._downloadfile(url, destination; force=true, showprogress=false) == destination
+    @test read(destination, String) == "updated"
   end
 
   # download rejects unsupported year
