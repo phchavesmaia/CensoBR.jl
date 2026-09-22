@@ -192,7 +192,7 @@ function _extractarchive(zippaths::Vector{String}; force::Bool=false)
     push!(destinations, destination)
     if isdir(destination)
       if !force
-        return destination
+        continue
       end
       rm(destination; recursive=true)
     end
