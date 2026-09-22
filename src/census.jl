@@ -2,10 +2,6 @@
 const CENSUS_RECORDS =
   Dict(2000 => (:household, :family, :person), 2010 => (:household, :person, :emigration, :mortality))
 
-function _parquetpath(year::Integer, uf::Union{String,Symbol}, record::Symbol; cachedir::AbstractString=_defaultcachedir())
-  joinpath(cachedir, "parquet", string(year), uppercase(String(uf)), "$(record).parquet")
-end
-
 """
 	opencensus(year, uf, record; cachedir=_defaultcachedir(),
 			   force=false, showprogress=true)
@@ -22,7 +18,7 @@ function opencensus(
   year::Integer,
   uf::Union{String,Symbol},
   record::Symbol;
-  cachedir::AbstractString=_defaultcachedir(),
+  cachedir::String=_defaultcachedir(),
   force::Bool=false,
   showprogress::Bool=true,
   chunksize::Integer=5_000
@@ -37,10 +33,10 @@ function opencensus(
   uf = uppercase(String(uf))
   _censusurl(year, uf) # validate UF before returning a cached dataset
 
-  parquetpath = _parquetpath(year, uf, record; cachedir=cachedir)
+  parquetpath = joinpath(cachedir, "parquet", string(year), uppercase(String(uf)), "$(record).parquet")
 
   if !isfile(parquetpath) || force
-    _processcensus(year, uf; cachedir=String(cachedir), force=force, showprogress=showprogress, chunksize=chunksize)
+    _processcensus(year, uf; cachedir=cachedir, force=force, showprogress=showprogress, chunksize=chunksize)
   end
 
   Parquet2.Dataset(parquetpath)
