@@ -31,7 +31,6 @@ function opencensus(
 
   # setup
   uf = uppercase(String(uf))
-  _censusurl(year, uf) # validate UF before returning a cached dataset
 
   parquetpath = joinpath(cachedir, "parquet", string(year), uppercase(String(uf)), "$(record).parquet")
 
