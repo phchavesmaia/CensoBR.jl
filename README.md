@@ -128,4 +128,4 @@ The parser follows these conventions:
 - numeric fields with implied decimal places become `Float64`; and
 - character identifiers retain leading zeroes.
 
-Parsing is performed internally as part of the conversion pipeline. Users normally interact with the resulting Parquet datasets rather than the original fixed-width files.
+Parsing is performed internally as part of the conversion pipeline.
