@@ -10,12 +10,6 @@ const RAW_FILE_PREFIXES = Dict(
   (2010, :mortality) => "AMOSTRA_MORTALIDADE_"
 )
 
-"""
-	_findrawfiles(censusdir, layout)
-
-Find the fixed-width microdata file corresponding to `record` inside an
-extracted Census directory.
-"""
 function _findrawfiles(censusdir::Vector{String}, layout::CensusLayout)
   # ensure that the requested Census file is supported.
   key = (layout.year, layout.record)

@@ -28,11 +28,6 @@ const LAYOUT_FILES = Dict(
   (2010, :mortality) => "mortality.toml"
 )
 
-"""
-	_loadlayout(year, record)
-
-Load a bundled Census layout into CensoBR's internal representation.
-"""
 function _loadlayout(year::Integer, record::Symbol)
 
   # retrieve the filename for the given year and record from the LAYOUT_FILES dictionary.

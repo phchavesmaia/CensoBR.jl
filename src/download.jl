@@ -36,11 +36,6 @@ const VALID_UFS = Set([
   "TO"
 ])
 
-"""
-	_censusurl(year, uf)
-
-Return the official IBGE URL for a Census microdata archive.
-"""
 function _censusurl(year::Integer, uf::Union{String,Symbol})
   # checking if the year is supported
   year in keys(IBGE_URLS) || throw(ArgumentError("Unsupported census year: $year"))
@@ -59,11 +54,6 @@ function _censusurl(year::Integer, uf::Union{String,Symbol})
   ["$(IBGE_URLS[year])/$uf.zip"]
 end
 
-"""
-	_defaultcachedir()
-
-Default location for downloaded CensoBR files.
-"""
 function _defaultcachedir()
   if Sys.iswindows()
     base = get(ENV, "LOCALAPPDATA", joinpath(homedir(), "AppData", "Local"))
@@ -141,13 +131,6 @@ function _downloadfile(
   destination
 end
 
-"""
-	_downloadcensus(year, uf; cachedir=_defaultcachedir(), force=false, showprogress=true)
-
-Download an official IBGE Census microdata archive.
-
-Returns the path to the cached ZIP file.
-"""
 function _downloadcensus(
   year::Integer,
   uf;
@@ -174,13 +157,6 @@ function _downloadcensus(
   ]
 end
 
-"""
-	_extractarchive(zippath; destination=nothing, force=false)
-
-Extract a Census ZIP archive with 7-Zip.
-
-Returns the extraction directory.
-"""
 function _extractarchive(zippaths::Vector{String}; force::Bool=false)
   destinations = String[]
   for zippath in zippaths
@@ -209,13 +185,6 @@ function _extractarchive(zippaths::Vector{String}; force::Bool=false)
   destinations
 end
 
-"""
-	_preparecensus(year, uf; cachedir=_defaultcachedir(), force=false)
-
-Download and extract an IBGE Census archive.
-
-Returns the directory containing the extracted raw files.
-"""
 function _preparecensus(
   year::Integer,
   uf;
