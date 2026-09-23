@@ -60,3 +60,48 @@ end
   @test metadata.values isa Dict{String,String}
   @test metadata.notes isa Vector{String}
 end
+
+@testitem "Display field metadata" begin
+  using CensoBR
+
+  metadata = CensoBR.FieldMetadata(
+    "REGIÃO GEOGRÁFICA",
+    Dict(
+      "4" => "Região Sul",
+      "1" => "Região Norte",
+      "5" => "Região Centro-Oeste",
+      "2" => "Região Nordeste",
+      "3" => "Região Sudeste"
+    ),
+    ["Example note"]
+  )
+
+  output = sprint(show, MIME"text/plain"(), metadata)
+
+  @test output ==
+        "\n" *
+        "Label:\n" *
+        "  REGIÃO GEOGRÁFICA\n" *
+        "\n" *
+        "Values:\n" *
+        "  1 ⇒ Região Norte\n" *
+        "  2 ⇒ Região Nordeste\n" *
+        "  3 ⇒ Região Sudeste\n" *
+        "  4 ⇒ Região Sul\n" *
+        "  5 ⇒ Região Centro-Oeste\n" *
+        "\n" *
+        "Notes:\n" *
+        "  Example note\n"
+end
+
+@testitem "Display empty field metadata" begin
+  using CensoBR
+
+  metadata = CensoBR.FieldMetadata(nothing, Dict{String,String}(), String[])
+
+  output = sprint(show, MIME"text/plain"(), metadata)
+
+  expected = "\n" * "Label:\n" * "  —\n" * "\n" * "Values:\n" * "  —\n" * "\n" * "Notes:\n" * "  —"
+
+  @test output == expected
+end
