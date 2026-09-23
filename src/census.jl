@@ -6,7 +6,7 @@ const CENSUS_RECORDS =
 	fetchcensus(year, uf, record; cachedir=_defaultcachedir(),
 			   force=false, showprogress=true)
 
-Open IBGE Census microdata as a Parquet2 dataset.
+Returns the path of the processed Parquet file.
 
 If a processed Parquet file is not already cached, CensoBR downloads and
 extracts the corresponding Census archive, parses the fixed-width microdata,
