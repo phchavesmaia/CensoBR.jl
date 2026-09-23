@@ -5,7 +5,7 @@
 [![Build Status](https://github.com/phchavesmaia/CensoBR.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/phchavesmaia/CensoBR.jl/actions/workflows/CI.yml?query=branch%3Amain)
 [![Coverage](https://codecov.io/gh/phchavesmaia/CensoBR.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/phchavesmaia/CensoBR.jl)
 
-**CensoBR.jl** is a Julia package for downloading and processing microdata from the Brazilian Population Census (Censo Demográfico). 
+CensoBR.jl is a Julia package for downloading and processing microdata from the Brazilian Population Census (Censo Demográfico). 
 
 In specific, this package:
 1. Downloads census data directly from the IBGE servers
@@ -35,7 +35,7 @@ During the first call to `fetchcensus` for a given UF-year pair, the function ta
 
 ### Larger-than-memory queries with DuckDB
 
-Because **CensoBR.jl** caches processed data as `.parquet`, the files can be queried directly with tools such as [DuckDB.jl](https://github.com/duckdb/duckdb), without first loading the entire Census dataset into memory.
+Because CensoBR.jl caches processed data as `.parquet`, the files can be queried directly with tools such as [DuckDB.jl](https://github.com/duckdb/duckdb), without first loading the entire Census dataset into memory.
 
 ```julia
 using CensoBR
@@ -61,7 +61,7 @@ Here, `DuckDB` performs the filtering and column selection directly against the 
 
 ## Variable metadata
 
-**CensoBR.jl** includes variable metadata derived from the official IBGE documentation. Metadata can be accessed with `fieldlabel`, `fieldvalues`, and `fieldnotes`, or retrieved together with `fieldmetadata`.
+CensoBR.jl includes variable metadata derived from the official IBGE documentation. Metadata can be accessed with `fieldlabel`, `fieldvalues`, and `fieldnotes`, or retrieved together with `fieldmetadata`.
 
 For example:
 
@@ -114,11 +114,11 @@ Metadata access does not require downloading the Census microdata.
 | 2010 | Emigration | `fetchcensus(2010, :rj, :emigration)` |
 | 2010 | Mortality | `fetchcensus(2010, :rj, :mortality)` |
 
-**CensoBR.jl** supports Census microdata for all Brazilian states and the Federal District. National-level (`Brazil`) queries are not currently supported.
+CensoBR.jl supports Census microdata for all Brazilian states and the Federal District. National-level (`Brazil`) queries are not currently supported.
 
 ## Parsing
 
-IBGE Census microdata are distributed as fixed-width text files. **CensoBR.jl** uses bundled layouts derived from official IBGE documentation to determine each variable's byte position, width, type, and implied decimal places.
+IBGE Census microdata are distributed as fixed-width text files. CensoBR.jl uses bundled layouts derived from official IBGE documentation to determine each variable's byte position, width, type, and implied decimal places.
 
 The parser follows these conventions:
 
