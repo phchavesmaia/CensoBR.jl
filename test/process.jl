@@ -19,7 +19,12 @@
     @test basename.(CensoBR._findrawfiles([dir2000], family2000)) == ["FAMI33.TXT"]
     @test basename.(CensoBR._findrawfiles([dir2000], person2000)) == ["Pes33.txt"]
 
-    for name in ("Amostra_Domicilios_33.txt", "Amostra_Pessoas_33.txt", "Amostra_Emigracao_33.txt", "Amostra_Mortalidade_33.txt")
+    for name in (
+      "Amostra_Domicilios_33.txt",
+      "Amostra_Pessoas_33.txt",
+      "Amostra_Emigracao_33.txt",
+      "Amostra_Mortalidade_33.txt"
+    )
       write(joinpath(dir2010, name), "")
     end
 

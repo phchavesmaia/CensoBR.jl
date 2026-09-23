@@ -46,7 +46,7 @@ con = DBInterface.connect(DuckDB.DB())
 results = DBInterface.execute(
     con,
     """
-    SELECT V1002, V0211, M0213
+    SELECT V1001, V0211, M0213
     FROM read_parquet('$parquetpath')
     WHERE V0211 = '4'
     """
@@ -65,25 +65,37 @@ For example:
 
 ```julia
 julia> fieldmetadata(2000, :household, :V0211)
-(label = "TIPO DE ESCOADOURO",
- values = Dict(
-     "1" => "Rede geral de esgoto ou pluvial",
-     "2" => "Fossa séptica",
-     "3" => "Fossa rudimentar",
-     "4" => "Vala",
-     "5" => "Rio, lago ou mar",
-     "6" => "Outro escoadouro",
-     "Branco" => "para domicílio particular improvisado, domicílio coletivo e domicílio particular permanente que tinha banheiro(s) ou sanitário",
- ),
- notes = String[])
+```
+```
+Label:
+  TIPO DE ESCOADOURO
+
+Values:
+  1 ⇒ Rede geral de esgoto ou pluvial
+  2 ⇒ Fossa séptica
+  3 ⇒ Fossa rudimentar
+  4 ⇒ Vala
+  5 ⇒ Rio, lago ou mar
+  6 ⇒ Outro escoadouro
+  Branco ⇒ para domicílio particular improvisado, domicílio coletivo e domicílio particular permanente que tinha banheiro(s) ou sanitário
+
+Notes:
+  —
 ```
 
 Individual components can be retrieved with:
 
 ```julia
+# specific functions
 fieldlabel(2000, :household, :V0211)
 fieldvalues(2000, :household, :V0211)
 fieldnotes(2000, :household, :V0211)
+
+# using the Struct
+metadata = fieldmetadata(2000, :household, :V0211)
+metadata.label
+metadata.values
+metadata.notes
 ```
 
 Metadata access does not require downloading the Census microdata.

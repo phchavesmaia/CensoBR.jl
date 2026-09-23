@@ -1,5 +1,36 @@
+struct FieldMetadata
+  label::Union{Nothing,String}
+  values::Dict{String,String}
+  notes::Vector{String}
+end
+
+function Base.show(io::IO, ::MIME"text/plain", metadata::FieldMetadata)
+  println(io, "\nLabel:")
+  println(io, "  ", something(metadata.label, "—"))
+
+  println(io, "\nValues:")
+
+  if isempty(metadata.values)
+    println(io, "  —")
+  else
+    for (code, description) in sort!(collect(metadata.values); by=first)
+      println(io, "  ", code, " ⇒ ", description)
+    end
+  end
+
+  println(io, "\nNotes:")
+
+  if isempty(metadata.notes)
+    print(io, "  —")
+  else
+    for note in metadata.notes
+      println(io, "  ", note)
+    end
+  end
+end
+
 """
-    fieldmetadata(year::Integer, record::Symbol, variable::Symbol)
+	fieldmetadata(year::Integer, record::Symbol, variable::Symbol)
 
 Return metadata for `variable` in the specified Census `year` and `record`.
 
@@ -16,7 +47,7 @@ function fieldmetadata(year::Integer, record::Symbol, variable::Symbol)
 
   for field in layout.fields
     if Symbol(field.name) == variable
-      return (label=field.label, values=field.values, notes=field.notes)
+      return FieldMetadata(field.label, field.values, field.notes)
     end
   end
 
@@ -24,7 +55,7 @@ function fieldmetadata(year::Integer, record::Symbol, variable::Symbol)
 end
 
 """
-    fieldlabel(year::Integer, record::Symbol, variable::Symbol)
+	fieldlabel(year::Integer, record::Symbol, variable::Symbol)
 
 Return the descriptive label for `variable` in the specified Census `year` and
 `record`.
@@ -38,7 +69,7 @@ function fieldlabel(year::Integer, record::Symbol, variable::Symbol)
 end
 
 """
-    fieldvalues(year::Integer, record::Symbol, variable::Symbol)
+	fieldvalues(year::Integer, record::Symbol, variable::Symbol)
 
 Return the coded values and their descriptions for `variable` in the specified
 Census `year` and `record`.
@@ -54,7 +85,7 @@ function fieldvalues(year::Integer, record::Symbol, variable::Symbol)
 end
 
 """
-    fieldnotes(year::Integer, record::Symbol, variable::Symbol)
+	fieldnotes(year::Integer, record::Symbol, variable::Symbol)
 
 Return additional notes for `variable` in the specified Census `year` and
 `record`.

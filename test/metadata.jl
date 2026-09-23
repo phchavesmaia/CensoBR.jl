@@ -55,6 +55,7 @@ end
 
   metadata = fieldmetadata(2010, :person, :V0001)
 
+  @test metadata isa CensoBR.FieldMetadata
   @test metadata.label !== nothing
   @test metadata.values isa Dict{String,String}
   @test metadata.notes isa Vector{String}

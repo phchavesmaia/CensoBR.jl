@@ -42,7 +42,13 @@ end
 
     zippath = joinpath(raw, "RJ.zip")
     cd(source) do
-      run(pipeline(`$(p7zip_jll.p7zip()) a -tzip $zippath DOM33.TXT FAMI33.TXT PES33.TXT`, stdout=devnull, stderr=devnull))
+      run(
+        pipeline(
+          `$(p7zip_jll.p7zip()) a -tzip $zippath DOM33.TXT FAMI33.TXT PES33.TXT`,
+          stdout=devnull,
+          stderr=devnull
+        )
+      )
     end
 
     dspath = fetchcensus(2000, :rj, :household; cachedir=tmpdir, showprogress=false, chunksize=1)
