@@ -10,18 +10,18 @@
 In specific, this package:
 1. Downloads census data directly from the IBGE servers
 2. Process these data using the IBGE's data dictionary
-3. Saves the proceesed data as a `.parquet` file at a pre-selected `cachedir` folder
-4. Further calls of using the same `cachedir` folder reuse the processed data
+3. Saves the processed data as a `.parquet` file at a pre-selected `cachedir` folder
+4. Further calls of using the same `cachedir` folder reuse the same processed data
 
-CensoBR currently supports the **2000** and **2010** Population Censuses.
+CensoBR.jl currently supports the **2000** and **2010** Population Censuses.
 
 This project is heavily inspired by the R package [{censobr}](https://github.com/ipea/censobr/).
 
-> **Note:** CensoBR is under active development. The public API may change before the first stable release.
+> **Note:** CensoBR.jl is under active development. The public API may change before the first stable release.
 
 ## Usage
 
-The main entry point is `fetchcensus`, which downloads, processes, and caches Census microdata. By default, CensoBR uses the operating system's standard cache directory. A different directory can be specified with the `cachedir` keyword argument.
+The main entry point is `fetchcensus`, which downloads, processes, and caches Census microdata. By default, CensoBR.jl uses the operating system's standard cache directory. A different directory can be specified with the `cachedir` keyword argument.
 
 ```julia
 using CensoBR
