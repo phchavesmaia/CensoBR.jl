@@ -15,7 +15,7 @@ In specific, this package:
 
 CensoBR currently supports the **2000** and **2010** Population Censuses.
 
-This project is heavily inspired by the R package [{censobr}](https://github.com/ipea/censobr/), bringing a similar workflow to the Julia ecosystem.
+This project is heavily inspired by the R package [{censobr}](https://github.com/ipea/censobr/).
 
 > **Note:** CensoBR is under active development. The public API may change before the first stable release.
 
@@ -29,7 +29,9 @@ using CensoBR
 dataset = fetchcensus(2000, :rj, :household)
 ```
 
-The returned object is a `String` indicating the resulting `.parquet` file path.
+The returned object is a `String` indicating the resulting `.parquet` file path. 
+
+During the first call to `fetchcensus` for a given UF-year pair, the function takes advantage that the downloaded `.zip` archive contains data for all available record types and generates the corresponding `.parquet` files before cleaning up the raw data. This may make the initial call slower, but avoids repeated downloads and processing in subsequent calls for other record types.
 
 ### Larger-than-memory queries with DuckDB
 
