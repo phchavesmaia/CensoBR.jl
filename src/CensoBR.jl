@@ -8,6 +8,6 @@ include("process.jl")
 include("census.jl")
 include("metadata.jl")
 
-export opencensus, fieldmetadata, fieldlabel, fieldvalues, fieldnotes
+export fetchcensus, fieldmetadata, fieldlabel, fieldvalues, fieldnotes
 
 end

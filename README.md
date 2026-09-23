@@ -21,15 +21,15 @@ This project is heavily inspired by the R package [{censobr}](https://github.com
 
 ## Usage
 
-The main entry point is `opencensus`, which downloads, processes, and caches Census microdata. By default, CensoBR uses the operating system's standard cache directory. A different directory can be specified with the `cachedir` keyword argument.
+The main entry point is `fetchcensus`, which downloads, processes, and caches Census microdata. By default, CensoBR uses the operating system's standard cache directory. A different directory can be specified with the `cachedir` keyword argument.
 
 ```julia
 using CensoBR
 
-dataset = opencensus(2000, :rj, :household)
+dataset = fetchcensus(2000, :rj, :household)
 ```
 
-The returned object is a `Parquet2.Dataset`.
+The returned object is a `String` indicating the resulting `.parquet` file path.
 
 ### Larger-than-memory queries with DuckDB
 
@@ -39,11 +39,7 @@ Because **CensoBR.jl** caches processed data as `.parquet`, the files can be que
 using CensoBR
 using DuckDB, DBInterface, DataFrames
 
-cachedir = "path/to/cache"
-
-dataset = opencensus(2000, :rj, :household; cachedir=cachedir)
-
-parquetpath = joinpath(cachedir, "parquet", "2000", "RJ", "household.parquet")
+parquetpath = fetchcensus(2000, :rj, :household; cachedir="path/to/cache")
 
 con = DBInterface.connect(DuckDB.DB())
 
@@ -96,17 +92,15 @@ Metadata access does not require downloading the Census microdata.
 
 | Census | Record | Example |
 |-------:|--------|---------|
-| 2000 | Household | `opencensus(2000, :rj, :household)` |
-| 2000 | Family | `opencensus(2000, :rj, :family)` |
-| 2000 | Person | `opencensus(2000, :rj, :person)` |
-| 2010 | Household | `opencensus(2010, :rj, :household)` |
-| 2010 | Person | `opencensus(2010, :rj, :person)` |
-| 2010 | Emigration | `opencensus(2010, :rj, :emigration)` |
-| 2010 | Mortality | `opencensus(2010, :rj, :mortality)` |
+| 2000 | Household | `fetchcensus(2000, :rj, :household)` |
+| 2000 | Family | `fetchcensus(2000, :rj, :family)` |
+| 2000 | Person | `fetchcensus(2000, :rj, :person)` |
+| 2010 | Household | `fetchcensus(2010, :rj, :household)` |
+| 2010 | Person | `fetchcensus(2010, :rj, :person)` |
+| 2010 | Emigration | `fetchcensus(2010, :rj, :emigration)` |
+| 2010 | Mortality | `fetchcensus(2010, :rj, :mortality)` |
 
 **CensoBR.jl** supports Census microdata for all Brazilian states and the Federal District. National-level (`Brazil`) queries are not currently supported.
-
-
 
 ## Parsing
 

@@ -11,11 +11,11 @@ end
 @testitem "Open Census validation" begin
   using CensoBR
 
-  @test_throws ArgumentError opencensus(1990, :rj, :household)
-  @test_throws ArgumentError opencensus(2000, :rj, :mortality)
-  @test_throws ArgumentError opencensus(2000, :xx, :household)
-  @test_throws ArgumentError opencensus(2000, :rj, :household; chunksize=0)
-  @test_throws ArgumentError opencensus(2000, :rj, :household; chunksize=-1)
+  @test_throws ArgumentError fetchcensus(1990, :rj, :household)
+  @test_throws ArgumentError fetchcensus(2000, :rj, :mortality)
+  @test_throws ArgumentError fetchcensus(2000, :xx, :household)
+  @test_throws ArgumentError fetchcensus(2000, :rj, :household; chunksize=0)
+  @test_throws ArgumentError fetchcensus(2000, :rj, :household; chunksize=-1)
 end
 
 @testitem "Open Census from a local archive" begin
@@ -45,9 +45,10 @@ end
       run(pipeline(`$(p7zip_jll.p7zip()) a -tzip $zippath DOM33.TXT FAMI33.TXT PES33.TXT`, stdout=devnull, stderr=devnull))
     end
 
-    dataset = opencensus(2000, :rj, :household; cachedir=tmpdir, showprogress=false, chunksize=1)
-    @test dataset isa Parquet2.Dataset
-    @test length(collect(Tables.rows(dataset))) == 2
+    dspath = fetchcensus(2000, :rj, :household; cachedir=tmpdir, showprogress=false, chunksize=1)
+    @test dspath isa String
+    @test isfile(dspath)
+    @test length(collect(Tables.rows(Parquet2.Dataset(dspath)))) == 2
 
     for record in CensoBR.CENSUS_RECORDS[2000]
       path = joinpath(tmpdir, "parquet", string(2000), uppercase(String(:rj)), "$(record).parquet")
@@ -58,6 +59,6 @@ end
     @test !isdir(joinpath(raw, "RJ"))
 
     # A second record is served from Parquet without the deleted archive.
-    @test opencensus(2000, :rj, :person; cachedir=tmpdir, showprogress=false) isa Parquet2.Dataset
+    @test Parquet2.Dataset(fetchcensus(2000, :rj, :person; cachedir=tmpdir, showprogress=false)) isa Parquet2.Dataset
   end
 end

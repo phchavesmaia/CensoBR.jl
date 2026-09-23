@@ -3,7 +3,7 @@ const CENSUS_RECORDS =
   Dict(2000 => (:household, :family, :person), 2010 => (:household, :person, :emigration, :mortality))
 
 """
-	opencensus(year, uf, record; cachedir=_defaultcachedir(),
+	fetchcensus(year, uf, record; cachedir=_defaultcachedir(),
 			   force=false, showprogress=true)
 
 Open IBGE Census microdata as a Parquet2 dataset.
@@ -14,7 +14,7 @@ writes the result to Parquet, and removes the temporary raw files.
 
 See also [`fieldmetadata`](@ref), [`fieldlabel`](@ref), [`fieldvalues`](@ref), and [`fieldnotes`](@ref)
 """
-function opencensus(
+function fetchcensus(
   year::Integer,
   uf::Union{String,Symbol},
   record::Symbol;
@@ -38,5 +38,5 @@ function opencensus(
     _processcensus(year, uf; cachedir=cachedir, force=force, showprogress=showprogress, chunksize=chunksize)
   end
 
-  Parquet2.Dataset(parquetpath)
+  parquetpath
 end
