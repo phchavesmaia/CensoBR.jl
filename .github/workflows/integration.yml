@@ -1,0 +1,28 @@
+name: Real census integration tests
+
+on:
+  schedule:
+    - cron: "0 10 * * 1"
+  workflow_dispatch:
+    inputs:
+      include_sp:
+        description: "Also convert both 2010 São Paulo archives (large download)"
+        type: boolean
+        default: false
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v7
+      - uses: julia-actions/setup-julia@v3
+        with:
+          version: "1.10"
+      - uses: julia-actions/cache@v3
+      - uses: julia-actions/julia-buildpkg@v1
+      - name: Convert and check real IBGE data
+        env:
+          CENSOBR_INTEGRATION_TESTS: "true"
+          CENSOBR_SP_INTEGRATION_TESTS: ${{ github.event_name == 'workflow_dispatch' && inputs.include_sp && 'true' || 'false' }}
+        run: julia --project=. -e 'using Pkg; Pkg.test()'
