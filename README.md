@@ -4,6 +4,7 @@
 [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://phchavesmaia.github.io/CensoBR.jl/dev/)
 [![Build Status](https://github.com/phchavesmaia/CensoBR.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/phchavesmaia/CensoBR.jl/actions/workflows/CI.yml?query=branch%3Amain)
 [![Coverage](https://codecov.io/gh/phchavesmaia/CensoBR.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/phchavesmaia/CensoBR.jl)
+[![DOI](https://zenodo.org/badge/1370583539.svg)](https://doi.org/10.5281/zenodo.22999790)
 
 CensoBR.jl is a Julia package for downloading and processing microdata from the Brazilian Population Census (Censo Demográfico). 
 
