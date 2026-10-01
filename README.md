@@ -34,6 +34,14 @@ The returned object is a `String` indicating the resulting `.parquet` file path.
 
 During the first call to `fetchcensus` for a given UF-year pair, the function takes advantage that the downloaded `.zip` archive contains data for all available record types and generates the corresponding `.parquet` files before cleaning up the raw data. This may make the initial call slower, but avoids repeated downloads and processing in subsequent calls for other record types.
 
+To build a country-level file by stacking all states and the Federal District, pass `:br` as the UF:
+
+```julia
+path = fetchcensus(2010, :br, :person)
+```
+
+This downloads and processes each UF in sequence. However, it does not generate intermediate `.parquet` files for individual UFs and therefore should not be used as a way to compile the complete set of UF sources.
+
 ### Larger-than-memory queries with DuckDB
 
 Because CensoBR.jl caches processed data as `.parquet`, the files can be queried directly with tools such as [DuckDB.jl](https://github.com/duckdb/duckdb), without first loading the entire Census dataset into memory.
@@ -114,8 +122,9 @@ Metadata access does not require downloading the Census microdata.
 | 2010 | Person | `fetchcensus(2010, :rj, :person)` |
 | 2010 | Emigration | `fetchcensus(2010, :rj, :emigration)` |
 | 2010 | Mortality | `fetchcensus(2010, :rj, :mortality)` |
+| 2000, 2010 | Any supported record | `fetchcensus(year, :br, record)` |
 
-CensoBR.jl supports Census microdata for all Brazilian states and the Federal District. National-level (`Brazil`) queries are not currently supported.
+CensoBR.jl supports Census microdata for all Brazilian states and the Federal District, and can stack them into a national file with `:br`.
 
 ## Parsing
 

@@ -12,6 +12,9 @@ If a processed Parquet file is not already cached, CensoBR downloads and
 extracts the corresponding Census archive, parses the fixed-width microdata,
 writes the result to Parquet, and removes the temporary raw files.
 
+Use `uf="BR"` to process and stack every federative unit into a national
+dataset for the requested year and record.
+
 See also [`fieldmetadata`](@ref), [`fieldlabel`](@ref), [`fieldvalues`](@ref), and [`fieldnotes`](@ref)
 """
 function fetchcensus(
@@ -35,7 +38,11 @@ function fetchcensus(
   parquetpath = joinpath(cachedir, "parquet", string(year), uppercase(String(uf)), "$(record).parquet")
 
   if !isfile(parquetpath) || force
-    _processcensus(year, uf; cachedir=cachedir, force=force, showprogress=showprogress, chunksize=chunksize)
+    if uf == "BR"
+      _processcountrycensus(year; cachedir=cachedir, force=force, showprogress=showprogress, chunksize=chunksize)
+    else
+      _processcensus(year, uf; cachedir=cachedir, force=force, showprogress=showprogress, chunksize=chunksize)
+    end
   end
 
   parquetpath
