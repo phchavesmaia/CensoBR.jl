@@ -37,7 +37,7 @@ During the first call to `fetchcensus` for a given UF-year pair, the function ta
 To build a country-level file by stacking all states and the Federal District, pass `:br` as the UF:
 
 ```julia
-path = fetchcensus(2010, :br, :person)
+dspath = fetchcensus(2010, :br, :person)
 ```
 
 This downloads and processes each UF in sequence. However, it does not generate intermediate `.parquet` files for individual UFs and therefore should not be used as a way to compile the complete set of UF sources.
