@@ -5,3 +5,4 @@
 **/.CondaPkg/
 /docs/Manifest*.toml
 /docs/build/
+AGENTS.md
