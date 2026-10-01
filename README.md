@@ -27,7 +27,7 @@ The main entry point is `fetchcensus`, which downloads, processes, and caches Ce
 ```julia
 using CensoBR
 
-dataset = fetchcensus(2000, :rj, :household)
+dspath = fetchcensus(2000, :rj, :household)
 ```
 
 The returned object is a `String` indicating the resulting `.parquet` file path. 
@@ -42,7 +42,7 @@ Because CensoBR.jl caches processed data as `.parquet`, the files can be queried
 using CensoBR
 using DuckDB, DBInterface, DataFrames
 
-parquetpath = fetchcensus(2000, :rj, :household; cachedir="path/to/cache")
+dspath = fetchcensus(2000, :rj, :household; cachedir="path/to/cache")
 
 con = DBInterface.connect(DuckDB.DB())
 
