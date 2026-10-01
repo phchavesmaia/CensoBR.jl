@@ -83,3 +83,59 @@ function _processcensus(
     rm(dir; recursive=true, force=true)
   end
 end
+
+function _processcountrycensus(
+  year::Integer;
+  cachedir::String,
+  force::Bool=false,
+  showprogress::Bool=true,
+  chunksize::Integer
+)
+  records = CENSUS_RECORDS[year]
+  parquetdir = joinpath(cachedir, "parquet", string(year), "BR")
+  mkpath(parquetdir)
+
+  temporary = Dict(record => joinpath(parquetdir, "$(record).parquet.part") for record in records)
+  streams = Dict{Symbol,IOStream}()
+  writers = Dict{Symbol,Any}()
+
+  try
+    for record in records
+      isfile(temporary[record]) && rm(temporary[record]; force=true)
+      streams[record] = open(temporary[record], "w")
+      writers[record] = Parquet2.FileWriter(streams[record], temporary[record])
+    end
+
+    # Process one UF at a time so the large extracted source files can be
+    # removed before downloading the next state's archives.
+    for uf in sort!(collect(VALID_UFS))
+      censusdir = _preparecensus(year, uf; cachedir=cachedir, force=force, showprogress=showprogress)
+      Threads.@threads for record in records
+        layout = _loadlayout(year, record)
+        paths = _findrawfiles(censusdir, layout)
+        chunks = Iterators.flatten(CensusChunks(path, layout; chunksize=chunksize) for path in paths)
+        for chunk in chunks
+          Parquet2.writetable!(writers[record], chunk)
+        end
+      end
+      for dir in censusdir
+        rm(dir * ".zip"; force=true)
+        rm(dir; recursive=true, force=true)
+      end
+    end
+
+    for record in records
+      Parquet2.finalize!(writers[record])
+      close(streams[record])
+      mv(temporary[record], joinpath(parquetdir, "$(record).parquet"); force=true)
+    end
+  catch
+    for io in values(streams)
+      isopen(io) && close(io)
+    end
+    for path in values(temporary)
+      isfile(path) && rm(path; force=true)
+    end
+    rethrow()
+  end
+end
