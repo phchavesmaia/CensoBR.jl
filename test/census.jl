@@ -182,3 +182,48 @@ end
           joinpath(tmpdir, "parquet", "2010", "BR", "person.parquet")
   end
 end
+
+@testitem "Country conversion cleans temporary output on failure" begin
+  using CensoBR
+  using p7zip_jll
+
+  mktempdir() do tmpdir
+    source = joinpath(tmpdir, "source")
+    raw = joinpath(tmpdir, "raw", "2010")
+    mkpath(source)
+    mkpath(raw)
+
+    # Omit mortality so processing fails after opening the country Parquet writers.
+    records = (:household, :person, :emigration)
+    filenames = String[]
+    for record in records
+      layout = CensoBR._loadlayout(2010, record)
+      bytes = fill(UInt8(' '), layout.lrecl)
+      for field in layout.fields
+        fill!(view(bytes, field.start:(field.start + field.width - 1)), field.ischaracter ? UInt8('A') : UInt8('0'))
+      end
+
+      uf_field = only(filter(field -> field.name == "V0001", layout.fields))
+      start = uf_field.start
+      stop = start + uf_field.width - 1
+      bytes[start:stop] .= codeunits("12")
+
+      filename = "$(CensoBR.RAW_FILE_PREFIXES[(2010, record)])AC.TXT"
+      write(joinpath(source, filename), vcat(bytes, UInt8('\n')))
+      push!(filenames, filename)
+    end
+
+    zippath = joinpath(raw, "AC.zip")
+    cd(source) do
+      run(pipeline(`$(p7zip_jll.p7zip()) a -tzip $zippath $filenames`, stdout=devnull, stderr=devnull))
+    end
+
+    @test_throws Exception fetchcensus(2010, :br, :household; cachedir=tmpdir, showprogress=false, chunksize=1)
+
+    parquetdir = joinpath(tmpdir, "parquet", "2010", "BR")
+    for record in CensoBR.CENSUS_RECORDS[2010]
+      @test !isfile(joinpath(parquetdir, "$(record).parquet.part"))
+      @test !isfile(joinpath(parquetdir, "$(record).parquet"))
+    end
+  end
+end
