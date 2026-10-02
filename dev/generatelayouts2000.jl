@@ -1,11 +1,15 @@
 using TOML
+using ExcelReaders
 using StringEncodings
 
 include(joinpath(@__DIR__, "download.jl"))
+include(joinpath(@__DIR__, "auxiliary.jl"))
 
 const SAS_LAYOUT_FILES = Dict(:household => "LE DOMIC.sas", :family => "LE FAMILIAS.sas", :person => "LE PESSOAS.sas")
 
 const OUTPUT_FILES = Dict(:household => "household.toml", :family => "family.toml", :person => "person.toml")
+
+_readwindows1252(path::AbstractString) = read(path, String, enc"WINDOWS-1252")
 
 """
 	_findfile(root, filename)
@@ -50,9 +54,8 @@ function _parse_layout_metadata(text::AbstractString)
   values = Dict{String,String}()
   notes = String[]
 
-  # Codes observed in the IBGE layouts include:
-  #   1, 11, 00, A, C, Branco, and occasionally numeric ranges.
-  value_regex = r"^((?:\d+(?:\s+a\s+\d+)?)|(?:[A-Z])|(?:Branco))\s*-\s*(.+)$"
+  # Codes observed in the IBGE layouts include numeric/alphabetic values and, occasionally, ranges.
+  value_regex = r"^((?:\d+(?:\s+a\s+\d+)?)|(?:[A-Z])|(?:Branco))\s*(?:[-–—]|[ºª])\s*(.+)$"i
 
   last_kind = :none
   last_key = nothing
@@ -67,15 +70,23 @@ function _parse_layout_metadata(text::AbstractString)
       code = strip(m.captures[1])
       value = strip(m.captures[2])
 
-      values[code] = value
-      last_kind = :value
-      last_key = code
+      if lowercase(code) == "branco"
+        push!(notes, "Branco — " * value)
+        last_kind = :blank
+        last_key = length(notes)
+      else
+        values[code] = value
+        last_kind = :value
+        last_key = code
+      end
       continue
     end
 
     # A physical line can be a continuation of the previous value label.
     if last_kind == :value && !isnothing(last_key)
       values[last_key] *= " " * line
+    elseif last_kind == :blank && !isnothing(last_key)
+      notes[last_key] *= " " * line
     else
       push!(notes, line)
       last_kind = :note
@@ -163,6 +174,7 @@ function generatelayouts2000(documentation_dir::AbstractString, output_dir::Abst
     source_path = _findfile(documentation_dir, SAS_LAYOUT_FILES[record])
 
     layout = _parsesaslayout(source_path, record)
+    _integrateauxiliaryvalues!(layout, documentation_dir, 2000)
     output_path = joinpath(output_dir, OUTPUT_FILES[record])
 
     open(output_path, "w") do io

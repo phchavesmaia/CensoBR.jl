@@ -36,5 +36,5 @@ function preparedocumentation(
 )
   zippath = downloaddocumentation(year; cachedir=cachedir, force=force, showprogress=showprogress)
 
-  CensoBR._extractarchive(zippath; force=force)
+  only(CensoBR._extractarchive([zippath]; force=force))
 end

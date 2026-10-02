@@ -1,3 +1,9 @@
 [deps]
+ExcelReaders = "c04bee98-12a5-510c-87df-2a230cb6e075"
 OdsIO = "56b0d19f-0a74-5872-92bc-f48f9c5431d4"
 StringEncodings = "69024149-9ee7-55f6-a4c4-859efe599b68"
+Unicode = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
+
+[compat]
+ExcelReaders = "1.1"
+Unicode = "1"

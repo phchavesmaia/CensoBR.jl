@@ -1,0 +1,43 @@
+00 - Município não pertencente a estrutura de RM
+01 - RM Manaus 
+02 - RM Belém
+03 - RM Macapá
+04 - RM Grande São Luís 
+05 - RM Sudoeste Maranhense 
+06 - RM Cariri 
+07 - RM Fortaleza 
+08 - RM Natal
+09 - RM Campina Grande
+10 - RM João Pessoa
+11 - RM Recife
+12 - RM Agreste
+13 - RM Maceió
+14 - RM Aracaju
+15 - RM Salvador 
+16 - RM Belo Horizonte 
+17 - RM Vale do Aço
+18 - RM Grande Vitória
+19 - RM Rio de Janeiro 
+20 - RM São Paulo
+21 - RM Baixada Santista
+22 - RM Campinas
+23 - RM Curitiba
+24 - RM Londrina
+25 - RM Maringá 
+26 - RM Florianópolis
+27 - RM Vale do Itajaí
+28 - RM Norte/Nordeste Catarinense
+29 - RM Foz do Rio Itajaí
+30 - RM Carbonífera
+31 - RM Tubarão
+32 - RM Lages
+33 - RM Chapecó
+34 - RM Porto Alegre
+35 - RM Vale do Rio Cuiabá 
+36 - RM Goiânia
+37 - Aglomeração Urbana do Nordeste - Rio Grande do Sul
+38 - Aglomeração Urbana do Sul - Rio Grande do Sul
+39 - Aglomeração Urbana do Litoral Norte - Rio Grande do Sul
+40 - RIDE - Região Integrada de Desenvolvimento do Distrito Federal e Entorno
+41 - RIDE TERESINA - Região Integrada de Desenvolvimento da Grande Teresina (8)
+42 - RIDE Petrolina/Juazeiro Reg Adm Int Desen do Pólo Petrolina/PE e Juazeiro/BA
