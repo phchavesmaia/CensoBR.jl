@@ -98,7 +98,10 @@ end
   @test employmentmeasure["1"] == "Sim"
   @test employmentmeasure["2"] == "Não"
   @test !haskey(employmentmeasure, "Branco")
-  @test any(startswith(note, "Branco — para a pessoa com menos de 10 anos de idade") for note in CensoBR.fieldnotes(2000, :person, :V0455))
+  @test any(
+    startswith(note, "Branco — para a pessoa com menos de 10 anos de idade") for
+    note in CensoBR.fieldnotes(2000, :person, :V0455)
+  )
 end
 
 @testitem "Validate Census layout" begin
