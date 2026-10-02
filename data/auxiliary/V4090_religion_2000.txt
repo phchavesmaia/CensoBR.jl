@@ -1,0 +1,267 @@
+﻿RELAÇÃO DAS RELIGIÕES
+	
+000	SEM RELIGIÃO
+	
+11 CATÓLICA APOSTÓLICA ROMANA
+110	Católica Apostólica Romana
+111	Católica Carismática, Católica Pentecostal
+112	Católica Armênia; Católica Ucraniana
+	
+12 CATÓLICA APOSTÓLICA BRASILEIRA
+120	Católica Apostólica Brasileira
+	
+13 CATÓLICA ORTODOXA
+130	Católica Ortodoxa
+	
+14 ORTODOXA CRISTÃ
+140	Ortodoxa Cristã
+149	Outras
+
+19 OUTRAS CATÓLICAS
+199	Outras Católicas
+	
+21 EVANGÉLICA DE MISSÃO LUTERANA
+210	Igrejas Luteranas
+219	Outras
+	
+22 EVANGÉLICA DE MISSÃO PRESBITERIANA
+220	Igreja Evangélica Presbiteriana
+221	Igreja Presbiteriana Independente
+222	Igreja Presbiteriana do Brasil
+223	Igreja Presbiteriana Unida
+224	Presbiteriana Fundamentalista
+225	Presbiteriana Renovada
+229	Outras
+	
+23 EVANGÉLICA DE MISSÃO METODISTA
+230	Igreja Evangélica Metodista
+231	Evangélica Metodista Wesleyana
+232	Evangélica Metodista Ortodoxa
+239	Outras
+	
+24 EVANGÉLICA DE MISSÃO BATISTA
+240	Igreja Evangélica Batista
+241	Convenção Batista Brasileira
+242	Convenção Batista Nacional
+
+RELAÇÃO DAS RELIGIÕES
+	
+24 EVANGÉLICA DE MISSÃO BATISTA
+243	Batista Pentecostal
+244	Batista Bíblica
+245	Batista Renovada
+249	Outras
+
+25 EVANGÉLICA DE MISSÃO CONGREGACIONAL
+250	Igreja Evangélica Congregacional
+251	Igreja Congregacional Independente
+259	Outras
+	
+26 EVANGÉLICA DE MISSÃO ADVENTISTA
+260	Igreja Evangélica Adventista do Sétimo Dia
+261	Igreja Evangélica Adventista Movimento de Reforma
+262	Igreja Evangélica Adventista da Promessa
+269	Outras
+	
+27 EVANGÉLICA DE MISSÃO EPISCOPAL ANGLICANA
+270	Igreja Evangélica Episcopal Anglicana
+279	Outras
+	
+28 EVANGÉLICA DE MISSÃO MENONITA
+280	Igreja Evangélica Menonita
+289	Outras
+	
+30 EXÉRCITO DA SALVAÇÃO
+300	Exército da Salvação
+	
+31 EVANGÉLICA DE ORIGEM PENTECOSTAL ASSEMBLÉIA DE DEUS
+310	Igreja Evangélica Assembléia de Deus
+311	Igreja Assembléia de Deus Madureira
+312	Igreja Assembléia de Deus Todos os Santos
+319	Outras
+	
+32 EVANGÉLICA DE ORIGEM PENTECOSTAL CONGREGACIONAL CRISTÃ DO BRASIL
+320	Igreja Congregacional Cristã do Brasil
+329	Outras
+	
+33 EVANGÉLICA DE ORIGEM PENTECOSTAL O BRASIL PARA CRISTO
+330	Igreja Evangélica Pentecostal O Brasil Para Cristo
+339	Outras
+
+
+
+RELAÇÃO DAS RELIGIÕES	
+		
+34 EVANGÉLICA DE ORIGEM PENTECOSTAL EVANGELHO QUADRANGULAR	
+340	Igreja Evangelho Quadrangular	
+349	Outras	
+		
+35 EVANGÉLICA DE ORIGEM PENTECOSTAL UNIVERSAL DO REINO DE DEUS	
+350	Igreja Universal do Reino de Deus	
+359	Outras	
+		
+36 EVANGÉLICA DE ORIGEM PENTECOSTAL CASA DA BENÇÃO	
+360	Igreja Evangélica Casa da Benção	
+369	Outras	
+		
+37 EVANGÉLICA DE ORIGEM PENTECOSTAL CASA DE ORAÇÃO	
+370	Igreja Evangélica Casa de Oração	
+379	Outras	
+		
+38 EVANGÉLICA DE ORIGEM PENTECOSTAL DEUS É AMOR
+380	Igreja Evangélica Pentecostal Deus é Amor
+389	Outras
+	
+39 EVANGÉLICA DE ORIGEM PENTECOSTAL MARANATA
+390	Igreja Evangélica Pentecostal Maranata
+399	Outras
+	
+40 EVANGÉLICA RENOVADA SEM VÍNCULO INSTITUCIONAL
+400	Evangélica Renovada, Restaurada e Reformada Sem Vínculo Institucional
+401	Pentecostal Renovada, Restaurada e Reformada Sem Vínculo Institucional
+409	Outras
+	
+41 EVANGÉLICA PENTECOSTAL SEM VÍNCULO INSTITUCIONAL
+410	Evangélica Pentecostal Sem Vínculo Institucional
+419	Outras
+	
+42 EVANGÉLICA DE ORIGEM  PENTECOSTAL COMUNIDADE CRISTÃ
+420	Igreja Evangélica Comunidade Cristã
+429	Outras
+	
+43 EVANGÉLICA DE ORIGEM PENTECOSTAL NOVA VIDA
+430	Igreja de Origem Pentecostal Nova Vida
+439	Outras
+
+
+RELAÇÃO DAS RELIGIÕES	
+		
+44 EVANGÉLICA DE ORIGEM PENTECOSTAL COMUNIDADE EVANGÉLICA
+440	Igreja Evangélica Comunidade Evangélica
+449	Outras
+	
+45 OUTRAS IGREJAS EVANGÉLICAS DE ORIGEM PENTECOSTAL
+450	Outras Igrejas Evangélicas Pentecostais
+	
+46 EVANGÉLICA DE ORIGEM PENTECOSTAL AVIVAMENTO BÍBLICO
+460	Igreja Pentecostal Avivamento Bíblico
+469	Outras
+	
+47 EVANGÉLICA DE ORIGEM PENTECOSTAL CADEIA DA PRECE
+470	Igreja Evangélica Cadeia da Prece
+479	Outras
+	
+48 EVANGÉLICA DE ORIGEM PENTECOSTAL IGREJA DO NAZARENO
+480	Igreja do Nazareno
+489	Outras
+	
+49 EVANGÉLICA NÃO DETERMINADA
+490	Evangélica Não Determinada
+491	Evangélica Sem Vínculo Institucional
+492	Declaração Múltipla de Religião Evangélica
+499	Outros Evangélicos
+	
+51 IGREJA DE JESUS CRISTO DOS SANTOS DOS ÚLTIMOS DIAS
+510	Igreja de Jesus Cristo dos Santos dos Últimos Dias/Mormons
+519	Outras
+
+52 EVANGÉLICOS TESTEMUNHA DE JEOVÁ
+520	Testemunha de Jeová
+529	Outras
+	
+53 LBV/RELIGIÃO DE DEUS
+530	Legião da Boa Vontade/Religião de Deus
+	
+59 ESPIRITUALISTA
+590	Espiritualista
+599	Outras
+	
+61 ESPÍRITA
+610	Espírita, Kardecista
+619	Outras
+RELAÇÃO DAS RELIGIÕES	
+		
+62 UMBANDA
+620	Umbanda
+629	Outras
+	
+63 CANDOMBLÉ
+630	Candomblé
+639	Outras
+	
+64 OUTRAS DECLARAÇÕES DE  RELIGIOSIDADE AFRO-BRASILEIRA
+640	Religiosidades Afro-Brasileiras
+641	Declaração Múltipla de Religiosidade Afro com Outras Religiosidades
+649	Outras
+	
+71 JUDAÍSMO
+710	Judaísmo
+719	Outras
+	
+74 HINDUÍSMO
+740	Hinduísmo
+741	Ioga
+749	Outras
+	
+75 BUDISMO
+750	Budismo
+751	Nitiren
+752	Budismo Theravada
+753	Zen Budismo
+754	Budismo Tibetano
+755	Soka Gakkai
+759	Outras
+	
+76 NOVAS RELIGIÕES ORIENTAIS
+760	Igreja Messiânica Mundial
+761	Seicho No-Ie
+762	Perfect Liberty
+763	Hare Krishna
+764	Discipulos Oshoo
+765	Tenrykyo
+766	Mahicari
+
+
+
+
+
+RELAÇÃO DAS RELIGIÕES	
+		
+79 OUTRAS RELIGIÕES ORIENTAIS
+790	Religiões Orientais
+791	Bahai
+792	Shintoismo
+793	Taoismo
+799	Outras
+	
+81 ISLAMISMO
+810	Islamismo
+819	Outras
+	
+82 TRADIÇÕES ESOTÉRICAS
+820	Esotérica
+821	Racionalismo Cristão
+829	Outras
+	
+83 TRADIÇÕES INDÍGENAS
+830	Tradições Indígenas
+831	Santo Daime
+832	União do Vegetal
+833	A Barquinha
+834	Neoxamânica
+839	Outras
+	
+85 RELIGIOSIDADE CRISTÃ SEM VÍNCULO INSTITUCIONAL
+850	Religiosidade Cristã Sem Vínculo Institucional
+	
+89 NÃO DETERMINADA
+890	Religiosidade Não Determinada/Mal Definida
+891	Declaração Múltipla de Religiosidade Católica/Outras Religiosidades
+892	Declaração Múltipla de Religiosidade Evangélica/Outras Religiosidades
+893	Declaração Múltipla de Religiosidade Católica/Espírita
+894	Declaração Múltipla de Religiosidade Católica/Umbanda
+895	Declaração Múltipla de Religiosidade Católica/Candomblé
+896	Declaração Múltipla de Religiosidade Católica/Kardecista
+	
+990	SEM DECLARAÇAO
+

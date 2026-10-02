@@ -1,7 +1,9 @@
 using TOML
+using ExcelReaders
 using OdsIO
 
 include(joinpath(@__DIR__, "download.jl"))
+include(joinpath(@__DIR__, "auxiliary.jl"))
 
 const ODSLAYOUTFILE = "Layout_microdados_Amostra.ods"
 
@@ -75,6 +77,16 @@ function _parselayoutmetadata(text::AbstractString)
       values[code] = value
       lastkind = :value
       lastkey = code
+      continue
+    end
+
+    # IBGE uses a standalone `Branco` line as a note about blank applicability
+    # in several variable descriptions, not as a continuation of the previous
+    # category label.
+    if occursin(r"^Branco\b"i, line)
+      push!(notes, line)
+      lastkind = :note
+      lastkey = nothing
       continue
     end
 
@@ -224,6 +236,7 @@ function _generatelayouts2010(documentationdir::AbstractString, outputdir::Abstr
 
     for record in (:household, :person, :emigration, :mortality)
       layout = _parsespreadsheetlayout(odspath, record)
+      _integrateauxiliaryvalues!(layout, documentationdir, 2010)
 
       outputpath = joinpath(outputdir, OUTPUT_FILES[record])
 

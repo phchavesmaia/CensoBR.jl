@@ -82,6 +82,23 @@ end
   @test situation.label == "SITUAÇÃO DO DOMICÍLIO"
   @test situation.values["1"] == "Urbano"
   @test situation.values["2"] == "Rural"
+
+  microcomputer = CensoBR.fieldvalues(2000, :household, :V0220)
+  @test microcomputer["1"] == "Sim"
+  @test microcomputer["2"] == "Não"
+  @test !haskey(microcomputer, "Branco")
+  @test any(startswith(note, "Branco") for note in CensoBR.fieldnotes(2000, :household, :V0220))
+
+  bathrooms = CensoBR.fieldvalues(2000, :household, :V0209)
+  @test bathrooms["9"] == "9 ou mais banheiros"
+  @test !haskey(bathrooms, "Branco")
+  @test any(startswith(note, "Branco") for note in CensoBR.fieldnotes(2000, :household, :V0209))
+
+  employmentmeasure = CensoBR.fieldvalues(2000, :person, :V0455)
+  @test employmentmeasure["1"] == "Sim"
+  @test employmentmeasure["2"] == "Não"
+  @test !haskey(employmentmeasure, "Branco")
+  @test any(startswith(note, "Branco — para a pessoa com menos de 10 anos de idade") for note in CensoBR.fieldnotes(2000, :person, :V0455))
 end
 
 @testitem "Validate Census layout" begin

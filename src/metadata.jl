@@ -74,9 +74,10 @@ end
 Return the coded values and their descriptions for `variable` in the specified
 Census `year` and `record`.
 
-The result is a `Dict{String,String}` mapping the codes used in the raw Census
-data to their corresponding descriptions. Returns an empty dictionary when no
-coded values are defined.
+The result is a `Dict{String,String}` mapping codes to their corresponding
+descriptions. For fields whose raw codes are split across multiple variables,
+the dictionary uses the complete reference code described in the field notes.
+Returns an empty dictionary when no coded values are defined.
 
 See also [`fieldmetadata`](@ref), [`fieldlabel`](@ref), and [`fieldnotes`](@ref).
 """
