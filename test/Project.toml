@@ -6,3 +6,6 @@ TestItemRunner = "f8b46487-2199-4994-9208-9a1283c18c0a"
 TestItems = "1c621080-faea-4a02-84b6-bbd5e436b8fe"
 Unicode = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 p7zip_jll = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
+
+[compat]
+Unicode = "<0.0.1, 1"
